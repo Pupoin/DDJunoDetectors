@@ -1,0 +1,19 @@
+{
+    "C_Cpp.default.includePath": [
+        "/home/wln/DD4hep/include",
+        "/home/wln/DD4hep/DDJunoDetectors/include",
+        "/home/wln/DD4hep/DDJunoDetectors/build/lib"
+    ],
+    "files.associations": {
+        "*.dec": "shellscript",
+        "*jdl": "shellscript",
+        "*.dat": "shellscript",
+        "*.mac": "shellscript",
+        "*.card": "shellscript",
+        "deque": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "array": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}

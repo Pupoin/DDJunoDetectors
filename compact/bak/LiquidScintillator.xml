@@ -1,0 +1,60 @@
+<!-- ====================================================================== -->
+<!--                                                                        -->
+<!--    XML description of the water pool calorimeter endcap detector  -->
+<!--    of the SiD linear collider detector design.                         -->
+<!--                                                                        -->
+<!-- ====================================================================== -->
+
+
+      
+<detectors>
+
+
+  <!-- <detector id="EcalEndcap_ID" name="EcalEndcap" type="DD4hep_PolyhedraEndcapCalorimeter2" reflect="true" readout="EcalEndcapHits" vis="EcalEndcapVis" calorimeterType="EM_ENDCAP"> -->
+  
+    <detector  id="80" name="testDetectorname" type="testDetector" vis="TotalSpheres">
+    <layer>
+      <!-- <slice type="Box" x="1000*cm" y="2000*cm" z="3000*cm"/> -->
+      <sphere name="LiquidScintillator" rmin="0" rmax="35400/2.0*mm" starttheta="0" endtheta="1*pi" 
+        startphi="0" endphi="2*pi" x="0" y="0" z="0" material="Scintillator" vis="LiquidScintillatorVis"/>
+
+      <!-- <sphere name="AcrylicfVessel" rmin="35400/2.0*mm" rmax="35400/2.0*mm + 120*mm" starttheta="0" endtheta="1*pi" 
+        startphi="0" endphi="2*pi" x="0" y="0" z="0" material="Acrylic" vis="AcrylicfVesselVis"/> -->
+
+    </layer>
+  
+  
+  </detector>
+
+
+
+
+  <!-- <detector id="EcalEndcap_ID" name="EcalEndcap"> 
+
+    <comment>Electromagnetic Calorimeter Endcaps</comment>
+
+    <dimensions numsides="(int) CaloSides" zmin="EcalEndcap_zmin" rmin="EcalEndcap_rmin" rmax="EcalEndcap_rmax" />
+    <layer repeat="1" vis="EcalLayerVis">
+      <slice material = "Silicon" thickness = "0.032*cm" sensitive="yes" limits="cal_limits" vis="EcalSensitiveVis"/>
+      <slice material = "Copper"  thickness = "0.005*cm" vis="EcalAbsorberVis"/>
+      <slice material = "Kapton"  thickness = "0.030*cm" vis="EcalAbsorberVis"/>
+      <slice material = "Air"     thickness = "0.033*cm" vis="InvisibleNoDaughters"/>
+    </layer>       
+    <layer repeat="20" vis="EcalLayerVis">
+      <slice material = "TungstenDens24" thickness = "0.25*cm" />
+      <slice material = "Air"     thickness = "0.025*cm" vis="InvisibleNoDaughters"/>
+      <slice material = "Silicon" thickness = "0.032*cm" sensitive="yes" limits="cal_limits" vis="EcalSensitiveVis"/>
+      <slice material = "Copper"  thickness = "0.005*cm" vis="EcalAbsorberVis"/>
+      <slice material = "Kapton"  thickness = "0.030*cm" vis="EcalAbsorberVis"/>
+      <slice material = "Air"     thickness = "0.033*cm" vis="InvisibleNoDaughters"/>
+    </layer>
+    <layer repeat="10" vis="EcalLayerVis">
+      <slice material = "TungstenDens24" thickness = "0.5*cm" />
+      <slice material = "Air"     thickness = "0.025*cm" vis="InvisibleNoDaughters"/>
+      <slice material = "Silicon" thickness = "0.032*cm" sensitive="yes" limits="cal_limits" vis="EcalSensitiveVis"/>
+      <slice material = "Copper"  thickness = "0.005*cm" vis="EcalAbsorberVis"/>
+      <slice material = "Kapton"  thickness = "0.030*cm" vis="EcalAbsorberVis"/>
+      <slice material = "Air"     thickness = "0.033*cm" vis="InvisibleNoDaughters"/>
+    </layer>
+  </detector> -->
+</detectors>

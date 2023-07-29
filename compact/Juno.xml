@@ -39,10 +39,15 @@
 
   <includes>
     <!-- 
-      if no <gdmlFile  ref="elements.xml"/>
+      if delete line: <gdmlFile  ref="elements.xml"/>
       Fatal in <TGeoMixture::AddElement>: Cannot add element having Z=26 to mixture Rock 
+      need to check
     -->
     <gdmlFile  ref="elements.xml"/>
+
+    <!-- /home/wln/junosw/Simulation/DetSimV2/DetSimOptions/src/LSExpDetectorConstructionMaterial.icc 
+         /home/wln/junosw/Doc/detsim/material.md
+    -->
     <gdmlFile  ref="Juno_materials.xml"/>
   </includes>
 
@@ -52,8 +57,8 @@
   </define>
 
 
-  <comment> acrylic and liquid scintillator </comment>
-  <include ref="TotSphere.xml"/>
+  <comment> Central Detector </comment>
+  <include ref="CentralDetector.xml"/>
   <!-- <include ref="SiD_Ecal.xml"/> -->
 
 

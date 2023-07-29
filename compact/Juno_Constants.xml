@@ -4,15 +4,47 @@
     <constant name="world_y" value="world_side"/>
     <constant name="world_z" value="world_side"/>
     
-    <!-- LiquidScintillator parameters -->
+
+
+    <!-- 
+      ****************** C E N T R A L    D E T E C T O R  **************
+
+      /home/wln/junosw/Simulation/DetSimV2/CentralDetector/src/DetSim2Construction.cc func: initVariables() 
+      
+      children Vol      in       mother Vol
+      ********************************************
+      lab               in       Steel
+      acrylic           in       lab
+      balloon           in       lab
+      LS                in       ballon 
+      ********************************************
+      steel vol do not apply any placement                     
+
+    -->
+    <!-- LiquidScintillator -->
     <constant name="LiquidScintillator_rmin" value="0"/>
     <constant name="LiquidScintillator_rmax" value="35400/2.0*mm"/>
 
-    <!-- AcrylicVessel parameters thickness=120.0*mm -->
-    <constant name="AcrylicVessel_thickness" value="1200.0*mm"/>
-    <constant name="AcrylicVessel_rmin" value="LiquidScintillator_rmax"/>
-    <constant name="AcrylicVessel_rmax" value="LiquidScintillator_rmax + AcrylicVessel_thickness"/>
+    <constant name="BalloonThickness" value="0.2 *mm"/>
+    <constant name="Balloon_rmin" value="LiquidScintillator_rmax"/>
+    <constant name="Balloon_rmax" value="LiquidScintillator_rmax + BalloonThickness"/>
+
+    <constant name="SpaceInArylicAndBalloon_rmin" value="Balloon_rmax"/>
+    <constant name="SpaceInArylicAndBalloon_rmax" value="Balloon_rmax + 0.1*mm"/>
+
+    <!-- AcrylicVessel, thickness=10.0*mm -->
+    <constant name="AcrylicVessel_thickness" value="10.0*mm"/>
+    <constant name="AcrylicVessel_rmin" value="Balloon_rmax + 0.1*mm"/>
+    <constant name="AcrylicVessel_rmax" value="AcrylicVessel_rmin + AcrylicVessel_thickness"/>
     
+    <constant name="Lab_rmin" value="AcrylicVessel_rmax"/>
+    <constant name="Lab_rmax" value="AcrylicVessel_rmax + 2.5*m"/>
+
+    <constant name="Steel_thickness" value="4.0*cm"/>
+    <constant name="Steel_rmin" value="Lab_rmax"/>
+    <constant name="Steel_rmax" value="Lab_rmax + Steel_thickness"/>
+
+
 
 
 

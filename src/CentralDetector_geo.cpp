@@ -102,4 +102,4 @@ static Ref_t create_detector(Detector &lcdd, xml_h e, SensitiveDetector sens)
   return sdet;
 }
 
-DECLARE_DETELEMENT(DD4hep_TotSphere, create_detector)
+DECLARE_DETELEMENT(DD4hep_CentralDetector, create_detector)

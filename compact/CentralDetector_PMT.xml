@@ -11,12 +11,34 @@
 
 
   <!-- <detector id="EcalEndcap_ID" name="EcalEndcap" type="DD4hep_PolyhedraEndcapCalorimeter2" reflect="true" readout="EcalEndcapHits" vis="EcalEndcapVis" calorimeterType="EM_ENDCAP"> -->
-  
-    <detector  id="80" name="TotSphere" type="DD4hep_TotSphere" >
-    <layer repeat="13413" vis="ttt">
 
-      <torus name="AcrylicVessel" rmin="AcrylicVessel_rmin" rmax="AcrylicVessel_rmax" starttheta="0" endtheta="1*pi" 
-        startphi="0" endphi="2*pi" x="0" y="0" z="0" material="Acrylic" vis="AcrylicVesselVis"/>
+
+  <detector  id="80" name="PMT_type1" type="DD4hep_CentralDetector_PMT" >
+
+    <layer repeat="1" vis="ttt">
+      <!-- 
+        PMT=ellipsoid + Tube, where ellipsoid = sphere scaled
+        there is no ellipsoid in DD4hep.
+        https://github.com/AIDASoft/DD4hep/issues/588 
+      -->
+      <thickness name="_pmt_solid" thickness="0.001 *mm" vis="pmtVis"/>
+      <thickness name="_body_solid" thickness="0 *mm" vis="bodyVis"/>
+      <thickness name="_inner_solid" thickness="-1 *mm" vis="inner_Vis"/>
+
+      <sphere name="PMTEllisolid" rmin="0.0 *mm" rmax="P2r"  material="LS" >
+        <parameters name="scale"    x="P2r" y="P2r" z="P1z" />
+        <position   name="position" x="" y="" z="" />
+      </sphere>
+
+      <polycone type="Polycone" start="0" deltaphi="2*pi" material="LS">
+        <zplane z="P4z" rmin="0" rmax="P4r"/>
+        <zplane z="P3z" rmin="0" rmax="P3r"/>
+        <zplane z="P3z" rmin="0" rmax="r_bottom"/>
+        <zplane z="P2z" rmin="0" rmax="r_bottom"/>
+      </polycone>
+
+
+
 
     </layer>
   
@@ -24,34 +46,4 @@
   </detector>
 
 
-
-
-  <!-- <detector id="EcalEndcap_ID" name="EcalEndcap"> 
-
-    <comment>Electromagnetic Calorimeter Endcaps</comment>
-
-    <dimensions numsides="(int) CaloSides" zmin="EcalEndcap_zmin" rmin="EcalEndcap_rmin" rmax="EcalEndcap_rmax" />
-    <layer repeat="1" vis="EcalLayerVis">
-      <slice material = "Silicon" thickness = "0.032*cm" sensitive="yes" limits="cal_limits" vis="EcalSensitiveVis"/>
-      <slice material = "Copper"  thickness = "0.005*cm" vis="EcalAbsorberVis"/>
-      <slice material = "Kapton"  thickness = "0.030*cm" vis="EcalAbsorberVis"/>
-      <slice material = "Air"     thickness = "0.033*cm" vis="InvisibleNoDaughters"/>
-    </layer>       
-    <layer repeat="20" vis="EcalLayerVis">
-      <slice material = "TungstenDens24" thickness = "0.25*cm" />
-      <slice material = "Air"     thickness = "0.025*cm" vis="InvisibleNoDaughters"/>
-      <slice material = "Silicon" thickness = "0.032*cm" sensitive="yes" limits="cal_limits" vis="EcalSensitiveVis"/>
-      <slice material = "Copper"  thickness = "0.005*cm" vis="EcalAbsorberVis"/>
-      <slice material = "Kapton"  thickness = "0.030*cm" vis="EcalAbsorberVis"/>
-      <slice material = "Air"     thickness = "0.033*cm" vis="InvisibleNoDaughters"/>
-    </layer>
-    <layer repeat="10" vis="EcalLayerVis">
-      <slice material = "TungstenDens24" thickness = "0.5*cm" />
-      <slice material = "Air"     thickness = "0.025*cm" vis="InvisibleNoDaughters"/>
-      <slice material = "Silicon" thickness = "0.032*cm" sensitive="yes" limits="cal_limits" vis="EcalSensitiveVis"/>
-      <slice material = "Copper"  thickness = "0.005*cm" vis="EcalAbsorberVis"/>
-      <slice material = "Kapton"  thickness = "0.030*cm" vis="EcalAbsorberVis"/>
-      <slice material = "Air"     thickness = "0.033*cm" vis="InvisibleNoDaughters"/>
-    </layer>
-  </detector> -->
 </detectors>

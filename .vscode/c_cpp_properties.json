@@ -4,7 +4,9 @@
             "name": "Linux",
             "includePath": [
                 "${default}",
-                "/home/wln/DD4hep/DDJunoDetectors/include"
+                "/home/wln/DD4hep/DDJunoDetectors/include",
+                "/home/wln/anaconda3/envs/root6/include",
+                "/home/wln/DD4hep/include"
             ],
             "defines": [],
             "compilerPath": "/home/wln/anaconda3/envs/root6/bin/gcc",

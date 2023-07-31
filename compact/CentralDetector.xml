@@ -18,7 +18,9 @@
   Balloon_rmin  balloon_rmax
         
    -->
+
   <detector  id="80" name="CentralDetector" type="DD4hep_CentralDetector" >
+  
     <layer>
 
       <sphere name="LiquidScintillator" rmin="LiquidScintillator_rmin" rmax="LiquidScintillator_rmax" starttheta="0" endtheta="1*pi" 

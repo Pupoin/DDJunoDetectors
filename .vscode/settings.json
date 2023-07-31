@@ -2,9 +2,10 @@
     "C_Cpp.default.includePath": [
         "/home/wln/DD4hep/include",
         "/home/wln/DD4hep/DDJunoDetectors/include",
-        "/home/wln/DD4hep/DDJunoDetectors/build/lib"
+        "/home/wln/anaconda3/envs/root6/include"
     ],
     "files.associations": {
+        "*.icc": "cpp",
         "*.dec": "shellscript",
         "*jdl": "shellscript",
         "*.dat": "shellscript",
@@ -13,7 +14,10 @@
         "deque": "cpp",
         "string": "cpp",
         "vector": "cpp",
-        "array": "cpp"
+        "array": "cpp",
+        "stdexcept": "cpp",
+        "branch_element": "cpp"
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "cmake.configureOnOpen": true
 }

@@ -47,6 +47,30 @@
 
 
 
+    <constant name="P1r" value="0.0" /> 
+    <constant name="P1z" value="22.5*mm" /> 
+    <constant name="P2r" value="40.0*mm" />  
+    <constant name="P2z" value="0.0*mm" /> 
+    <constant name="P3r" value="28.25*mm" />  
+    <constant name="P3z" value="-55.5*mm" /> 
+    <constant name="P4r" value="28.25*mm" />  
+    <constant name="P4z" value="-87.5*mm" /> 
+
+    
+    <constant name="thickness" value="0.0*mm" /> 
+    <constant name="aa_p1r"       value="P1r"  />           
+    <constant name="aa_p1z"       value="P1z+thickness"  />
+    <constant name="aa_p2r" value="P2r+thickness"  /> 
+    <constant name="aa_p2z"       value="P2z"  />
+    <constant name="aa_p3r"       value="P3r+thickness"  /> 
+    <constant name="aa_p3z"       value="P3z+thickness"  />
+    <constant name="aa_p4r"       value="P4r+thickness"  /> 
+    <constant name="aa_p4z"       value="P4z-thickness"  />
+    <constant name="r_bottom"   value="51.9*mm/2"  />
+    <constant name="r_botthin"  value="r_bottom+thickness"  /> 
+
+
+
 
 
     <!-- ***

@@ -10,6 +10,7 @@
 #==========================================================================
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 project("JunoDetector")
+include_directories(include)
 
 IF(NOT TARGET DD4hep::DDCore)
   find_package ( DD4hep REQUIRED )

@@ -1,0 +1,551 @@
+  <materials>
+    <isotope N="14" Z="7" name="N140x65b2e80">
+      <atom unit="g/mole" value="14.0031"/>
+    </isotope>
+    <isotope N="15" Z="7" name="N150x65b2ed0">
+      <atom unit="g/mole" value="15.0001"/>
+    </isotope>
+    <element name="Nitrogen0x65b2d10">
+      <fraction n="0.99632" ref="N140x65b2e80"/>
+      <fraction n="0.00368" ref="N150x65b2ed0"/>
+    </element>
+    <isotope N="16" Z="8" name="O160x65b2b80">
+      <atom unit="g/mole" value="15.9949"/>
+    </isotope>
+    <isotope N="17" Z="8" name="O170x65b2bd0">
+      <atom unit="g/mole" value="16.9991"/>
+    </isotope>
+    <isotope N="18" Z="8" name="O180x65b2c20">
+      <atom unit="g/mole" value="17.9992"/>
+    </isotope>
+    <element name="Oxygen0x65b2a60">
+      <fraction n="0.99757" ref="O160x65b2b80"/>
+      <fraction n="0.00038" ref="O170x65b2bd0"/>
+      <fraction n="0.00205" ref="O180x65b2c20"/>
+    </element>
+    <isotope N="36" Z="18" name="Ar360x65b29f0">
+      <atom unit="g/mole" value="35.9675"/>
+    </isotope>
+    <isotope N="38" Z="18" name="Ar380x65b4f50">
+      <atom unit="g/mole" value="37.9627"/>
+    </isotope>
+    <isotope N="40" Z="18" name="Ar400x65b4fa0">
+      <atom unit="g/mole" value="39.9624"/>
+    </isotope>
+    <element name="Argon0x65b4dc0">
+      <fraction n="0.003365" ref="Ar360x65b29f0"/>
+      <fraction n="0.000632" ref="Ar380x65b4f50"/>
+      <fraction n="0.996003" ref="Ar400x65b4fa0"/>
+    </element>
+    <isotope N="12" Z="6" name="C120x65b1d40">
+      <atom unit="g/mole" value="12"/>
+    </isotope>
+    <isotope N="13" Z="6" name="C130x65b1d90">
+      <atom unit="g/mole" value="13.0034"/>
+    </isotope>
+    <element name="Carbon0x65b1c00">
+      <fraction n="0.9893" ref="C120x65b1d40"/>
+      <fraction n="0.0107" ref="C130x65b1d90"/>
+    </element>
+    <material name="Air0x65f8220" state="gas">
+      <property name="RINDEX" ref="RINDEX0x65fea60"/>
+      <property name="GROUPVEL" ref="GROUPVEL0x65feb20"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH0x65fe890"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="85.6717540366814"/>
+      <D unit="g/cm3" value="0.001205"/>
+      <fraction n="0.755" ref="Nitrogen0x65b2d10"/>
+      <fraction n="0.2321" ref="Oxygen0x65b2a60"/>
+      <fraction n="0.0128" ref="Argon0x65b4dc0"/>
+      <fraction n="0.0001" ref="Carbon0x65b1c00"/>
+    </material>
+    <isotope N="28" Z="14" name="Si280x65b3140">
+      <atom unit="g/mole" value="27.9769"/>
+    </isotope>
+    <isotope N="29" Z="14" name="Si290x65b3190">
+      <atom unit="g/mole" value="28.9765"/>
+    </isotope>
+    <isotope N="30" Z="14" name="Si300x65b31e0">
+      <atom unit="g/mole" value="29.9738"/>
+    </isotope>
+    <element name="Silicon0x65b2fc0">
+      <fraction n="0.922296077703922" ref="Si280x65b3140"/>
+      <fraction n="0.0468319531680468" ref="Si290x65b3190"/>
+      <fraction n="0.0308719691280309" ref="Si300x65b31e0"/>
+    </element>
+    <isotope N="27" Z="13" name="Al270x65b2600">
+      <atom unit="g/mole" value="26.9815"/>
+    </isotope>
+    <element name="Aluminium0x65b3360">
+      <fraction n="1" ref="Al270x65b2600"/>
+    </element>
+    <isotope N="54" Z="26" name="Fe540x65b3740">
+      <atom unit="g/mole" value="53.9396"/>
+    </isotope>
+    <isotope N="56" Z="26" name="Fe560x65b3790">
+      <atom unit="g/mole" value="55.9349"/>
+    </isotope>
+    <isotope N="57" Z="26" name="Fe570x65b37e0">
+      <atom unit="g/mole" value="56.9354"/>
+    </isotope>
+    <isotope N="58" Z="26" name="Fe580x65b3830">
+      <atom unit="g/mole" value="57.9333"/>
+    </isotope>
+    <element name="Iron0x65b3580">
+      <fraction n="0.05845" ref="Fe540x65b3740"/>
+      <fraction n="0.91754" ref="Fe560x65b3790"/>
+      <fraction n="0.02119" ref="Fe570x65b37e0"/>
+      <fraction n="0.00282" ref="Fe580x65b3830"/>
+    </element>
+    <isotope N="24" Z="12" name="Mg240x65b3a90">
+      <atom unit="g/mole" value="23.985"/>
+    </isotope>
+    <isotope N="25" Z="12" name="Mg250x65b3ae0">
+      <atom unit="g/mole" value="24.9858"/>
+    </isotope>
+    <isotope N="26" Z="12" name="Mg260x65b3b30">
+      <atom unit="g/mole" value="25.9826"/>
+    </isotope>
+    <element name="Magnesium0x65b3920">
+      <fraction n="0.7899" ref="Mg240x65b3a90"/>
+      <fraction n="0.1" ref="Mg250x65b3ae0"/>
+      <fraction n="0.1101" ref="Mg260x65b3b30"/>
+    </element>
+    <isotope N="40" Z="20" name="Ca400x65b3f70">
+      <atom unit="g/mole" value="39.9626"/>
+    </isotope>
+    <isotope N="42" Z="20" name="Ca420x65b3fc0">
+      <atom unit="g/mole" value="41.9586"/>
+    </isotope>
+    <isotope N="43" Z="20" name="Ca430x65b4010">
+      <atom unit="g/mole" value="42.9588"/>
+    </isotope>
+    <isotope N="44" Z="20" name="Ca440x65b4060">
+      <atom unit="g/mole" value="43.9555"/>
+    </isotope>
+    <isotope N="46" Z="20" name="Ca460x65b40b0">
+      <atom unit="g/mole" value="45.9537"/>
+    </isotope>
+    <isotope N="48" Z="20" name="Ca480x65b4100">
+      <atom unit="g/mole" value="47.9525"/>
+    </isotope>
+    <element name="Calcium0x65b3d90">
+      <fraction n="0.96941" ref="Ca400x65b3f70"/>
+      <fraction n="0.00647" ref="Ca420x65b3fc0"/>
+      <fraction n="0.00135" ref="Ca430x65b4010"/>
+      <fraction n="0.02086" ref="Ca440x65b4060"/>
+      <fraction n="4e-05" ref="Ca460x65b40b0"/>
+      <fraction n="0.00187" ref="Ca480x65b4100"/>
+    </element>
+    <isotope N="23" Z="11" name="Na230x65b4360">
+      <atom unit="g/mole" value="22.9898"/>
+    </isotope>
+    <element name="Sodium0x65b41f0">
+      <fraction n="1" ref="Na230x65b4360"/>
+    </element>
+    <isotope N="39" Z="19" name="K390x65b45f0">
+      <atom unit="g/mole" value="38.9637"/>
+    </isotope>
+    <isotope N="40" Z="19" name="K400x65b4640">
+      <atom unit="g/mole" value="39.964"/>
+    </isotope>
+    <isotope N="41" Z="19" name="K410x65b4690">
+      <atom unit="g/mole" value="40.9618"/>
+    </isotope>
+    <element name="Potassium0x65b4450">
+      <fraction n="0.932581" ref="K390x65b45f0"/>
+      <fraction n="0.000117" ref="K400x65b4640"/>
+      <fraction n="0.067302" ref="K410x65b4690"/>
+    </element>
+    <material name="Rock0x66155d0" state="solid">
+      <property name="ABSLENGTH" ref="ABSLENGTH0x66182c0"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="129.971753019961"/>
+      <D unit="g/cm3" value="2.7"/>
+      <fraction n="0.485" ref="Oxygen0x65b2a60"/>
+      <fraction n="0.343" ref="Silicon0x65b2fc0"/>
+      <fraction n="0.08" ref="Aluminium0x65b3360"/>
+      <fraction n="0.02" ref="Iron0x65b3580"/>
+      <fraction n="0.001" ref="Magnesium0x65b3920"/>
+      <fraction n="0.002" ref="Calcium0x65b3d90"/>
+      <fraction n="0.024" ref="Sodium0x65b41f0"/>
+      <fraction n="0.045" ref="Potassium0x65b4450"/>
+    </material>
+    <isotope N="1" Z="1" name="H10x65b7640">
+      <atom unit="g/mole" value="1.00782503081372"/>
+    </isotope>
+    <isotope N="2" Z="1" name="H20x65b7690">
+      <atom unit="g/mole" value="2.01410199966617"/>
+    </isotope>
+    <element name="H0x65b74e0">
+      <fraction n="0.999885" ref="H10x65b7640"/>
+      <fraction n="0.000115" ref="H20x65b7690"/>
+    </element>
+    <material name="Galactic0x65b65f0" state="gas">
+      <T unit="K" value="2.73"/>
+      <P unit="pascal" value="3e-18"/>
+      <MEE unit="eV" value="19.2"/>
+      <D unit="g/cm3" value="1e-25"/>
+      <fraction n="1" ref="H0x65b74e0"/>
+    </material>
+    <isotope N="55" Z="25" name="Mn550x65b5c70">
+      <atom unit="g/mole" value="54.938"/>
+    </isotope>
+    <element name="Mn0x65b5ad0">
+      <fraction n="1" ref="Mn550x65b5c70"/>
+    </element>
+    <isotope N="31" Z="15" name="P310x65b5ee0">
+      <atom unit="g/mole" value="30.9738"/>
+    </isotope>
+    <element name="Phosphorus0x65b5d60">
+      <fraction n="1" ref="P310x65b5ee0"/>
+    </element>
+    <isotope N="32" Z="16" name="S320x65b4920">
+      <atom unit="g/mole" value="31.9721"/>
+    </isotope>
+    <isotope N="33" Z="16" name="S330x65b4970">
+      <atom unit="g/mole" value="32.9715"/>
+    </isotope>
+    <isotope N="34" Z="16" name="S340x65b49c0">
+      <atom unit="g/mole" value="33.9679"/>
+    </isotope>
+    <isotope N="36" Z="16" name="S360x65b4a10">
+      <atom unit="g/mole" value="35.9671"/>
+    </isotope>
+    <element name="Sulfur0x65b4780">
+      <fraction n="0.9493" ref="S320x65b4920"/>
+      <fraction n="0.0076" ref="S330x65b4970"/>
+      <fraction n="0.0429" ref="S340x65b49c0"/>
+      <fraction n="0.0002" ref="S360x65b4a10"/>
+    </element>
+    <isotope N="50" Z="24" name="Cr500x65b58f0">
+      <atom unit="g/mole" value="49.946"/>
+    </isotope>
+    <isotope N="52" Z="24" name="Cr520x65b5940">
+      <atom unit="g/mole" value="51.9405"/>
+    </isotope>
+    <isotope N="53" Z="24" name="Cr530x65b5990">
+      <atom unit="g/mole" value="52.9407"/>
+    </isotope>
+    <isotope N="54" Z="24" name="Cr540x65b59e0">
+      <atom unit="g/mole" value="53.9389"/>
+    </isotope>
+    <element name="Cr0x65b5730">
+      <fraction n="0.04345" ref="Cr500x65b58f0"/>
+      <fraction n="0.83789" ref="Cr520x65b5940"/>
+      <fraction n="0.09501" ref="Cr530x65b5990"/>
+      <fraction n="0.02365" ref="Cr540x65b59e0"/>
+    </element>
+    <isotope N="58" Z="28" name="Ni580x65b5500">
+      <atom unit="g/mole" value="57.9353"/>
+    </isotope>
+    <isotope N="60" Z="28" name="Ni600x65b5550">
+      <atom unit="g/mole" value="59.9308"/>
+    </isotope>
+    <isotope N="61" Z="28" name="Ni610x65b55a0">
+      <atom unit="g/mole" value="60.9311"/>
+    </isotope>
+    <isotope N="62" Z="28" name="Ni620x65b55f0">
+      <atom unit="g/mole" value="61.9283"/>
+    </isotope>
+    <isotope N="64" Z="28" name="Ni640x65b5640">
+      <atom unit="g/mole" value="63.928"/>
+    </isotope>
+    <element name="Ni0x65b5330">
+      <fraction n="0.680769" ref="Ni580x65b5500"/>
+      <fraction n="0.262231" ref="Ni600x65b5550"/>
+      <fraction n="0.011399" ref="Ni610x65b55a0"/>
+      <fraction n="0.036345" ref="Ni620x65b55f0"/>
+      <fraction n="0.009256" ref="Ni640x65b5640"/>
+    </element>
+    <material name="Steel0x65dfc00" state="solid">
+      <property name="ABSLENGTH" ref="ABSLENGTH0x65e2920"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="280.330055108221"/>
+      <D unit="g/cm3" value="8.1"/>
+      <fraction n="0.70845" ref="Iron0x65b3580"/>
+      <fraction n="0.0008" ref="Carbon0x65b1c00"/>
+      <fraction n="0.02" ref="Mn0x65b5ad0"/>
+      <fraction n="0.00045" ref="Phosphorus0x65b5d60"/>
+      <fraction n="0.0003" ref="Sulfur0x65b4780"/>
+      <fraction n="0.01" ref="Silicon0x65b2fc0"/>
+      <fraction n="0.18" ref="Cr0x65b5730"/>
+      <fraction n="0.08" ref="Ni0x65b5330"/>
+    </material>
+    <isotope N="12" Z="6" name="C_GRAPHITE120x65b1980">
+      <atom unit="g/mole" value="12"/>
+    </isotope>
+    <isotope N="13" Z="6" name="C_GRAPHITE130x65b20b0">
+      <atom unit="g/mole" value="13.0034"/>
+    </isotope>
+    <element name="TS_C_of_Graphite0x65b1f30">
+      <fraction n="0.9893" ref="C_GRAPHITE120x65b1980"/>
+      <fraction n="0.0107" ref="C_GRAPHITE130x65b20b0"/>
+    </element>
+    <isotope N="1" Z="1" name="H_WATER10x65b2560">
+      <atom unit="g/mole" value="1.00782503081372"/>
+    </isotope>
+    <isotope N="2" Z="1" name="H_WATER20x65b25b0">
+      <atom unit="g/mole" value="2.01410199966617"/>
+    </isotope>
+    <element name="TS_H_of_Water0x65b2400">
+      <fraction n="0.999885" ref="H_WATER10x65b2560"/>
+      <fraction n="0.000115" ref="H_WATER20x65b25b0"/>
+    </element>
+    <material name="LS0x65b6780" state="solid">
+      <property name="RINDEX" ref="RINDEX0x65bd590"/>
+      <property name="GROUPVEL" ref="GROUPVEL0x65bf7b0"/>
+      <property name="RAYLEIGH" ref="RAYLEIGH0x65bf850"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH0x65bf9f0"/>
+      <property name="FASTCOMPONENT" ref="FASTCOMPONENT0x65bfa90"/>
+      <property name="SLOWCOMPONENT" ref="SLOWCOMPONENT0x65c05f0"/>
+      <property name="REEMISSIONPROB" ref="REEMISSIONPROB0x65c0690"/>
+      <property name="OpticalCONSTANT" ref="OpticalCONSTANT0x65c1250"/>
+      <property name="GammaCONSTANT" ref="GammaCONSTANT0x65c0760"/>
+      <property name="AlphaCONSTANT" ref="AlphaCONSTANT0x65bd440"/>
+      <property name="NeutronCONSTANT" ref="NeutronCONSTANT0x65c0db0"/>
+      <property name="PPOABSLENGTH" ref="PPOABSLENGTH0x65c0bb0"/>
+      <property name="PPOREEMISSIONPROB" ref="PPOREEMISSIONPROB0x65c0940"/>
+      <property name="PPOCOMPONENT" ref="PPOCOMPONENT0x65c09e0"/>
+      <property name="PPOTIMECONSTANT" ref="PPOTIMECONSTANT0x65c0830"/>
+      <property name="bisMSBABSLENGTH" ref="bisMSBABSLENGTH0x65c0ce0"/>
+      <property name="bisMSBREEMISSIONPROB" ref="bisMSBREEMISSIONPROB0x65bdb20"/>
+      <property name="bisMSBCOMPONENT" ref="bisMSBCOMPONENT0x65bf6f0"/>
+      <property name="bisMSBTIMECONSTANT" ref="bisMSBTIMECONSTANT0x65d4370"/>
+      <property name="SCINTILLATIONYIELD" ref="SCINTILLATIONYIELD"/>
+      <property name="RESOLUTIONSCALE" ref="RESOLUTIONSCALE"/>
+      <property name="CerenkovYieldFactor" ref="CerenkovYieldFactor"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="59.6228860352502"/>
+      <D unit="g/cm3" value="0.859"/>
+      <fraction n="0.87924" ref="TS_C_of_Graphite0x65b1f30"/>
+      <fraction n="0.1201" ref="TS_H_of_Water0x65b2400"/>
+      <fraction n="0.00034" ref="Oxygen0x65b2a60"/>
+      <fraction n="0.00027" ref="Nitrogen0x65b2d10"/>
+      <fraction n="5e-05" ref="Sulfur0x65b4780"/>
+    </material>
+    <isotope N="1" Z="1" name="H10x65b22c0">
+      <atom unit="g/mole" value="1.00782503081372"/>
+    </isotope>
+    <isotope N="2" Z="1" name="H20x65b2310">
+      <atom unit="g/mole" value="2.01410199966617"/>
+    </isotope>
+    <element name="Hydrogen0x65b2180">
+      <fraction n="0.999885" ref="H10x65b22c0"/>
+      <fraction n="0.000115" ref="H20x65b2310"/>
+    </element>
+    <material name="Tyvek0x65d7b90" state="solid">
+      <property name="ABSLENGTH" ref="ABSLENGTH0x65d96a0"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="56.5182975271737"/>
+      <D unit="g/cm3" value="0.94"/>
+      <fraction n="0.856022808267997" ref="Carbon0x65b1c00"/>
+      <fraction n="0.143977191732003" ref="Hydrogen0x65b2180"/>
+    </material>
+    <material name="Scintillator0x661f880" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="64.6844741120544"/>
+      <D unit="g/cm3" value="1.032"/>
+      <fraction n="0.0854556223030713" ref="Hydrogen0x65b2180"/>
+      <fraction n="0.914544377696929" ref="Carbon0x65b1c00"/>
+    </material>
+    <isotope N="46" Z="22" name="Ti460x65b6190">
+      <atom unit="g/mole" value="45.9526"/>
+    </isotope>
+    <isotope N="47" Z="22" name="Ti470x65b3b80">
+      <atom unit="g/mole" value="46.9518"/>
+    </isotope>
+    <isotope N="48" Z="22" name="Ti480x65b3bd0">
+      <atom unit="g/mole" value="47.9479"/>
+    </isotope>
+    <isotope N="49" Z="22" name="Ti490x65b3c20">
+      <atom unit="g/mole" value="48.9479"/>
+    </isotope>
+    <isotope N="50" Z="22" name="Ti500x65b3c70">
+      <atom unit="g/mole" value="49.9448"/>
+    </isotope>
+    <element name="Titanium0x65b5fd0">
+      <fraction n="0.0825" ref="Ti460x65b6190"/>
+      <fraction n="0.0744" ref="Ti470x65b3b80"/>
+      <fraction n="0.7372" ref="Ti480x65b3bd0"/>
+      <fraction n="0.0541" ref="Ti490x65b3c20"/>
+      <fraction n="0.0518" ref="Ti500x65b3c70"/>
+    </element>
+    <material name="TiO2Coating0x6626d20" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="76.1184412056185"/>
+      <D unit="g/cm3" value="1.21"/>
+      <fraction n="0.119866778519288" ref="Titanium0x65b5fd0"/>
+      <fraction n="0.0801332214807117" ref="Oxygen0x65b2a60"/>
+      <fraction n="0.0683644978424571" ref="Hydrogen0x65b2180"/>
+      <fraction n="0.731635502157543" ref="Carbon0x65b1c00"/>
+    </material>
+    <material name="Adhesive0x66243e0" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="64.6844741120546"/>
+      <D unit="g/cm3" value="0.1"/>
+      <fraction n="0.0854556223030713" ref="Hydrogen0x65b2180"/>
+      <fraction n="0.914544377696929" ref="Carbon0x65b1c00"/>
+    </material>
+    <material Z="13" name="Aluminium0x6625c70" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="166"/>
+      <D unit="g/cm3" value="2.7"/>
+      <atom unit="g/mole" value="26.98"/>
+    </material>
+    <material name="LatticedShellSteel0x65e06a0" state="solid">
+      <property name="ABSLENGTH" ref="ABSLENGTH0x65e38d0"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="280.330055108221"/>
+      <D unit="g/cm3" value="8.1"/>
+      <fraction n="0.70845" ref="Iron0x65b3580"/>
+      <fraction n="0.0008" ref="Carbon0x65b1c00"/>
+      <fraction n="0.02" ref="Mn0x65b5ad0"/>
+      <fraction n="0.00045" ref="Phosphorus0x65b5d60"/>
+      <fraction n="0.0003" ref="Sulfur0x65b4780"/>
+      <fraction n="0.01" ref="Silicon0x65b2fc0"/>
+      <fraction n="0.18" ref="Cr0x65b5730"/>
+      <fraction n="0.08" ref="Ni0x65b5330"/>
+    </material>
+    <isotope N="1" Z="1" name="H_POLYETHYLENE10x65b2890">
+      <atom unit="g/mole" value="1.00782503081372"/>
+    </isotope>
+    <isotope N="2" Z="1" name="H_POLYETHYLENE20x65b28e0">
+      <atom unit="g/mole" value="2.01410199966617"/>
+    </isotope>
+    <element name="TS_H_of_Polyethylene0x65b2710">
+      <fraction n="0.999885" ref="H_POLYETHYLENE10x65b2890"/>
+      <fraction n="0.000115" ref="H_POLYETHYLENE20x65b28e0"/>
+    </element>
+    <material name="Acrylic0x65d9870" state="solid">
+      <property name="RINDEX" ref="RINDEX0x65db8f0"/>
+      <property name="GROUPVEL" ref="GROUPVEL0x65dbde0"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH0x65db850"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="68.6339531278178"/>
+      <D unit="g/cm3" value="1.18"/>
+      <fraction n="0.59984" ref="TS_C_of_Graphite0x65b1f30"/>
+      <fraction n="0.08055" ref="TS_H_of_Polyethylene0x65b2710"/>
+      <fraction n="0.31961" ref="Oxygen0x65b2a60"/>
+    </material>
+    <material name="PE_PA0x65f2bb0" state="solid">
+      <property name="RINDEX" ref="RINDEX0x65f7070"/>
+      <property name="GROUPVEL" ref="GROUPVEL0x65f6330"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH0x65f6a80"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="80.8782390529315"/>
+      <D unit="g/cm3" value="0.96"/>
+      <fraction n="0.69906868451688" ref="Carbon0x65b1c00"/>
+      <fraction n="0.135913853317811" ref="Nitrogen0x65b2d10"/>
+      <fraction n="0.00979821497865735" ref="Hydrogen0x65b2180"/>
+      <fraction n="0.155219247186651" ref="Oxygen0x65b2a60"/>
+    </material>
+    <material name="StrutSteel0x65e7420" state="solid">
+      <property name="REFLECTIVITY" ref="REFLECTIVITY0x65e9470"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH0x65e82f0"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="280.330055108221"/>
+      <D unit="g/cm3" value="8.1"/>
+      <fraction n="0.70845" ref="Iron0x65b3580"/>
+      <fraction n="0.0008" ref="Carbon0x65b1c00"/>
+      <fraction n="0.02" ref="Mn0x65b5ad0"/>
+      <fraction n="0.00045" ref="Phosphorus0x65b5d60"/>
+      <fraction n="0.0003" ref="Sulfur0x65b4780"/>
+      <fraction n="0.01" ref="Silicon0x65b2fc0"/>
+      <fraction n="0.18" ref="Cr0x65b5730"/>
+      <fraction n="0.08" ref="Ni0x65b5330"/>
+    </material>
+    <material name="AcrylicMask0x65dc940" state="solid">
+      <property name="RINDEX" ref="RINDEX0x65e1b10"/>
+      <property name="GROUPVEL" ref="GROUPVEL0x65e1bd0"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH0x65dd4a0"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="68.6339531278178"/>
+      <D unit="g/cm3" value="1.18"/>
+      <fraction n="0.59984" ref="TS_C_of_Graphite0x65b1f30"/>
+      <fraction n="0.08055" ref="TS_H_of_Polyethylene0x65b2710"/>
+      <fraction n="0.31961" ref="Oxygen0x65b2a60"/>
+    </material>
+    <material name="CDReflectorSteel0x65e4970" state="solid">
+      <property name="REFLECTIVITY" ref="REFLECTIVITY0x65e6e30"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH0x65e5bb0"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="280.330055108221"/>
+      <D unit="g/cm3" value="8.1"/>
+      <fraction n="0.70845" ref="Iron0x65b3580"/>
+      <fraction n="0.0008" ref="Carbon0x65b1c00"/>
+      <fraction n="0.02" ref="Mn0x65b5ad0"/>
+      <fraction n="0.00045" ref="Phosphorus0x65b5d60"/>
+      <fraction n="0.0003" ref="Sulfur0x65b4780"/>
+      <fraction n="0.01" ref="Silicon0x65b2fc0"/>
+      <fraction n="0.18" ref="Cr0x65b5730"/>
+      <fraction n="0.08" ref="Ni0x65b5330"/>
+    </material>
+    <material name="Vacuum0x65fe1e0" state="gas">
+      <property name="RINDEX" ref="RINDEX0x6600d50"/>
+      <property name="GROUPVEL" ref="GROUPVEL0x6600ed0"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH0x6601500"/>
+      <P unit="pascal" value="785.46511627907"/>
+      <MEE unit="eV" value="85.6717540366814"/>
+      <D unit="g/cm3" value="1e-05"/>
+      <fraction n="0.755" ref="Nitrogen0x65b2d10"/>
+      <fraction n="0.2321" ref="Oxygen0x65b2a60"/>
+      <fraction n="0.0128" ref="Argon0x65b4dc0"/>
+      <fraction n="0.0001" ref="Carbon0x65b1c00"/>
+    </material>
+    <isotope N="10" Z="5" name="B100x65b51f0">
+      <atom unit="g/mole" value="10.0129"/>
+    </isotope>
+    <isotope N="11" Z="5" name="B110x65b5240">
+      <atom unit="g/mole" value="11.0093"/>
+    </isotope>
+    <element name="Boron0x65b5090">
+      <fraction n="0.199" ref="B100x65b51f0"/>
+      <fraction n="0.801" ref="B110x65b5240"/>
+    </element>
+    <material name="Pyrex0x6611af0" state="solid">
+      <property name="RINDEX" ref="RINDEX0x6613660"/>
+      <property name="GROUPVEL" ref="GROUPVEL0x66131c0"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH0x6612930"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="120.375141926703"/>
+      <D unit="g/cm3" value="2.23"/>
+      <fraction n="0.373972374771177" ref="Silicon0x65b2fc0"/>
+      <fraction n="0.521678202337138" ref="Oxygen0x65b2a60"/>
+      <fraction n="0.0524199022789154" ref="Boron0x65b5090"/>
+      <fraction n="0.05192952061277" ref="Sodium0x65b41f0"/>
+    </material>
+    <material name="Water0x661d640" state="solid">
+      <property name="RINDEX" ref="RINDEX0x661f150"/>
+      <property name="GROUPVEL" ref="GROUPVEL0x6620050"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH0x661f730"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="68.9984174679527"/>
+      <D unit="g/cm3" value="1"/>
+      <fraction n="0.112097669256382" ref="Hydrogen0x65b2180"/>
+      <fraction n="0.887902330743618" ref="Oxygen0x65b2a60"/>
+    </material>
+    <isotope N="19" Z="9" name="F190x65b4c60">
+      <atom unit="g/mole" value="18.9984"/>
+    </isotope>
+    <element name="Fluorine0x65b4b00">
+      <fraction n="1" ref="F190x65b4c60"/>
+    </element>
+    <material name="Teflon0x65df280" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="87.8191047657801"/>
+      <D unit="g/cm3" value="2.2"/>
+      <fraction n="0.759814" ref="Carbon0x65b1c00"/>
+      <fraction n="0.240186" ref="Fluorine0x65b4b00"/>
+    </material>
+    <material name="vetoWater0x661ba70" state="solid">
+      <property name="RINDEX" ref="RINDEX0x661cc70"/>
+      <property name="GROUPVEL" ref="GROUPVEL0x661ce40"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH0x661cd60"/>
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="68.9984174679527"/>
+      <D unit="g/cm3" value="1"/>
+      <fraction n="0.112097669256382" ref="Hydrogen0x65b2180"/>
+      <fraction n="0.887902330743618" ref="Oxygen0x65b2a60"/>
+    </material>
+  </materials>

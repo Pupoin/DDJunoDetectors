@@ -17,6 +17,7 @@
 #include "DD4hep/DetFactoryHelper.h"
 #include "XML/Layering.h"
 
+
 using namespace std;
 using namespace dd4hep;
 using namespace dd4hep::detail;
@@ -27,6 +28,9 @@ static Ref_t create_detector(Detector &lcdd, xml_h e, SensitiveDetector sens)
   int         det_id   = x_det.id();
 
   DetElement sdet(det_name, det_id);
+  DetElement parent = lcdd.detector("WaterPool");
+  lcdd.declareParent(det_name, parent);
+
   Volume motherVol = lcdd.pickMotherVolume(sdet);
   PlacedVolume pv;
 
@@ -89,7 +93,6 @@ static Ref_t create_detector(Detector &lcdd, xml_h e, SensitiveDetector sens)
       Volume LSVol(s_name, LiquidScintillator, materi);
       LSVol.setVisAttributes(lcdd.visAttributes( x_sphere.visStr()));
       pv = totSphereVol.placeVolume(LSVol, Position(pos_x, pos_y, pos_z));
-      // pv = motherVol.placeVolume(v_LS, Position(0, 0, 0));
       pv.addPhysVolID("sphere", sphereNum);
 
       if (x_sphere.isSensitive())
@@ -103,7 +106,7 @@ static Ref_t create_detector(Detector &lcdd, xml_h e, SensitiveDetector sens)
   }
 
   
-
+  cout << "@@@@ ; " << motherVol.name() <<endl;
   PlacedVolume phv = motherVol.placeVolume(totSphereVol, Position(0, 0, 0));
   phv.addPhysVolID("system", sdet.id()).addPhysVolID("sphere", 1);
 

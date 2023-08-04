@@ -1,0 +1,23 @@
+<!-- ====================================================================== -->
+<!--                                                                        -->
+<!--    XML description of the water pool calorimeter endcap detector  -->
+<!--    of the SiD linear collider detector design.                         -->
+<!--                                                                        -->
+<!-- ====================================================================== -->
+
+
+      
+<detectors>
+
+
+  <detector  id="81" name="WaterPool" type="DD4hep_WaterPool" >
+  
+
+    <tube name="WaterPoolTube" rmin="0" rmax="21750*mm" height="43500*mm" startphi="0" endphi="2*pi" material="vetoWater" vis="WaterPoolVis">
+      <!-- <position x="" y="" z="" /> -->
+    </tube>    
+  
+  
+  </detector>
+
+</detectors>

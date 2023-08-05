@@ -32,17 +32,17 @@ using namespace dd4hep::detail;
 /// @param e xml_h
 /// @param thicknessIdx the index of <thickness> tag in order which is in xml files. 0 is the first <thickness> tag, 1 is the second ....
 /// @return pmt Solid
-Solid PMTCore(Detector &lcdd, xml_h e, int thicknessIdx){
+Solid PMTSolid(Detector &lcdd, xml_h e, int thicknessIdx){
   xml_det_t   x_det    = e;
   string      det_name = x_det.nameStr();
   // int         det_id   = x_det.id();
 
   vector<string> thincknessName;
   vector<double> thicknessValue;
-  for (xml_coll_t xc(x_det, _U(layer)); xc; ++xc)
+  for (xml_coll_t xc(x_det, _U(module)); xc; ++xc)
   {
-    xml_comp_t xlayer       = xc;
-    for(xml_coll_t zc(xlayer, _U(thickness)); zc; ++zc)
+    xml_comp_t xmodule       = xc;
+    for(xml_coll_t zc(xmodule, _U(thickness)); zc; ++zc)
     {
       xml_comp_t x_thick = zc;
       thincknessName.push_back(x_thick.nameStr());
@@ -56,16 +56,14 @@ Solid PMTCore(Detector &lcdd, xml_h e, int thicknessIdx){
   Volume pmtVol;
   Solid pmt;
 
-  // iterate the layer, contents in layer
-  for (xml_coll_t xc(x_det, _U(layer)); xc; ++xc)
+  // iterate the module, contents in module
+  for (xml_coll_t xc(x_det, _U(module)); xc; ++xc)
   {
-    xml_comp_t xlayer       = xc;
+    xml_comp_t xmodule       = xc;
 
     // construct the ellisolid volume
-    xml_comp_t pmtElli = xlayer.child(_U(sphere));
-    // xml_dim_t  ell_position = pmtElli.position();
+    xml_comp_t pmtElli = xmodule.child(_U(sphere));
     xml_dim_t  ell_scale    = pmtElli.parameters();
-    // Material   pmtElliMat    = lcdd.material(pmtElli.materialStr());
     double     rmin         = pmtElli.rmin();
     double     rmax         = pmtElli.rmax()  + thickness;
     double     xScale       = (ell_scale.x()  + thickness)/rmax;
@@ -77,8 +75,7 @@ Solid PMTCore(Detector &lcdd, xml_h e, int thicknessIdx){
     // Volume pmtElliVol("pmtEllisolid", pmtElliSolid, pmtElliMat);
   
     // constuct the polycone volume
-    xml_comp_t pmtPolycone  = xlayer.child(_U(polycone));
-    // Material   pmtPolMat    = lcdd.material(pmtPolycone.materialStr()); 
+    xml_comp_t pmtPolycone  = xmodule.child(_U(polycone));
     double     pol_startPhi = pmtPolycone.start();
     double     pol_deltaPhi = pmtPolycone.deltaphi();
     vector<double> zPlane, rInner, rOuter;
@@ -109,22 +106,75 @@ Solid PMTCore(Detector &lcdd, xml_h e, int thicknessIdx){
 }
 
 
+/// @brief 
+/// @param lcdd 
+/// @param e 
+/// @return PMT Volume 
+// PlacedVolume PMTVol(Detector &lcdd, xml_h e, SensitiveDetector sens){
+
+//   xml_det_t   x_det    = e;
+//   string      det_name = x_det.nameStr();
+//   int         det_id   = x_det.id();
+
+//   Solid pmt_solid   = PMTSolid(lcdd, e, 0);
+//   Solid body_solid  = PMTSolid(lcdd, e, 1);
+//   Solid inner_solid = PMTSolid(lcdd, e, 2);
+
+//   double rEllip=0;
+//   double zEllip=0;
+//   for (xml_coll_t xc(x_det, _U(module)); xc; ++xc)
+//   {
+//     xml_comp_t xmodule       = xc; 
+//     xml_comp_t pmtElli      = xmodule.child(_U(sphere));
+//     xml_dim_t  ell_scale    = pmtElli.parameters();
+//     rEllip         = pmtElli.rmax();
+//     zEllip         = ell_scale.z() ;
+//   }
+
+//   Tube pInnerSep("", 0, rEllip+1E-9*mm, zEllip/2.0 + 1E-9*mm, 0, 2*M_PI);
+//   // Volume ttt("", pInnerSep, lcdd.air());
+
+//   Position innerSepDispl(0.,0.,zEllip/2.0 -1E-9*mm);
+//   Solid inner1_solid = IntersectionSolid(inner_solid, pInnerSep, innerSepDispl);
+//   Solid inner2_solid = SubtractionSolid (inner_solid, pInnerSep, innerSepDispl);
+
+//   Volume pmt_log   ("", pmt_solid,    lcdd.material("Pyrex"));
+//   Volume body_log  ("", body_solid,   lcdd.material("Pyrex"));
+//   Volume inner1_log("", inner1_solid, lcdd.vacuum()); // half of Ellisolid
+//   Volume inner2_log("", inner2_solid, lcdd.vacuum()); // half of Ellisolid + tube
+
+//   PlacedVolume body_phys   = pmt_log.placeVolume(body_log);
+//   PlacedVolume inner1_phys = body_log.placeVolume(inner1_log); 
+//   PlacedVolume inner2_phys = body_log.placeVolume(inner2_log); 
+
+
+//   // set the vis attributes
+//   inner1_log.setVisAttributes(lcdd.visAttributes("inner1Vis"));
+//   inner2_log.setVisAttributes(lcdd.visAttributes("inner2Vis"));
+//   body_log.setVisAttributes  (lcdd.visAttributes("bodyVis"));
+
+//   return body_log;
+
+// }
+
 static Ref_t create_detector(Detector &lcdd, xml_h e, SensitiveDetector sens)
 {
   xml_det_t   x_det    = e;
   string      det_name = x_det.nameStr();
   int         det_id   = x_det.id();
 
-  Solid pmt_solid   = PMTCore(lcdd, e, 0);
-  Solid body_solid  = PMTCore(lcdd, e, 1);
-  Solid inner_solid = PMTCore(lcdd, e, 2);
+
+  // PlacedVolume body_log=PMTVol(lcdd, e, sens);
+  Solid pmt_solid   = PMTSolid(lcdd, e, 0);
+  Solid body_solid  = PMTSolid(lcdd, e, 1);
+  Solid inner_solid = PMTSolid(lcdd, e, 2);
 
   double rEllip=0;
   double zEllip=0;
-  for (xml_coll_t xc(x_det, _U(layer)); xc; ++xc)
+  for (xml_coll_t xc(x_det, _U(module)); xc; ++xc)
   {
-    xml_comp_t xlayer       = xc;
-    xml_comp_t pmtElli      = xlayer.child(_U(sphere));
+    xml_comp_t xmodule       = xc; 
+    xml_comp_t pmtElli      = xmodule.child(_U(sphere));
     xml_dim_t  ell_scale    = pmtElli.parameters();
     rEllip         = pmtElli.rmax();
     zEllip         = ell_scale.z() ;
@@ -152,23 +202,17 @@ static Ref_t create_detector(Detector &lcdd, xml_h e, SensitiveDetector sens)
   inner2_log.setVisAttributes(lcdd.visAttributes("inner2Vis"));
   body_log.setVisAttributes  (lcdd.visAttributes("bodyVis"));
 
-  // if ( x_slice.isSensitive() )  {
-  // if ( 1 )  {
-    // sens.setType("calorimeter");
-    // inner1_log.setSensitiveDetector(sens);
-    // sensitives.push_back(s_phv);
-  // }
 
   DetElement sdet(det_name, det_id);
   Volume motherVol = lcdd.pickMotherVolume(sdet);
   PlacedVolume phv = motherVol.placeVolume(body_log, Position(0, 0, 0));
-  // phv.addPhysVolID("system", sdet.id()).addPhysVolID("sphere", 1);
+  phv.addPhysVolID("system", sdet.id()).addPhysVolID("pmt", 1);
 
   sdet.setPlacement(phv);
   cout << "@@@ PMTConstructor INFO " << __LINE__ << " configure one PMT shape finished " << endl;
 
 
-  // atach optical surface to the Volume
+  // atouch optical surface to the Volume
   // help:
   // https://geant4-userdoc.web.cern.ch/UsersGuides/ForApplicationDeveloper/html/TrackingAndPhysics/physicsProcess.html#optical-photon-processes
   // https://geant4-userdoc.web.cern.ch/Doxygen/examples_doc/html/ExampleOpNovice.html
@@ -177,22 +221,29 @@ static Ref_t create_detector(Detector &lcdd, xml_h e, SensitiveDetector sens)
   // https://www.liangye.site/2022/05/12/geant4-optical/
   // Now attach the surface
   // need to fix, wrong parameters
-  OpticalSurfaceManager surfMgr = lcdd.surfaceManager();
-  OpticalSurface waterSurf  = surfMgr.opticalSurface("/world/BubbleDevice#WaterSurface");
-  OpticalSurface airSurf    = surfMgr.opticalSurface("/world/BubbleDevice#AirSurface");
+  // OpticalSurfaceManager surfMgr = lcdd.surfaceManager();
+  // OpticalSurface waterSurf  = surfMgr.opticalSurface("/world/BubbleDevice#WaterSurface");
+  // OpticalSurface airSurf    = surfMgr.opticalSurface("/world/BubbleDevice#AirSurface");
 
-  BorderSurface  tankSurf   = BorderSurface(lcdd, sdet, "HallTank",   waterSurf, inner2_phys, body_phys);
-  BorderSurface  bubbleSurf = BorderSurface(lcdd, sdet, "TankBubble", airSurf,   inner2_phys, body_phys);
-  bubbleSurf.isValid();
-  tankSurf.isValid();
+  // BorderSurface  tankSurf   = BorderSurface(lcdd, sdet, "HallTank",   waterSurf, inner2_phys, body_phys);
+  // BorderSurface  bubbleSurf = BorderSurface(lcdd, sdet, "TankBubble", airSurf,   inner2_phys, body_phys);
+  // bubbleSurf.isValid();
+  // tankSurf.isValid();
 
+
+  // if ( x_slice.isSensitive() )  {
+  // if ( 1 )  {
+    // sens.setType("tracker");
+    // pmt_log.setSensitiveDetector(sens);
+    // sensitives.push_back(s_phv);
+  // }
   cout << "@@@ PMTConstructor INFO " << __LINE__ << " configure PMT optical surface finished " << endl;
 
 
 
 
 
-
+/*
 
   PMTParam PMT_WP("/home/wln/junosw/data/Detector/Geometry/PMTPos_WP_LPMT.csv", PMTType::Hamamatsu);
   PMTParam PMT_CD_Large("/home/wln/junosw/data/Detector/Geometry/PMTPos_CD_LPMT.csv", "/home/wln/junosw/data/Detector/Geometry/PMTType_CD_LPMT.csv");
@@ -224,7 +275,7 @@ static Ref_t create_detector(Detector &lcdd, xml_h e, SensitiveDetector sens)
 
   // {NotSet=1, HZC, Hamamatsu, NNVT, HighQENNVT};
 
-  
+  */
 
   
 

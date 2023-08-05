@@ -5,42 +5,48 @@
 <!--                                                                        -->
 <!-- ====================================================================== -->
 
-
+<!-- 
+  PMT=ellipsoid + Tube, where ellipsoid = sphere scaled
+  there is no ellipsoid in DD4hep.
+  https://github.com/AIDASoft/DD4hep/issues/588 
+-->
 
 
 <detectors>
-
-
   <!-- <detector id="EcalEndcap_ID" name="EcalEndcap" type="DD4hep_PolyhedraEndcapCalorimeter2" reflect="true" readout="EcalEndcapHits" vis="EcalEndcapVis" calorimeterType="EM_ENDCAP"> -->
-
 
   <detector  id="80" name="PMT_type1" type="DD4hep_CentralDetector_PMT"  calorimeterType="EM_ENDCAP">
 
+      <module type="Hamamatsu">
+        <thickness name="_pmt_solid" thickness="0.001 *mm" vis="pmtVis"/>
+        <thickness name="_body_solid" thickness="0 *mm" vis="bodyVis"/>
+        <thickness name="_inner_solid" thickness="-10 *mm" vis="inner_Vis"/>
+        <sphere name="PMTEllisolid" rmin="0.0 *mm" rmax="P2r" sensitive="yes"  >
+          <parameters name="scale"    x="P2r" y="P2r" z="P1z" />
+        </sphere>
+        <polycone type="Polycone" start="0" deltaphi="2*pi">
+          <zplane z="P4z" rmin="0" rmax="P4r"/>
+          <zplane z="P3z" rmin="0" rmax="P3r"/>
+          <zplane z="P3z" rmin="0" rmax="r_bottom"/>
+          <zplane z="P2z" rmin="0" rmax="r_bottom"/>
+        </polycone>
+      </module>
+<!-- 
+      <module type="NNVT">
+      </module>
+
+      <module type="HighQENNVT">
+      </module>
+
+      <module type="HZC">
+      </module> -->
+
     <layer repeat="1" vis="ttt">
       <!-- 
-        PMT=ellipsoid + Tube, where ellipsoid = sphere scaled
-        there is no ellipsoid in DD4hep.
-        https://github.com/AIDASoft/DD4hep/issues/588 
+        put different types of PMTs 
+        with positions and rotations
+        here.
       -->
-      <thickness name="_pmt_solid" thickness="0.001 *mm" vis="pmtVis"/>
-      <thickness name="_body_solid" thickness="0 *mm" vis="bodyVis"/>
-      <thickness name="_inner_solid" thickness="-10 *mm" vis="inner_Vis"/>
-
-      <sphere name="PMTEllisolid" rmin="0.0 *mm" rmax="P2r" sensitive="yes"  >
-        <parameters name="scale"    x="P2r" y="P2r" z="P1z" />
-        <position   name="position" x="" y="" z="" />
-      </sphere>
-
-      <polycone type="Polycone" start="0" deltaphi="2*pi">
-        <zplane z="P4z" rmin="0" rmax="P4r"/>
-        <zplane z="P3z" rmin="0" rmax="P3r"/>
-        <zplane z="P3z" rmin="0" rmax="r_bottom"/>
-        <zplane z="P2z" rmin="0" rmax="r_bottom"/>
-      </polycone>
-
-
-  
-
     </layer>
   
   

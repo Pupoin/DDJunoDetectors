@@ -89,3 +89,24 @@
 
 
 </lccdd>
+
+<!-- 
+/home/wln/DD4hep_source/DDCore/include/XML/UnicodeValues.h
+
+UNICODE (bordersurface); 
+UNICODE (material);
+UNICODE (materialref);
+UNICODE (materials);
+UNICODE (matrices);
+UNICODE (matrix);
+UNICODE (member);
+UNICODE (mesh);
+UNICODE (MeV);
+UNICODE (mm);
+UNICODE (model);
+UNICODE (module);
+UNICODE (modules);
+UNICODE (module_component);
+
+
+-->

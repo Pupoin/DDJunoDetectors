@@ -11,7 +11,7 @@ using namespace dd4hep;
 using namespace dd4hep::detail;
 
 
-enum class PMTType {NotSet=0, HZC, Hamamatsu, NNVT, HighQENNVT};
+enum class PMTType {NotSet=0, Hamamatsu, NNVT, HighQENNVT, HZC};
 
 class PMT
 {

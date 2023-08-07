@@ -14,7 +14,7 @@
   
     <layer>
 
-      <box name="SingleTT" x="21750" y=""  z="" material="Air">
+      <box name="SingleTT" x="47 *m" y="20 *m"  z="3 *m" material="Air">
         <position x="0" y="0" z="0" />
       </box>
     

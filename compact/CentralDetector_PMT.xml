@@ -41,7 +41,8 @@
       <module type="HZC">
       </module> -->
 
-    <layer repeat="1" vis="ttt">
+    <!-- <layer name="PMTPos_CD_LPMT" repeat="17612" vis="ttt"> -->
+    <layer name="PMTPos_CD_LPMT" repeat="305" vis="ttt">
       <!-- 
         put different types of PMTs 
         with positions and rotations
@@ -54,3 +55,11 @@
 
 
 </detectors>
+
+
+  <!-- 
+  17612 PMTPos_CD_LPMT.csv
+  25600 PMTPos_CD_SPMT.csv
+   4800 PMTPos_WP_LPMT.csv
+  17612 PMTType_CD_LPMT.csv
+  25600 PMTType_CD_SPMT.csv -->

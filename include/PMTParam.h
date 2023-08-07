@@ -7,11 +7,14 @@
 #include "XML/Layering.h"
 #include "Math/Vector3D.h"
 #include "Math/Transform3D.h"
-
+#include "Math/AxisAngle.h"
+#include "Math/RotationZ.h"
 
 using namespace std;
 using namespace dd4hep;
 using namespace dd4hep::detail;
+using namespace ROOT::Math;
+
 
 
 class PMTParam 

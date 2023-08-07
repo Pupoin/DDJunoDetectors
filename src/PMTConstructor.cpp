@@ -18,13 +18,17 @@
 #include "XML/Layering.h"
 #include "PMT.h"
 #include "PMTParam.h"
-
+#include "Math/Vector3D.h"
+#include "Math/AxisAngle.h"
+#include "Math/RotationZ.h"
 #include "Math/Vector3D.h"
 #include "Math/Transform3D.h"
 
 using namespace std;
 using namespace dd4hep;
 using namespace dd4hep::detail;
+using namespace ROOT::Math;
+
 
 
 /// @brief contruct the PMT core Solid. 
@@ -203,13 +207,13 @@ static Ref_t create_detector(Detector &lcdd, xml_h e, SensitiveDetector sens)
   body_log.setVisAttributes  (lcdd.visAttributes("bodyVis"));
 
 
-  DetElement sdet(det_name, det_id);
-  Volume motherVol = lcdd.pickMotherVolume(sdet);
-  PlacedVolume phv = motherVol.placeVolume(body_log, Position(0, 0, 0));
-  phv.addPhysVolID("system", sdet.id()).addPhysVolID("pmt", 1);
+  // DetElement sdet(det_name, det_id);
+  // Volume motherVol = lcdd.pickMotherVolume(sdet);
+  // PlacedVolume phv = motherVol.placeVolume(body_log, Position(0, 0, 0));
+  // phv.addPhysVolID("system", sdet.id()).addPhysVolID("pmt", 1);
 
-  sdet.setPlacement(phv);
-  cout << "@@@ PMTConstructor INFO " << __LINE__ << " configure one PMT shape finished " << endl;
+  // sdet.setPlacement(phv);
+  // cout << "@@@ PMTConstructor INFO " << __LINE__ << " configure one PMT shape finished " << endl;
 
 
   // atouch optical surface to the Volume
@@ -237,10 +241,46 @@ static Ref_t create_detector(Detector &lcdd, xml_h e, SensitiveDetector sens)
     // pmt_log.setSensitiveDetector(sens);
     // sensitives.push_back(s_phv);
   // }
-  cout << "@@@ PMTConstructor INFO " << __LINE__ << " configure PMT optical surface finished " << endl;
+  // cout << "@@@ PMTConstructor INFO " << __LINE__ << " configure PMT optical surface finished " << endl;
 
 
 
+  // place pmts into central detector
+  // PMTParam PMT_CD_Large("/home/wln/junosw/data/Detector/Geometry/PMTPos_CD_LPMT.csv", "/home/wln/junosw/data/Detector/Geometry/PMTType_CD_LPMT.csv");
+  PMTParam PMT_CD_Large("/home/wln/DD4hep/DDJunoDetectors/b.csv", PMTType::NNVT);
+  map<int, PMT> pmtpars = PMT_CD_Large.getPMTParam();
+  xml_comp_t xlayer = x_det.child(_U(layer));
+  uint64_t lcd_repeat = xlayer.repeat();
+  if ( lcd_repeat <= 0 || lcd_repeat!=pmtpars.size()) 
+    throw std::runtime_error(x_det.nameStr()+"> Invalid repeat value, "
+    +xlayer.nameStr()+" repeat != pmt num in file"  );
+  
+  PlacedVolume pv;
+  DetElement sdet(det_name, det_id);
+  Assembly assembly(det_name);
+  int iab=1;
+  for(auto &item :pmtpars)
+  {
+    PMT       mpmt = item.second;
+    Position  pos  = mpmt.getPMTPosition();
+    AxisAngle rot  = mpmt.getPMTRotation();
+    PMTType   ty   = mpmt.getPMTType();
+    // if(ty!=PMTType::NNVT)
+    //   continue;
+
+    pv = assembly.placeVolume(body_log,Transform3D(rot, pos));
+    
+iab++;
+// if(iab>20)
+// break;
+  }
+
+  Volume motherVol = lcdd.pickMotherVolume(sdet);
+  PlacedVolume phv = motherVol.placeVolume(assembly, Position(0, 0, 0));
+  phv.addPhysVolID("system", sdet.id()).addPhysVolID("pmt", 1);
+
+  sdet.setPlacement(phv);
+  cout << "@@@ PMTConstructor INFO " << __LINE__ << " configure one PMT shape finished " << endl;
 
 
 /*

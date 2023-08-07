@@ -13,10 +13,15 @@
 #include <vector>
 #include <iterator>
 #include <regex>
+#include <Evaluator/DD4hepUnits.h>
+#include "Math/AxisAngle.h"
+#include "Math/RotationZ.h"
 
 using namespace std;
 using namespace dd4hep;
 using namespace dd4hep::detail;
+using namespace ROOT::Math;
+
 
 
 void trim(string &s)
@@ -83,8 +88,19 @@ void PMTParam::readFileGetPosition(int paramNumPerLine)
     {
       int idx = stoi(num[0]);
       Position pos(stof(num[1]), stof(num[2]), stof(num[3]));
-      XYZAngles ang(stof(num[4]), stof(num[5]), 0);
-      _pmtParam[idx] = PMT(pos, ang, _defaultPMTType);
+
+
+    double mtheta = stof(num[4]); // 1.79773944469553; //
+    double mphi   = stof(num[5]); // 1.54077938433657;  //
+
+    ROOT::Math::XYZVector a(0,1,0);
+    ROOT::Math::RotationZ rz(mphi);  // phi
+    auto raxis=rz*a;
+    ROOT::Math::AxisAngle ryz(raxis, mtheta + pi);  // theta
+
+      cout << "@@ int pmtParam " << stof(num[5]) <<" " <<  stof(num[4]) << "  aa " << rad <<endl;
+
+      _pmtParam[idx] = PMT(pos, ryz, _defaultPMTType);
     }
   }
   cout << "@@@ PMTParam " << __LINE__ <<  ", file=" << filePath << ", line nums=" << _pmtParam.size() << endl;

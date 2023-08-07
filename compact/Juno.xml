@@ -78,8 +78,8 @@
   </surfaces>
   
   <comment> Central Detector </comment>
-  <!-- <include ref="WaterPool.xml"/> -->
-  <!-- <include ref="CentralDetector.xml"/> -->
+  <!-- <include ref="WaterPool.xml"/>
+  <include ref="CentralDetector.xml"/> -->
   <!-- <include ref="TopTrigger.xml"/> -->
   <include ref="CentralDetector_PMT.xml"/>
 

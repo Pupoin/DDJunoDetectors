@@ -17,7 +17,7 @@
 
   <detector  id="80" name="PMT_type1" type="DD4hep_CentralDetector_PMT"  calorimeterType="EM_ENDCAP">
 
-      <module type="Hamamatsu">
+      <module name="Hamamatsu">
         <thickness name="_pmt_solid" thickness="0.001 *mm" vis="pmtVis"/>
         <thickness name="_body_solid" thickness="0 *mm" vis="bodyVis"/>
         <thickness name="_inner_solid" thickness="-10 *mm" vis="inner_Vis"/>
@@ -41,7 +41,7 @@
       <module type="HZC">
       </module> -->
 
-    <!-- <layer name="PMTPos_CD_LPMT" repeat="17612" vis="ttt"> -->
+    <!-- <layer name="PMTPos_CD_LPMT"  module="Hamamatsu" repeat="17612" vis="ttt"> -->
     <layer name="PMTPos_CD_LPMT" repeat="305" vis="ttt">
       <!-- 
         put different types of PMTs 

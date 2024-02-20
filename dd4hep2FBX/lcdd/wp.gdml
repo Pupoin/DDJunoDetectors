@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<gdml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://service-spi.web.cern.ch/service-spi/app/releases/GDML/schema/gdml.xsd">
+  <define>
+    <matrix name="RINDEX0x660a7b0" coldim="2" values="3.26274e-06 1.92
+4.13e-06 1.49
+4.96e-06 0.564
+1.55e-05 0.88"/>
+    <matrix name="REFLECTIVITY0x660b030" coldim="2" values="1.55e-06 0
+6.2e-06 0
+1.033e-05 0
+1.55e-05 0"/>
+    <matrix name="EFFICIENCY0x660b200" coldim="2" values="1.55e-06 1
+1.55e-05 1"/>
+    <matrix name="GROUPVEL0x660a8f0" coldim="2" values="3.26274e-06 156.142
+3.69637e-06 175.831
+4.545e-06 291.911
+1.55e-05 259.038"/>
+    <matrix name="KINDEX0x660a9f0" coldim="2" values="3.26274e-06 1.69
+4.13e-06 2
+4.96e-06 1.79
+1.55e-05 1.79"/>
+    <matrix name="THICKNESS0x660b3b0" coldim="2" values="0 2.6e-05
+375 2.6e-05"/>
+    <matrix name="RINDEX0x66068c0" coldim="2" values="3.26274e-06 1.92
+4.13e-06 1.49
+4.96e-06 0.564
+1.55e-05 0.88"/>
+    <matrix name="REFLECTIVITY0x66070a0" coldim="2" values="1.55e-06 0
+6.2e-06 0
+1.033e-05 0
+1.55e-05 0"/>
+    <matrix name="EFFICIENCY0x6607db0" coldim="2" values="1.55e-06 1
+1.55e-05 1"/>
+    <matrix name="GROUPVEL0x66069d0" coldim="2" values="3.26274e-06 156.142
+3.69637e-06 175.831
+4.545e-06 291.911
+1.55e-05 259.038"/>
+    <matrix name="KINDEX0x6606f40" coldim="2" values="3.26274e-06 1.69
+4.13e-06 2
+4.96e-06 1.79
+1.55e-05 1.79"/>
+    <matrix name="THICKNESS0x6607200" coldim="2" values="0 2.6e-05
+375 2.6e-05"/>
+    <matrix name="RINDEX0x6604740" coldim="2" values="1.55e-06 2.9
+6.2e-06 2.9
+1.033e-05 2.9
+1.55e-05 2.9"/>
+    <matrix name="REFLECTIVITY0x6604590" coldim="2" values="1.55e-06 0
+6.2e-06 0
+1.033e-05 0
+1.55e-05 0"/>
+    <matrix name="EFFICIENCY0x6605000" coldim="2" values="1.55e-06 1
+1.55e-05 1"/>
+    <matrix name="GROUPVEL0x6604ca0" coldim="2" values="1.55e-06 103.377
+3.875e-06 103.377
+8.265e-06 103.377
+1.55e-05 103.377"/>
+    <matrix name="KINDEX0x6604de0" coldim="2" values="1.55e-06 1.6
+6.2e-06 1.6
+1.033e-05 1.6
+1.55e-05 1.6"/>
+    <matrix name="THICKNESS0x6605270" coldim="2" values="0 2.6e-05
+375 2.6e-05"/>
+    <matrix name="RINDEX__Acrylic_PFRICH" coldim="2" values="4.13281e-09 1.5017
+4.22099e-09 1.5017
+4.30916e-09 1.5017
+4.39734e-09 1.5017
+4.48552e-09 1.5017
+4.57369e-09 1.5017
+4.66187e-09 1.5017
+4.75005e-09 1.5017
+4.83822e-09 1.5017
+4.9264e-09 1.5017
+5.01458e-09 1.5017
+5.10275e-09 1.5017
+5.19093e-09 1.5017
+5.27911e-09 1.5017
+5.36728e-09 1.5017
+5.45546e-09 1.5017
+5.54364e-09 1.5017
+5.63181e-09 1.5017
+5.71999e-09 1.5017
+5.80817e-09 1.5017
+5.89634e-09 1.5017
+5.98452e-09 1.5017
+6.0727e-09 1.5017
+6.16087e-09 1.5017
+6.24905e-09 1.5017
+6.33723e-09 1.5017
+6.4254e-09 1.5017
+6.51358e-09 1.5017
+6.60176e-09 1.5017
+6.68993e-09 1.5017
+6.77811e-09 1.5017
+6.86629e-09 1.5017
+6.95446e-09 1.5017
+7.04264e-09 1.5017
+7.13082e-09 1.5017
+7.21899e-09 1.5017
+7.30717e-09 1.5017
+7.39535e-09 1.5017
+7.48353e-09 1.5017
+7.5717e-09 1.5017
+7.65988e-09 1.5017
+7.74806e-09 1.5017
+7.83623e-09 1.5017
+7.92441e-09 1.5017
+8.01259e-09 1.5017
+8.10076e-09 1.5017
+8.18894e-09 1.5017
+8.27712e-09 1.5017
+8.36529e-09 1.5017
+8.45347e-09 1.5017"/>
+    <matrix name="ABSLENGTH__Acrylic_PFRICH" coldim="2" values="4.13281e-09 8.20704
+4.22099e-09 3.69138
+4.30916e-09 1.33325
+4.39734e-09 0.503627
+4.48552e-09 0.23393
+4.57369e-09 0.136177
+4.66187e-09 0.0933192
+4.75005e-09 0.0708268
+4.83822e-09 0.0573082
+4.9264e-09 0.0483641
+5.01458e-09 0.0420282
+5.10275e-09 0.0373102
+5.19093e-09 0.033662
+5.27911e-09 0.0307572
+5.36728e-09 0.0283902
+5.45546e-09 0.0264235
+5.54364e-09 0.0247641
+5.63181e-09 0.0233453
+5.71999e-09 0.0221177
+5.80817e-09 0.0210456
+5.89634e-09 0.0201012
+5.98452e-09 0.0192627
+6.0727e-09 0.0185134
+6.16087e-09 0.0178399
+6.24905e-09 0.0172309
+6.33723e-09 0.0166779
+6.4254e-09 0.0166779
+6.51358e-09 0.0166779
+6.60176e-09 0.0166779
+6.68993e-09 0.0166779
+6.77811e-09 0.0166779
+6.86629e-09 0.0166779
+6.95446e-09 0.0166779
+7.04264e-09 0.0166779
+7.13082e-09 0.0166779
+7.21899e-09 0.0166779
+7.30717e-09 0.0166779
+7.39535e-09 0.0166779
+7.48353e-09 0.0166779
+7.5717e-09 0.0166779
+7.65988e-09 0.0166779
+7.74806e-09 0.0166779
+7.83623e-09 0.0166779
+7.92441e-09 0.0166779
+8.01259e-09 0.0166779
+8.10076e-09 0.0166779
+8.18894e-09 0.0166779
+8.27712e-09 0.0166779
+8.36529e-09 0.0166779
+8.45347e-09 0.0166779"/>
+    <matrix name="RINDEX__0x5577ae938e20" coldim="2" values="2.034e-09 1.35
+4.136e-09 1.4"/>
+    <matrix name="SPECULARLOBECONSTANT__0x5577ae935de0" coldim="2" values="2.034e-09 0.3
+4.136e-09 0.3"/>
+    <matrix name="SPECULARSPIKECONSTANT__0x5577ae9346c0" coldim="2" values="2.034e-09 0.2
+4.136e-09 0.2"/>
+    <matrix name="BACKSCATTERCONSTANT__0x5577ae9335d0" coldim="2" values="2.034e-09 0.2
+4.136e-09 0.2"/>
+    <matrix name="REFLECTIVITY__0x5577ae9324c0" coldim="2" values="2.034e-09 0.3
+4.136e-09 0.5"/>
+    <matrix name="EFFICIENCY__0x5577ae931430" coldim="2" values="2.034e-09 0.8
+4.136e-09 1"/>
+    <position name="_0inworld_volumepos" x="0" y="0" z="0" unit="cm"/>
+  </define>
+  <materials>
+    <element name="N_elm" formula="N" Z="7" N="14">
+      <atom unit="g/mole" value="14.0068"/>
+    </element>
+    <element name="O_elm" formula="O" Z="8" N="15">
+      <atom unit="g/mole" value="15.9994"/>
+    </element>
+    <element name="Ar_elm" formula="Ar" Z="18" N="39">
+      <atom unit="g/mole" value="39.9477"/>
+    </element>
+    <element name="C_elm" formula="C" Z="6" N="12">
+      <atom unit="g/mole" value="12.0107"/>
+    </element>
+    <material name="Air">
+      <D unit="g/cm3" value="0.001205"/>
+      <fraction n="0.0127999996766" ref="Ar_elm"/>
+      <fraction n="9.99999974738e-05" ref="C_elm"/>
+      <fraction n="0.754999995232" ref="N_elm"/>
+      <fraction n="0.232099995017" ref="O_elm"/>
+    </material>
+    <element name="H_elm" formula="H" Z="1" N="1">
+      <atom unit="g/mole" value="1.00794"/>
+    </element>
+    <material name="vetoWater">
+      <D unit="g/cm3" value="1"/>
+      <fraction n="0.112097665668" ref="H_elm"/>
+      <fraction n="0.887902319431" ref="O_elm"/>
+    </material>
+  </materials>
+  <solids>
+    <box name="world_volume_shape_0x5577ae9673d0" x="10000" y="10000" z="10000" lunit="cm"/>
+    <tube name="_shape_0x5577ae931cc0" rmin="0" rmax="2175" z="4350" startphi="0" deltaphi="360" aunit="deg" lunit="cm"/>
+  </solids>
+  <structure>
+    <volume name="">
+      <materialref ref="vetoWater"/>
+      <solidref ref="_shape_0x5577ae931cc0"/>
+    </volume>
+    <volume name="world_volume">
+      <materialref ref="Air"/>
+      <solidref ref="world_volume_shape_0x5577ae9673d0"/>
+      <physvol name="_0" copynumber="0">
+        <volumeref ref=""/>
+        <positionref ref="_0inworld_volumepos"/>
+      </physvol>
+    </volume>
+  </structure>
+  <setup name="default" version="1.0">
+    <world ref="world_volume"/>
+  </setup>
+</gdml>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<description xmlns:description="http://www.lcsim.org/schemas/description/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/description/1.0/description.xsd">
+    <!--
+      +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      ++++   dd4hep generated alignment file using the         ++++
+      ++++   dd4hep Detector description XML generator.        ++++
+      ++++                                                     ++++
+      ++++   Parser: TinyXML DOM mini-parser                   ++++
+      ++++                                                     ++++
+      ++++                              M.Frank CERN/LHCb      ++++
+      +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  -->
+    <header>
+        <detector name="clic_sid_cdr" />
+        <generator name="LCDDConverter" version="$Id: compact.xml 1374 2014-11-05 10:49:55Z markus.frank@cern.ch $" file="https://twiki.cern.ch/twiki/bin/view/CLIC/ClicSidCdr" checksum="4058535407" />
+        <author name="Christian Grefe" />
+        <comment>The compact format for the CLIC Silicon Detector used for the conceptual design report</comment>
+    </header>
+    <iddict />
+    <sensitive_detectors />
+    <limits />
+    <regions />
+    <display>
+        <vis name="WaterPoolVis" visible="true" show_daughters="true" line_style="unbroken" drawing_style="solid">
+            <color alpha="2.00000003e-01" R="7.76470602e-01" B="1.00000000e+00" G="8.86274517e-01" />
+        </vis>
+        <vis name="WorldVis" visible="false" show_daughters="true" line_style="unbroken" drawing_style="wireframe">
+            <color alpha="1.00000000e+00" R="1.00000000e+00" B="1.00000000e+00" G="1.00000000e+00" />
+        </vis>
+    </display>
+    <gdml>
+        <define>
+            <position name="identity_pos" x="0" y="0" z="0" unit="cm" />
+        </define>
+        <materials>
+            <element name="N" formula="N" Z="7">
+                <atom type="A" unit="g/mol" value="1.40068000e+01" />
+            </element>
+            <element name="O" formula="O" Z="8">
+                <atom type="A" unit="g/mol" value="1.59994000e+01" />
+            </element>
+            <element name="Ar" formula="Ar" Z="18">
+                <atom type="A" unit="g/mol" value="3.99477000e+01" />
+            </element>
+            <element name="C" formula="C" Z="6">
+                <atom type="A" unit="g/mol" value="1.20107000e+01" />
+            </element>
+            <material name="Air">
+                <D value="1.20500000e-03" unit="g/cm3" type="density" />
+                <fraction n="7.55000000e-01" ref="N" />
+                <fraction n="2.32100000e-01" ref="O" />
+                <fraction n="1.28000000e-02" ref="Ar" />
+                <fraction n="1.00000000e-04" ref="C" />
+            </material>
+            <element name="H" formula="H" Z="1">
+                <atom type="A" unit="g/mol" value="1.00794000e+00" />
+            </element>
+            <material name="vetoWater">
+                <D value="1.00000000e+00" unit="g/cm3" type="density" />
+                <fraction n="1.12097669e-01" ref="H" />
+                <fraction n="8.87902331e-01" ref="O" />
+            </material>
+        </materials>
+        <solids>
+            <tube name="_shape_0x55fbadf40500" rmin="0.00000000e+00" rmax="2.17500000e+03" z="4.35000000e+03" startphi="0.00000000e+00" deltaphi="3.60000000e+02" aunit="deg" lunit="cm" />
+            <box name="world_volume_shape_0x55fbadf75c10" x="1.00000000e+04" y="1.00000000e+04" z="1.00000000e+04" lunit="cm" />
+        </solids>
+        <structure>
+            <volume name="_0x55fbadec67f0">
+                <materialref ref="vetoWater" />
+                <solidref ref="_shape_0x55fbadf40500" />
+                <visref ref="WaterPoolVis" />
+            </volume>
+            <volume name="world_volume_0x55fbadca5a20">
+                <materialref ref="Air" />
+                <solidref ref="world_volume_shape_0x55fbadf75c10" />
+                <physvol>
+                    <volumeref ref="_0x55fbadec67f0" />
+                    <positionref ref="identity_pos" />
+                </physvol>
+                <visref ref="WorldVis" />
+            </volume>
+        </structure>
+        <setup name="default" version="1.0">
+            <world ref="world_volume_0x55fbadca5a20" />
+        </setup>
+    </gdml>
+    <fields />
+</description>

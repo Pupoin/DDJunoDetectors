@@ -9,8 +9,9 @@
 
 #ifndef DD4HEP2FBXWRITER_H
 #define DD4HEP2FBXWRITER_H
-
-// #include "DD4hep/DetFactoryHelper.h"
+#include "HepPolyhedron.h"
+#include "G4Polyhedron.hh"
+#include "DD4hep/DetFactoryHelper.h"
 #include "DD4hep/Detector.h"
 #include <DD4hep/Handle.h>
 #include "XML/Layering.h"
@@ -40,9 +41,7 @@ public:
 
   //! Constructor [empty]
   dd4hep2FBXWriter() {}
-  // dd4hep2FBXWriter(Detector lcdd, bool usePrototypes);
-  // dd4hep2FBXWriter(Detector lcdd, bool usePrototypes);
-  dd4hep2FBXWriter(HandleMap det_map, bool usePrototypes);
+  dd4hep2FBXWriter(string filePath, bool usePrototypes);
 
   //! Destructor [empty]
   ~dd4hep2FBXWriter() {}
@@ -57,10 +56,13 @@ private:
 
   //! Create unique and legal name for each solid, logical volume, physical volume
   // void assignName(std::vector<std::string>*, unsigned int, const G4String&, int);
-  std::vector<std::string> assignName(std::vector<std::string> names, string originalName);
+  std::vector<std::string> assignName(std::vector<std::string> names, string originalName, unsigned int mindex);
+  // get all children detectors of det, include children's children
+  void getAllChildren(DetElement det);
 
   // //! Write FBX definition for each solid's polyhedron
   // void writeGeometryNode(G4VSolid*, const std::string&, unsigned long long);
+  void writeGeometryNode(Solid solid, const std::string solidName, unsigned long long solidID);
 
   // //! Write FBX definition for each logical volume's color information
   // void writeMaterialNode(int, const std::string&);
@@ -73,6 +75,7 @@ private:
 
   // //! Count the physical volumes, logical volumes, materials and solids (recursive)
   // void countEntities(G4VPhysicalVolume*);
+  // void countEntities(DetElement world)
 
   // //! Process one physical volume for FBX-node writing (recursive)
   // void addModels(G4VPhysicalVolume*, int);
@@ -106,8 +109,10 @@ private:
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-  Detector *m_lcdd;
-  HandleMap m_det_map;
+  // Detector mm_lcdd;
+  string  m_filePath;
+  // std::vector<DetElement> m_childrenDet;
+  DetElement m_world;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
   //! User-specified flag to select whether to write and re-use logical- and physical-volume
   //! prototypes once (true) or to write duplicate instances of each such volume (false).
@@ -124,6 +129,17 @@ private:
 
   //! Modified (legal-character and unique) solid name
   std::vector<std::string> m_SolidName;
+
+
+  //! Modified (legal-character and unique) physical-volume 
+  std::vector<DetElement> m_childrenDet;
+
+  //! Modified (legal-character and unique) logical-volume 
+  std::vector<Volume> m_childrenVol;
+
+  //! Modified (legal-character and unique) solid 
+  std::vector<Solid> m_childrenSolid;
+
 
   //! Unique identifiers for physical volumes (Model nodes with transformation information)
   std::vector<unsigned long long>* m_PVID;

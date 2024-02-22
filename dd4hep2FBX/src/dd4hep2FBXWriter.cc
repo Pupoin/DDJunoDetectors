@@ -14,9 +14,12 @@
 #include <DD4hep/Handle.h>
 #include "XML/Layering.h"
 #include "XML/XML.h"
+#include "HepPolyhedron.h"
+#include "G4Polyhedron.hh"
 
 #include "Math/Vector3D.h"
 #include "Math/Transform3D.h"
+#include <iomanip>
 
 using namespace std;
 using namespace dd4hep;
@@ -24,118 +27,369 @@ using namespace dd4hep::detail;
 typedef std::map<std::string, Handle<NamedObject>> HandleMap;
 typedef std::map<std::string, DetElement> Children;
 
-#include <iomanip>
-
-// dd4hep2FBXWriter(Detector lcdd, bool usePrototypes)
-// {
-//   this->m_lcdd = lcdd;
-//   this->m_UsePrototypes = usePrototypes;
-// }
-
-dd4hep2FBXWriter::dd4hep2FBXWriter(HandleMap det_map, bool usePrototypes)
+dd4hep2FBXWriter::dd4hep2FBXWriter(string filePath, bool usePrototypes)
 {
-  this->m_det_map = det_map;
+  this->m_filePath = filePath;
   this->m_UsePrototypes = usePrototypes;
+}
+
+void dd4hep2FBXWriter::getAllChildren(DetElement det)
+{
+  m_childrenDet.push_back(det);
+  m_childrenVol.push_back(det.volume());
+  m_childrenSolid.push_back(det.solid());
+
+  m_DetName.push_back(det.name());
+  m_VolName.push_back(det.volume().name());
+  m_SolidName.push_back(det.solid().name());
+
+  // std::cout << " is assembly " << det.volume().isAssembly() << std::endl;
+  // std::cout << " in getname() " << det.name() << std::endl;
+  if (det.children().size() != 0)
+  {
+    for (const auto &[name, detchild] : det.children())
+    {
+      getAllChildren(detchild);
+    }
+  }
 }
 
 bool dd4hep2FBXWriter::doit(std::string outputFilename)
 {
-  // Check that the top-most (world) detector element has been created already
-  // if (m_det.world() == nullptr)
-  // {
-  //   return false;
-  // }
-  // Detector &lcwdd = Detector::getInstance();
+
+  Detector &m_lcdd = Detector::getInstance();
   // Tube waterPool(0, 10 * mm, 10 * mm, 20 * mm, 30 * mm);
-  // lcwdd.fromCompact("/home/wln/DD4hep_source/DDDetectors/compact/SiD.xml");
+  m_lcdd.fromCompact(m_filePath);
   // DetElement ele=lcwdd.detector("WaterPool");
   // std::cout << "@@@@@ this is test: " << ele.id() << "  " << ele.name() << std::endl;
   /// Accessor to the map of sub-detectors
-  // const HandleMap &m_det_map = m_lcdd.detectors();
-
-  // std::vector<std::string> m_DetName;   //= new std::vector<std::string>(pvStore->size(), "");
-  // std::vector<std::string> m_VolName;   //= new std::vector<std::string>(lvStore->size(), "");
-  // std::vector<std::string> m_SolidName; // = new std::vector<std::string>(solidStore->size(), "");
+  // m_det_map = m_lcdd.detectors();
+  m_world = m_lcdd.world();
+  // Check that the top-most (world) detector element has been created already
+  if (!m_lcdd.world())
+  {
+    return false;
+  }
 
   // Assign legal and unique names to each used physical volume, logical volume and solid
-  for (const auto &[name, detHandle] : m_det_map)
-  {
-    // get all of the names
-    DetElement subdet = DetElement(detHandle);
-    std::cout << __LINE__ << "name: " << name << ", detHandle: " << subdet.name() << " id " << subdet.id() << "\n";
-    Volume subdetVol = subdet.volume();
-    Solid subdetSolid = subdet.solid();
-    std::cout << __LINE__ << "name: " << subdetVol.name() << std::endl;   //<< " id : " << subdetVol.i<< " id " << subdet.id() << "\n";
-    std::cout << __LINE__ << "name: " << subdetSolid.name() << std::endl; //<< " id : " << subdetVol.i<< " id " << subdet.id() << "\n";
-
-    // get the child except itselef( top-level here)
-    // const Children&  detchd = subdet.children();
-    // for (const auto &[chdname, chd] : detchd){
-    //   DetElement subdetofdet = DetElement(chd);
-    //   std::cout << __LINE__<<"name: " << name << ", detHandle: " << subdetofdet.name() << " id " << subdetofdet.id() << "\n";
-    // }
-
-    m_DetName.push_back(subdet.name());
-    m_VolName.push_back(subdetVol.name());
-    m_SolidName.push_back(subdetSolid.name());
-  }
+  getAllChildren(m_world);
   // Assign new name if duplicate
   // Compact          ERROR ++ FAILED    to convert subdetector:
   // PMT_type1: dd4hep: Attempt to add an already existing object:PMT_type1.
-  for (const auto &[name, detHandle] : m_det_map)
+  // for (const auto subdet : m_childrenDet)
+  for (size_t i = 0; i < m_childrenDet.size(); i++)
   {
-    DetElement subdet = DetElement(detHandle);
+    DetElement subdet = m_childrenDet[i];
+    // DetElement subdet = DetElement(mdet);
+    // std::cout << __LINE__ << " name:" << subdet.name() << " children:" << subdet.children().size()
+    //           << " isassembly: " << subdet.volume().isAssembly() << std::endl;
+
     Volume subdetVol = subdet.volume();
     Solid subdetSolid = subdet.solid();
+
+    // auto c=subdetVol.IsReplicated();
 
     string detName = subdet.name();
     string detVolName = subdetVol.name();
     string detSolidName = subdetSolid.name();
-    
-    m_DetName= assignName(m_DetName, detName);
-    m_VolName= assignName(m_VolName, detName);
-    m_SolidName= assignName(m_SolidName, detName);
 
+    m_DetName = assignName(m_DetName, detName, i);
+    m_VolName = assignName(m_VolName, detName, i);
+    m_SolidName = assignName(m_SolidName, detName, i);
   }
 
   // Count the number of references to each physical volume and logical volume and solid
   // so that these values can be placed in the FBX file's Definitions{} section.
+  // countEntities(m_world);
   unsigned int geometryCount = m_DetName.size();
   unsigned int materialCount = m_VolName.size();
   unsigned int modelCount = m_SolidName.size();
+  // Open the output file
+  if (outputFilename.length() > 0)
+  {
+    m_File.open(outputFilename, std::ios_base::trunc);
+  }
+  else
+  {
+    m_File.open("geometry.fbx", std::ios_base::trunc);
+  }
+  if (m_File.fail())
+  {
+    return false;
+  }
 
+  // Write the FBX preamble and headers
+  writePreamble(modelCount, materialCount, geometryCount);
 
-  // // Open the output file
-  // if (outputFilename.length() > 0)
-  // {
-  //   m_File.open(outputFilename, std::ios_base::trunc);
-  // }
-  // else
-  // {
-  //   m_File.open("geometry.fbx", std::ios_base::trunc);
-  // }
-  // if (m_File.fail())
-  // {
-  //   return false;
-  // }
+  // Write all solids as Geometry nodes (replicas are written later).
+  // Write all logical volumes as Material nodes (color information).
+  // Write all physical and logical volumes as Model nodes (with replica-solids treated here).
+  // m_PVID = new std::vector<unsigned long long>(pvStore->size(), 0x0000010000000000LL);
+  // m_LVID = new std::vector<unsigned long long>(lvStore->size(), 0x000000C000000000LL);
+  m_SolidID = new std::vector<unsigned long long>(m_childrenSolid.size(), 0x0000008000000000LL);
+  // m_MatID = new std::vector<unsigned long long>(lvStore->size(), 0x0000004000000000LL);
+  // m_Visible = new std::vector<bool>(lvStore->size(), false);
 
-  // // Write the FBX preamble and headers
-  // writePreamble(modelCount, materialCount, geometryCount);
+  m_File << "Objects:  {" << std::endl;
+  for (unsigned int solidIndex = 0; solidIndex <m_childrenSolid.size(); ++solidIndex)
+  {
+    (*m_SolidID)[solidIndex] += 0x0000000001000000LL * solidIndex;
+    if (m_SolidName[solidIndex].length() > 0)
+    {
+      // for (unsigned int solidCount = 0; solidCount <= m_childrenSolid[solidIndex]; ++solidCount) { // note lower and upper limits!
+      std::cout << __LINE__ << " " << m_childrenSolid.size() << " " << m_SolidID->size()
+                << m_SolidName[solidIndex] << " "
+                << " index " << solidIndex << " "
+                << (*m_SolidID)[solidIndex] << std::endl;
+      // cout << m_childrenSolid[solidIndex].to_string() << " " << 
+      writeGeometryNode(m_childrenSolid[solidIndex], m_SolidName[solidIndex], (*m_SolidID)[solidIndex]);
+      // }
+      break;
+    }
+  }
+
+  cout << __LINE__ << " " << m_DetName.size() << std::endl;
 
   return true;
 }
+/*
+void dd4hep2FBXWriter::countEntities(DetElement world)
+{
+  G4VPhysicalVolume* physVol;
+  // Descend to the leaves of the tree
+  G4LogicalVolume* logVol = physVol->GetLogicalVolume();
+  for (int daughter = 0; daughter < logVol->GetNoDaughters(); ++daughter) {
+    G4VPhysicalVolume* physVolDaughter = logVol->GetDaughter(daughter);
+    for (int j = 0; j < physVolDaughter->GetMultiplicity(); ++j) {
+      countEntities(physVolDaughter);
+    }
+  }
+  // Count replicas and duplicates of each physical and logical volume as well as the unique
+  // versions of replicated solids as we ascend the recursive tree
+  G4PhysicalVolumeStore* pvStore = G4PhysicalVolumeStore::GetInstance();
+  G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
+  G4SolidStore* solidStore = G4SolidStore::GetInstance();
+  G4VSolid* solid = logVol->GetSolid();
+  int pvIndex = std::find(pvStore->begin(), pvStore->end(), physVol) - pvStore->begin();
+  int lvIndex = std::find(lvStore->begin(), lvStore->end(), logVol) - lvStore->begin();
+  int solidIndex = std::find(solidStore->begin(), solidStore->end(), solid) - solidStore->begin();
+  if (physVol->IsReplicated())
+  {
+    EAxis axis;
+    G4int nReplicas;
+    G4double width;
+    G4double offset;
+    G4bool consuming;
+    physVol->GetReplicationData(axis, nReplicas, width, offset, consuming);
+    G4VPVParameterisation *physParameterisation = physVol->GetParameterisation();
+    if (physParameterisation)
+    { // parameterised volume
+      G4VSolid *solidReplica = physParameterisation->ComputeSolid(0, physVol);
+      physParameterisation->ComputeTransformation(0, physVol);
+      solidReplica->ComputeDimensions(physParameterisation, 0, physVol);
+      if (!(*solidReplica == *solid))
+        (*m_SolidReplicas)[solidIndex]++;
+      if (m_UsePrototypes && (*solidReplica == *solid))
+      {
+        if ((*m_LVReplicas)[lvIndex] > 0)
+          (*m_LVUnique)[lvIndex] = false;
+        (*m_LVReplicas)[lvIndex] = 1;
+      }
+      else
+      {
+        (*m_LVReplicas)[lvIndex]++;
+      }
+      (*m_PVReplicas)[pvIndex]++;
+    }
+    else
+    { // plain replicated volume
+      if ((axis == kRho) && (solid->GetEntityType() == "G4Tubs"))
+        (*m_SolidReplicas)[solidIndex]++;
+      if (m_UsePrototypes && !((axis == kRho) && (solid->GetEntityType() == "G4Tubs")))
+      {
+        (*m_LVReplicas)[lvIndex] = 1;
+      }
+      else
+      {
+        (*m_LVReplicas)[lvIndex]++;
+      }
+      (*m_PVReplicas)[pvIndex]++;
+    }
+  }
+  else
+  {
+    if ((*m_LVCount)[lvIndex] > 0)
+      (*m_LVUnique)[lvIndex] = false;
+    if (m_UsePrototypes)
+    {
+      (*m_PVCount)[pvIndex] = 1;
+      (*m_LVCount)[lvIndex] = 1;
+    }
+    else
+    {
+      (*m_PVCount)[pvIndex]++;
+      (*m_LVCount)[lvIndex]++;
+    }
+  }
+}
+*/
 
-std::vector<std::string> dd4hep2FBXWriter::assignName(std::vector<std::string> names, string originalName)
+void getPolyhedron(Solid solid)
+{
+    // bool solidtype=solid->IsCylType();
+  string solidtype=solid.type();
+  if (solidtype == "TGeoBBox")
+  {
+    auto *ddda = new HepPolyhedronBox(Box(solid).x(), Box(solid).y(), Box(solid).z());
+    /* code */
+
+  }
+
+  // return ;
+}
+
+void dd4hep2FBXWriter::writeGeometryNode(Solid solid, const std::string solidName, unsigned long long solidID)
+{
+  std::cout <<__LINE__ << " solid.type:" << solid.type() << /*" IsComposite:" << solid.IsComposite() << */ std::endl;
+  string solidtype=solid.type();
+  if ((solidtype == "TGeoIntersection") ||
+      (solidtype == "TGeoUnion") ||
+      (solidtype == "TGeoSubtraction") ||
+      (solidtype == "TGeoBoolNode")) {
+    // HepPolyhedron* polyhedron = getBooleanSolidPolyhedron(solid);
+    // G4Polyhedron* g4polyhedron = new G4Polyhedron(*polyhedron);
+    // writePolyhedron(solid, g4polyhedron, solidName, solidID);
+    // delete polyhedron;
+    // delete g4polyhedron;
+  } else {
+    auto a=Polyhedra(solid);
+    std:: cout << __LINE__ << " name:" << solid.name() << " type:" << solid.type()<< std::endl;
+    std:: cout << __LINE__
+      << "solid.tostring: " << solid.toString()
+      << " solid->x()" << Box(solid).x() 
+      // << " solid->y()" << solid.y() 
+      // << " solid->z()" << solid.z() 
+      //  << " name:" << a.name() 
+      // << " type:" << a.type()
+      << std::endl;
+    
+    getPolyhedron(solid);
+    // std::cout << __LINE__ << " polyhedra:" << a.numEdges() << std::endl;
+    // writePolyhedron(solid, PolyhedraRegular(solid), solidName, solidID);
+  }
+}
+
+
+/*
+void dd4hep2FBXWriter::writePolyhedron(Solid solid, TGeoPolygon* polyhedron, const std::string name,
+                                      unsigned long long solidID)
+{
+  if (polyhedron) {
+    polyhedron->SetNumberOfRotationSteps(120);
+    m_File << "\t; Solid " << solid->GetName() << " of type " << solid->GetEntityType() << std::endl <<
+           "\tGeometry: " << solidID << ", \"Geometry::" << name << "\", \"Mesh\" {" << std::endl <<
+           "\t\tVertices: *" << polyhedron->GetNoVertices() * 3 << " {" << std::endl << "\t\t\ta: ";
+    std::streampos startOfLine = m_File.tellp();
+    for (int j = 1; j <= polyhedron->GetNoVertices(); ++j) {
+      m_File << (j == 1 ? "" : ",") <<
+             polyhedron->GetVertex(j).x() << "," <<
+             polyhedron->GetVertex(j).y() << "," <<
+             polyhedron->GetVertex(j).z();
+      if (m_File.tellp() - startOfLine > 100) {
+        startOfLine = m_File.tellp();
+        m_File << std::endl << "\t\t\t\t";
+      }
+    }
+    m_File << std::endl << "\t\t}" << std::endl;
+
+    std::vector<int> vertices;
+    for (int k = 1; k <= polyhedron->GetNoFacets(); ++k) {
+      G4bool notLastEdge = true;
+      G4int ndx = -1, edgeFlag = 1;
+      do {
+        notLastEdge = polyhedron->GetNextVertexIndex(ndx, edgeFlag);
+        if (notLastEdge) {
+          vertices.push_back(ndx - 1);
+        } else {
+          vertices.push_back(-ndx);
+        }
+      } while (notLastEdge);
+    }
+    m_File << "\t\tPolygonVertexIndex: *" << vertices.size() << " {" << std::endl << "\t\t\ta: ";
+    startOfLine = m_File.tellp();
+    for (unsigned int j = 0; j < vertices.size(); ++j) {
+      m_File << (j == 0 ? "" : ",") << vertices[j];
+      if (m_File.tellp() - startOfLine > 100) {
+        startOfLine = m_File.tellp();
+        m_File << std::endl << "\t\t\t\t";
+      }
+    }
+    m_File << std::endl << "\t\t}" << std::endl;
+
+    m_File << "\t\tGeometryVersion: 124" << std::endl <<
+           "\t\tLayerElementNormal: 0 {" << std::endl <<
+           "\t\t\tVersion: 101" << std::endl <<
+           // "\t\t\tName: \"\"" << std::endl <<
+           "\t\t\tMappingInformationType: \"ByPolygonVertex\"" << std::endl <<
+           "\t\t\tReferenceInformationType: \"Direct\"" << std::endl <<
+           "\t\t\tNormals: *" << vertices.size() * 3 << " {" << std::endl << "\t\t\t\ta: ";
+    startOfLine = m_File.tellp();
+    unsigned int j = 0;
+    for (int k = 1; k <= polyhedron->GetNoFacets(); ++k) {
+      G4Normal3D normal = polyhedron->GetUnitNormal(k);
+      do {
+        m_File << (j == 0 ? "" : ",") << normal.x() << "," << normal.y() << "," << normal.z();
+        if (m_File.tellp() - startOfLine > 100) {
+          startOfLine = m_File.tellp();
+          m_File << std::endl << "\t\t\t\t";
+        }
+      } while (vertices[j++] >= 0);
+    }
+    m_File << std::endl << "\t\t\t}" << std::endl << "\t\t}" << std::endl <<
+           "\t\tLayerElementMaterial: 0 {" << std::endl <<
+           "\t\t\tVersion: 101" << std::endl <<
+           // "\t\t\tName: \"\"" << std::endl <<
+           "\t\t\tMappingInformationType: \"AllSame\"" << std::endl <<
+           "\t\t\tReferenceInformationType: \"IndexToDirect\"" << std::endl <<
+           "\t\t\tMaterials: *1 {" << std::endl <<
+           "\t\t\t\ta: 0" << std::endl <<
+           "\t\t\t}" << std::endl <<
+           "\t\t}" << std::endl <<
+           "\t\tLayer: 0 {" << std::endl <<
+           "\t\t\tVersion: 100" << std::endl <<
+           "\t\t\tLayerElement:  {" << std::endl <<
+           "\t\t\t\tType: \"LayerElementNormal\"" << std::endl <<
+           "\t\t\t\tTypedIndex: 0" << std::endl <<
+           "\t\t\t}" << std::endl <<
+           "\t\t\tLayerElement:  {" << std::endl <<
+           "\t\t\t\tType: \"LayerElementMaterial\"" << std::endl <<
+           "\t\t\t\tTypedIndex: 0" << std::endl <<
+           "\t\t\t}" << std::endl <<
+           "\t\t}" << std::endl <<
+           "\t}" << std::endl;
+  } else {
+    std::err << "Polyhedron representation of solid " << name << " cannot be created" < std::endl;
+  }
+}
+*/
+std::vector<std::string> dd4hep2FBXWriter::assignName(std::vector<std::string> names, string originalName, unsigned int mindex)
 {
   // Replace problematic characters with underscore
+  if (originalName.length() == 0)
+  {
+    originalName = "anonymous";
+  }
   for (char c : " .,:;?'\"*+-=|^!/@#$\\%{}[]()<>")
     std::replace(originalName.begin(), originalName.end(), c, '_');
   //
   for (size_t i = 0; i < names.size(); i++)
   {
+    if (i == mindex)
+      continue;
     if (originalName == names[i])
     {
       names[i] = originalName + "_" + to_string(i);
+      // std::cout << __LINE__ << " " << originalName << " " << names[i] << std::endl;
     }
   }
   return names;

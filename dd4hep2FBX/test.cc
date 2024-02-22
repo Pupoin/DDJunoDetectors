@@ -8,6 +8,8 @@
  **************************************************************************/
 
 #include "dd4hep2FBXWriter.h"
+#include "HepPolyhedron.h"
+#include "G4Polyhedron.hh"
 
 #include "DD4hep/DetFactoryHelper.h"
 #include "DD4hep/Detector.h"
@@ -31,13 +33,14 @@ typedef std::map<std::string, DetElement> Children;
 
 int main()
 {
-  Detector &lcdd = Detector::getInstance();
+  // Detector &lcdd = Detector::getInstance();
+  string filePath="/home/wln/DD4hep_source/DDDetectors/compact/SiD.xml";
   // Tube waterPool(0, 10 * mm, 10 * mm, 20 * mm, 30 * mm);
-  lcdd.fromCompact("/home/wln/DD4hep_source/DDDetectors/compact/SiD.xml");
-  const HandleMap det_map = lcdd.detectors();
+  // lcdd.fromCompact("/home/wln/DD4hep_source/DDDetectors/compact/SiD.xml");
+  // const HandleMap det_map = lcdd.detectors();
 
-  dd4hep2FBXWriter test(det_map, true);
-  // dd4hep2FBXWriter test(lcdd, true);
+  // dd4hep2FBXWriter test(det_map, true);
+  dd4hep2FBXWriter test(filePath, true);
   test.doit("test.fbx");
 
 

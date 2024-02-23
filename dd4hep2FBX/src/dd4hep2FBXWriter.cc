@@ -133,9 +133,9 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
   // Write all logical volumes as Material nodes (color information).
   // Write all physical and logical volumes as Model nodes (with replica-solids treated here).
   // m_PVID = new std::vector<unsigned long long>(pvStore->size(), 0x0000010000000000LL);
-  // m_LVID = new std::vector<unsigned long long>(lvStore->size(), 0x000000C000000000LL);
+  m_LVID = new std::vector<unsigned long long>(m_childrenVol.size(), 0x000000C000000000LL);
   m_SolidID = new std::vector<unsigned long long>(m_childrenSolid.size(), 0x0000008000000000LL);
-  // m_MatID = new std::vector<unsigned long long>(lvStore->size(), 0x0000004000000000LL);
+  m_MatID = new std::vector<unsigned long long>(m_childrenVol.size(), 0x0000004000000000LL);
   // m_Visible = new std::vector<bool>(lvStore->size(), false);
 
   m_File << "Objects:  {" << std::endl;
@@ -144,22 +144,81 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
     (*m_SolidID)[solidIndex] += 0x0000000001000000LL * solidIndex;
     if (m_SolidName[solidIndex].length() > 0)
     {
-      // for (unsigned int solidCount = 0; solidCount <= m_childrenSolid[solidIndex]; ++solidCount) { // note lower and upper limits!
       std::cout << __LINE__ << " " << m_childrenSolid.size() << " " << m_SolidID->size()
                 << m_SolidName[solidIndex] << " "
                 << " index " << solidIndex << " "
                 << (*m_SolidID)[solidIndex] << std::endl;
-      // cout << m_childrenSolid[solidIndex].to_string() << " " << 
       writeGeometryNode(m_childrenSolid[solidIndex], m_SolidName[solidIndex], (*m_SolidID)[solidIndex]);
-      // }
-      break;
     }
   }
 
-  cout << __LINE__ << " " << m_DetName.size() << std::endl;
+  // write materials
+  for (unsigned int lvIndex = 0; lvIndex < m_childrenVol.size(); ++lvIndex) {
+    (*m_MatID)[lvIndex] += 0x0000000001000000LL * lvIndex;
+    (*m_LVID)[lvIndex]  += 0x0000000001000000LL * lvIndex;
+    if (m_VolName[lvIndex].length() > 0) {
+      if (!(*m_LVUnique)[lvIndex]) 
+        writeMaterialNode(lvIndex, m_VolName[lvIndex]);
+    }
+  }
+
+  // 
+  // addModels(topVol, 0);
+  m_File << "}" << std::endl << std::endl;
+
 
   return true;
 }
+
+
+void FBXWriter::writeMaterialNode(int lvIndex, const std::string matName)
+{
+  // G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
+  Volume logVol = m_childrenVol[lvIndex];
+  unsigned long long matID = (*m_MatID)[lvIndex];
+  G4Color color(0.0, 1.0, 0.0, 0.5); // default is semi-transparent green
+  // BelleII EM calorimeter crystals
+  /*if ((matName.compare(0, 23, "eclBarrelCrystalLogical") == 0) ||
+      (matName.compare(0, 20, "eclFwdCrystalLogical") == 0) ||
+      (matName.compare(0, 20, "eclBwdCrystalLogical") == 0) ||
+      (matName.compare(0, 24, "eclBarrelCrystalPhysical") == 0) ||
+      (matName.compare(0, 21, "eclFwdCrystalPhysical") == 0) ||
+      (matName.compare(0, 21, "eclBwdCrystalPhysical") == 0)) {
+    color = G4Color(1.0, 1.0, 1.0, 1.0); // white since ECL crystals have no G4VisAttribute :(
+  }*/
+  bool visible = true;
+  string materialName = logVol.material().name();
+  // Hide volumes that contain vacuum, air or gas
+  if (materialName == "Vacuum") visible = false;
+  if (materialName == "G4_AIR") visible = false;
+  if (materialName == "CDCGas") visible = false; // BelleII
+  if (materialName == "ColdAir") visible = false; // BelleII
+  if (materialName == "STR-DryAir") visible = false; // BelleII
+  if (materialName == "TOPAir") visible = false; // BelleII
+  if (materialName == "TOPVacuum") visible = false; // BelleII
+  // Hide volumes that are invisible in the GEANT4 geometry
+  const G4VisAttributes* visAttr = logVol->GetVisAttributes();
+  if (visAttr) {
+    color = const_cast<G4Color&>(logVol->GetVisAttributes()->GetColor());
+    if (!(visAttr->IsVisible())) visible = false;
+  } else {
+    visible = false;
+  }
+  if (logVol.sensitiveDetector() != NULL) visible = "";
+  (*m_Visible)[lvIndex] = visible;
+  m_File << "\t; Color for LogVol " << logVol->GetName() << std::endl <<
+         "\tMaterial: " << matID << ", \"Material::" << matName << "\", \"\" {" << std::endl <<
+         "\t\tVersion: 102" << std::endl <<
+         "\t\tProperties70:  {" << std::endl <<
+         "\t\t\tP: \"ShadingModel\", \"KString\", \"\", \"\", \"phong\"" << std::endl <<
+         "\t\t\tP: \"DiffuseColor\", \"RGBColor\", \"Color\", \"A\"," <<
+         color.GetRed() << "," << color.GetGreen() << "," << color.GetBlue() << std::endl <<
+         "\t\t\tP: \"TransparentColor\", \"RGBColor\", \"Color\", \"A\",1,1,1" << std::endl <<
+         "\t\t\tP: \"TransparencyFactor\", \"double\", \"Number\", \"\"," << (visible ? 1.0 - color.GetAlpha() : 1) << std::endl <<
+         "\t\t}" << std::endl <<
+         "\t}" << std::endl;
+}
+
 
 
 GPolyhedron* getPolyhedron(Solid solid)
@@ -183,10 +242,10 @@ void dd4hep2FBXWriter::writeGeometryNode(Solid solid, const std::string solidNam
   string solidtype=solid.type();
   if (solidtype == "TGeoCompositeShape") {
     HepPolyhedron* polyhedron = getBooleanSolidPolyhedron(solid);
-    GPolyhedron* GPolyhedron = new GPolyhedron(*polyhedron);
-    writePolyhedron(solid, GPolyhedron, solidName, solidID);
+    GPolyhedron* polyh = new GPolyhedron(*polyhedron);
+    writePolyhedron(solid, polyh, solidName, solidID);
     delete polyhedron;
-    delete GPolyhedron;
+    delete polyh;
   } else {
     // auto a=Polyhedra(solid);
     std:: cout << __LINE__ << " name:" << solid.name() << " type:" << solid.type()<< std::endl;
@@ -198,9 +257,10 @@ void dd4hep2FBXWriter::writeGeometryNode(Solid solid, const std::string solidNam
 HepPolyhedron* dd4hep2FBXWriter::getBooleanSolidPolyhedron(Solid solid)
 {
 
-  BooleanSolid boSolid=dynamic_cast<BooleanSolid>(solid);
-  BooleanSolid solidA = boSolid.rightShape();
-  BooleanSolid solidB = boSolid.leftShape();
+  BooleanSolid boSolid = (BooleanSolid) solid;
+  Solid solidA = boSolid.rightShape();
+  Solid solidB = boSolid.leftShape();
+
 
   HepPolyhedron* polyhedronA = NULL;
   string solidAtype=solidA.type();

@@ -48,7 +48,7 @@
 
   <!--  Includes for sensitives and support                -->
   <include ref="SiD_EcalBarrel.xml"/>
-  <include ref="SiD_EcalEndcap.xml"/>
+  <!-- <include ref="SiD_EcalEndcap.xml"/> -->
 <!--
 -->
 </lccdd>

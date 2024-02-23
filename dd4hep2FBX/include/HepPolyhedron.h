@@ -126,12 +126,12 @@
 // - G4ThreeVector replaced by either HepGeom::Point3D<double> or HepGeom::Normal3D<double>
 //
 // 15.12.96 E.Chernyaev
-// - private functions G4PolyhedronAlloc, G4PolyhedronPrism renamed
+// - private functions GPolyhedronAlloc, GPolyhedronPrism renamed
 //   to AllocateMemory and CreatePrism
 // - added private functions GetNumberOfRotationSteps, RotateEdge,
 //   RotateAroundZ, SetReferences
-// - rewritten G4PolyhedronCons;
-// - added G4PolyhedronPara, ...Trap, ...Pgon, ...Pcon, ...Sphere, ...Torus,
+// - rewritten GPolyhedronCons;
+// - added GPolyhedronPara, ...Trap, ...Pgon, ...Pcon, ...Sphere, ...Torus,
 //   so full List of implemented shapes now looks like:
 //   BOX, TRD1, TRD2, TRAP, TUBE, TUBS, CONE, CONS, PARA, PGON, PCON,
 //   SPHERE, TORUS
@@ -147,10 +147,10 @@
 //   GetNumberOfRotationSteps() appropriately.  Made all three functions
 //   inline (at end of this .hh file).
 //   Usage:
-//    G4Polyhedron::SetNumberOfRotationSteps
+//    GPolyhedron::SetNumberOfRotationSteps
 //     (fpView -> GetViewParameters ().GetNoOfSides ());
 //    pPolyhedron = solid.CreatePolyhedron ();
-//    G4Polyhedron::ResetNumberOfRotationSteps ();
+//    GPolyhedron::ResetNumberOfRotationSteps ();
 //
 // 19.03.00 E.Chernyaev
 // - added boolean operations (add, subtract, intersect) on polyhedra;

@@ -9,7 +9,7 @@
 
 #include "dd4hep2FBXWriter.h"
 #include "HepPolyhedron.h"
-#include "G4Polyhedron.hh"
+#include "GPolyhedron.hh"
 
 #include "DD4hep/DetFactoryHelper.h"
 #include "DD4hep/Detector.h"

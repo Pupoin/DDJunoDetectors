@@ -34,8 +34,8 @@
 //
 // 15.12.96 E.Chernyaev
 // - added GetNumberOfRotationSteps, RotateEdge, RotateAroundZ, SetReferences
-// - rewritten G4PolyhedronCons;
-// - added G4PolyhedronPara, ...Trap, ...Pgon, ...Pcon, ...Sphere, ...Torus
+// - rewritten GPolyhedronCons;
+// - added GPolyhedronPara, ...Trap, ...Pgon, ...Pcon, ...Sphere, ...Torus
 //
 // 01.06.97 E.Chernyaev
 // - modified RotateAroundZ, added SetSideFacets
@@ -2587,8 +2587,9 @@ HepPolyhedronEllipsoid::HepPolyhedronEllipsoid(double ax, double by,
   rr = new double[np1+1];
   if (!zz || !rr)
     {
-      std::exception("HepPolyhedronEllipsoid::HepPolyhedronEllipsoid",
-                  "greps1002", FatalException, "Out of memory");
+      // G4Exception("HepPolyhedronEllipsoid::HepPolyhedronEllipsoid",
+      //             "greps1002", FatalException, "Out of memory");
+      std::cerr << "HepPolyhedronEllipsoid::HepPolyhedronEllipsoid out of memory" << std::endl;
     }
 
   double a = dthe/(np1-cutflag-1);

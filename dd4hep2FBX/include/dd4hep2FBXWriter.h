@@ -10,7 +10,7 @@
 #ifndef DD4HEP2FBXWRITER_H
 #define DD4HEP2FBXWRITER_H
 #include "HepPolyhedron.h"
-#include "G4Polyhedron.hh"
+#include "GPolyhedron.hh"
 #include "DD4hep/DetFactoryHelper.h"
 #include "DD4hep/Detector.h"
 #include <DD4hep/Handle.h>
@@ -87,7 +87,9 @@ private:
   void writePreamble(int, int, int);
 
   // //! Write FBX definition for the solid's polyhedron
-  // void writePolyhedron(G4VSolid*, G4Polyhedron*, const std::string&, unsigned long long);
+  // void writePolyhedron(Solid, GPolyhedron*, const std::string&, unsigned long long);
+  void writePolyhedron(Solid solid, GPolyhedron* polyhedron, const std::string name,
+                                      unsigned long long solidID);
 
   // //! Write FBX connection for each logical volume's solid and color info
   // void writeSolidToLV(const std::string&, const std::string&, bool, unsigned long long, unsigned long long, unsigned long long);
@@ -106,6 +108,7 @@ private:
 
   // //! Create polyhedron for a boolean solid (recursive)
   // HepPolyhedron* getBooleanSolidPolyhedron(G4VSolid*);
+  HepPolyhedron* getBooleanSolidPolyhedron(Solid solid);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////

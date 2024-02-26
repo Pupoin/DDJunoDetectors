@@ -148,7 +148,10 @@
         "priorityq": "cpp",
         "node": "cpp",
         "ifile": "cpp",
-        "value": "cpp"
+        "value": "cpp",
+        "style_parser": "cpp",
+        "colorf": "cpp",
+        "mesh": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "cmake.configureOnOpen": true,

@@ -66,7 +66,7 @@
   <include ref="SiD/SiD_Tracker.xml"/> -->
 
   <comment>Calorimeters</comment>
-  <include ref="SiD/SiD_Ecal.xml"/>
+  <!-- <include ref="SiD/SiD_Ecal.xml"/> -->
   <!-- <include ref="SiD/SiD_Hcal.xml"/>
   <include ref="SiD/SiD_HcalPlug.xml"/>
   <include ref="SiD/SiD_Muon.xml"/>

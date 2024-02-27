@@ -67,11 +67,11 @@
 
   <comment>Calorimeters</comment>
   <!-- <include ref="SiD/SiD_Ecal.xml"/> -->
-  <!-- <include ref="SiD/SiD_Hcal.xml"/>
-  <include ref="SiD/SiD_HcalPlug.xml"/>
+  <!-- <include ref="SiD/SiD_Hcal.xml"/> -->
+  <!-- <include ref="SiD/SiD_HcalPlug.xml"/> -->
   <include ref="SiD/SiD_Muon.xml"/>
-  <include ref="SiD/SiD_Lumical.xml"/>
-  <include ref="SiD/SiD_Beamcal.xml"/> -->
+  <!-- <include ref="SiD/SiD_Lumical.xml"/> -->
+  <include ref="SiD/SiD_Beamcal.xml"/>
 
   <comment>Beampipe</comment>
   <!-- <include ref="SiD/SiD_Beampipe.xml"/> -->
@@ -81,6 +81,6 @@
   <include ref="SiD/SiD_Solenoid.xml"/>
 
   <comment>Magnetic field</comment>
-  <include ref="SiD/SiD_Field.xml"/>
+  <!-- <include ref="SiD/SiD_Field.xml"/> -->
 
 </lccdd>

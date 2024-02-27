@@ -1,0 +1,2327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<description xmlns:description="http://www.lcsim.org/schemas/description/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/description/1.0/description.xsd">
+    <!--
+      +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      ++++   dd4hep generated alignment file using the         ++++
+      ++++   dd4hep Detector description XML generator.        ++++
+      ++++                                                     ++++
+      ++++   Parser: TinyXML DOM mini-parser                   ++++
+      ++++                                                     ++++
+      ++++                              M.Frank CERN/LHCb      ++++
+      +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  -->
+    <header>
+        <detector name="clic_sid_cdr" />
+        <generator name="LCDDConverter" version="$Id: compact.xml 1374 2014-11-05 10:49:55Z markus.frank@cern.ch $" file="https://twiki.cern.ch/twiki/bin/view/CLIC/ClicSidCdr" checksum="3876283106" />
+        <author name="Christian Grefe" />
+        <comment>The compact format for the CLIC Silicon Detector used for the conceptual design report</comment>
+    </header>
+    <iddict />
+    <sensitive_detectors />
+    <limits />
+    <regions />
+    <display>
+        <vis name="inner1Vis" visible="true" show_daughters="false" line_style="unbroken" drawing_style="solid">
+            <color alpha="5.00000000e-01" R="9.92156863e-01" B="9.01960790e-01" G="9.60784316e-01" />
+        </vis>
+        <vis name="inner2Vis" visible="true" show_daughters="false" line_style="unbroken" drawing_style="solid">
+            <color alpha="5.00000000e-01" R="9.41176474e-01" B="1.00000000e+00" G="9.72549021e-01" />
+        </vis>
+        <vis name="bodyVis" visible="true" show_daughters="true" line_style="unbroken" drawing_style="solid">
+            <color alpha="5.00000000e-01" R="1.00000000e+00" B="0.00000000e+00" G="0.00000000e+00" />
+        </vis>
+        <vis name="WaterPoolVis" visible="true" show_daughters="true" line_style="unbroken" drawing_style="solid">
+            <color alpha="2.00000003e-01" R="7.76470602e-01" B="1.00000000e+00" G="8.86274517e-01" />
+        </vis>
+        <vis name="WorldVis" visible="false" show_daughters="true" line_style="unbroken" drawing_style="wireframe">
+            <color alpha="1.00000000e+00" R="1.00000000e+00" B="1.00000000e+00" G="1.00000000e+00" />
+        </vis>
+    </display>
+    <gdml>
+        <define>
+            <position name="_shape_0x55ac9360a0c0_right_pos_0x55ac9360a060" x="0.00000000e+00" y="0.00000000e+00" z="1.12500000e+00" unit="cm" />
+            <position name="_shape_0x55ac9360a0c0_right_pos_0x55ac9360a1e0" x="0.00000000e+00" y="0.00000000e+00" z="1.12500000e+00" unit="cm" />
+            <position name="identity_pos" x="0" y="0" z="0" unit="cm" />
+            <position name="_0_pos_0x55ac936156a0" x="2.92428780e+00" y="9.73919830e+01" z="-2.25000076e+01" unit="cm" />
+            <rotation name="_0_rot_0x55ac936156a0" x="-1.34375447e+00" y="2.92470797e-02" z="-2.32612282e-02" unit="rad" />
+            <position name="_1_pos_0x55ac936aa890" x="3.39949760e+01" y="2.52597847e+01" z="-9.05885468e+01" unit="cm" />
+            <rotation name="_1_rot_0x55ac936aa890" x="-2.71933548e-01" y="3.46863556e-01" z="-4.79271200e-02" unit="rad" />
+            <position name="_2_pos_0x55ac936aaa70" x="-3.24446297e+01" y="-2.21713200e+01" z="9.19553070e+01" unit="cm" />
+            <rotation name="_2_rot_0x55ac936aaa70" x="2.90499865e+00" y="-3.30426303e-01" z="-1.90302528e+00" unit="rad" />
+            <position name="_3_pos_0x55ac936aac50" x="-1.15601826e+00" y="9.91276093e+01" z="1.31293564e+01" unit="cm" />
+            <rotation name="_3_rot_0x55ac936aac50" x="-1.70247895e+00" y="-1.15603843e-02" z="1.31924617e-02" unit="rad" />
+            <position name="_4_pos_0x55ac936aae30" x="2.27143307e+01" y="-5.64082260e+01" z="-7.93862152e+01" unit="cm" />
+            <rotation name="_4_rot_0x55ac936aae30" x="6.17774330e-01" y="2.29143265e-01" z="7.34084720e-02" unit="rad" />
+            <position name="_5_pos_0x55ac936ab010" x="-4.58011627e+01" y="-8.83047714e+01" z="-1.02235203e+01" unit="cm" />
+            <rotation name="_5_rot_0x55ac936ab010" x="1.45553404e+00" y="-4.75757374e-01" z="-4.25496263e-01" unit="rad" />
+            <position name="_6_pos_0x55ac936ab1f0" x="6.60254974e+01" y="-7.50246964e+01" z="-3.45386577e+00" unit="cm" />
+            <rotation name="_6_rot_0x55ac936ab1f0" x="1.52479235e+00" y="7.21158086e-01" z="6.91296597e-01" unit="rad" />
+            <position name="_7_pos_0x55ac936ab3d0" x="-9.90378494e+01" y="6.66270971e+00" z="-1.21289835e+01" unit="cm" />
+            <rotation name="_7_rot_0x55ac936ab3d0" x="-5.02321934e-01" y="-1.43196583e+00" z="4.39239116e-01" unit="rad" />
+            <position name="_8_pos_0x55ac936ab5b0" x="2.15121078e+01" y="7.39042892e+01" z="6.38387413e+01" unit="cm" />
+            <rotation name="_8_rot_0x55ac936ab5b0" x="-2.28324934e+00" y="2.16815842e-01" z="-4.66980674e-01" unit="rad" />
+            <position name="_9_pos_0x55ac936ab790" x="-2.08253098e+01" y="-8.65672760e+01" z="4.55237617e+01" unit="cm" />
+            <rotation name="_9_rot_0x55ac936ab790" x="2.05493077e+00" y="-2.09788708e-01" z="-3.45162997e-01" unit="rad" />
+            <position name="_10_pos_0x55ac936ab970" x="-1.85031452e+01" y="9.72106934e+01" z="-1.44123030e+01" unit="cm" />
+            <rotation name="_10_rot_0x55ac936ab970" x="-1.42361011e+00" y="-1.86103902e-01" z="1.60665136e-01" unit="rad" />
+            <position name="_11_pos_0x55ac936abb50" x="8.85124817e+01" y="-4.61253929e+01" z="-6.16350126e+00" unit="cm" />
+            <rotation name="_11_rot_0x55ac936abb50" x="1.43795821e+00" y="1.08676211e+00" z="9.72669956e-01" unit="rad" />
+            <position name="_12_pos_0x55ac936abd30" x="8.01531219e+01" y="3.75527611e+01" z="-4.65324364e+01" unit="cm" />
+            <rotation name="_12_rot_0x55ac936abd30" x="-6.79008741e-01" y="9.29851524e-01" z="-3.50670362e-01" unit="rad" />
+            <position name="_13_pos_0x55ac936abf10" x="-9.01121445e+01" y="4.29482346e+01" z="5.93719244e+00" unit="cm" />
+            <rotation name="_13_rot_0x55ac936abf10" x="-1.70816630e+00" y="-1.12234929e+00" z="1.24996949e+00" unit="rad" />
+            <position name="_14_pos_0x55ac936ac0f0" x="5.49983597e+01" y="8.27149124e+01" z="-1.15509424e+01" unit="cm" />
+            <rotation name="_14_rot_0x55ac936ac0f0" x="-1.43204594e+00" y="5.82344595e-01" z="-5.10135275e-01" unit="rad" />
+            <position name="_15_pos_0x55ac936ac2d0" x="5.09875908e+01" y="8.40307465e+01" z="-1.84146442e+01" unit="cm" />
+            <rotation name="_15_rot_0x55ac936ac2d0" x="-1.35506483e+00" y="5.35040585e-01" z="-4.34111290e-01" unit="rad" />
+            <position name="_16_pos_0x55ac936ac4b0" x="5.47611237e+01" y="5.82249374e+01" z="6.00922279e+01" unit="cm" />
+            <rotation name="_16_rot_0x55ac936ac4b0" x="-2.37197528e+00" y="5.79506723e-01" z="-1.26916873e+00" unit="rad" />
+            <position name="_17_pos_0x55ac936ac710" x="-3.59134254e+01" y="3.35287437e+01" z="8.70979309e+01" unit="cm" />
+            <rotation name="_17_rot_0x55ac936ac710" x="-2.77412338e+00" y="-3.67340097e-01" z="1.57043671e+00" unit="rad" />
+            <position name="_18_pos_0x55ac936ac8f0" x="7.28383255e+01" y="6.82216721e+01" z="6.35460567e+00" unit="cm" />
+            <rotation name="_18_rot_0x55ac936ac8f0" x="-1.66367481e+00" y="8.15959387e-01" z="-8.85857295e-01" unit="rad" />
+            <position name="_19_pos_0x55ac936acad0" x="9.43921509e+01" y="4.89632940e+00" z="-3.26519127e+01" unit="cm" />
+            <rotation name="_19_rot_0x55ac936acad0" x="-1.48846282e-01" y="1.23431278e+00" z="-1.05721874e-01" unit="rad" />
+            <position name="_20_pos_0x55ac936accb0" x="7.57685776e+01" y="2.14829712e+01" z="6.16247063e+01" unit="cm" />
+            <rotation name="_20_rot_0x55ac936accb0" x="-2.80615692e+00" y="8.59759730e-01" z="-2.43409020e+00" unit="rad" />
+            <position name="_21_pos_0x55ac936ace90" x="-3.80897331e+01" y="9.08933258e+01" z="-1.69580307e+01" unit="cm" />
+            <rotation name="_21_rot_0x55ac936ace90" x="-1.38634631e+00" y="-3.90766616e-01" z="3.25883456e-01" unit="rad" />
+            <position name="_22_pos_0x55ac936ad070" x="5.32355232e+01" y="3.26703796e+01" z="7.80936966e+01" unit="cm" />
+            <rotation name="_22_rot_0x55ac936ad070" x="-2.74536935e+00" y="5.61380378e-01" z="-1.92511420e+00" unit="rad" />
+            <position name="_23_pos_0x55ac936ad250" x="-5.85094833e+01" y="-7.64393234e+01" z="-2.70863400e+01" unit="cm" />
+            <rotation name="_23_rot_0x55ac936ad250" x="1.23025066e+00" y="-6.24997112e-01" z="-4.48875319e-01" unit="rad" />
+            <position name="_24_pos_0x55ac936ad430" x="-8.44516373e+01" y="-3.13168125e+01" z="4.34416618e+01" unit="cm" />
+            <rotation name="_24_rot_0x55ac936ad430" x="2.51698140e+00" y="-1.00566147e+00" z="-2.07989678e+00" unit="rad" />
+            <position name="_25_pos_0x55ac936ad610" x="9.26562347e+01" y="-3.54881973e+01" z="-1.24663668e+01" unit="cm" />
+            <rotation name="_25_rot_0x55ac936ad610" x="1.23297987e+00" y="1.18516812e+00" z="8.90352148e-01" unit="rad" />
+            <position name="_26_pos_0x55ac936ad7f0" x="8.53561687e+00" y="9.69647827e+01" z="-2.29123096e+01" unit="cm" />
+            <rotation name="_26_rot_0x55ac936ad7f0" x="-1.33875740e+00" y="8.54601235e-02" z="-6.76351486e-02" unit="rad" />
+            <position name="_27_pos_0x55ac936ad9d0" x="6.23719788e+01" y="-5.28198318e+01" z="5.76177177e+01" unit="cm" />
+            <rotation name="_27_rot_0x55ac936ad9d0" x="2.39961142e+00" y="6.73492582e-01" z="1.46556575e+00" unit="rad" />
+            <position name="_28_pos_0x55ac936adbb0" x="3.64120331e+01" y="-8.66688843e+01" z="3.40979233e+01" unit="cm" />
+            <rotation name="_28_rot_0x55ac936adbb0" x="1.94562402e+00" y="3.72688268e-01" z="5.40024008e-01" unit="rad" />
+            <position name="_29_pos_0x55ac936add90" x="-9.34980392e+01" y="-6.49711514e+00" z="-3.48698158e+01" unit="cm" />
+            <rotation name="_29_rot_0x55ac936add90" x="1.84212372e-01" y="-1.20820374e+00" z="-1.27327320e-01" unit="rad" />
+            <position name="_30_pos_0x55ac936adf70" x="4.35899086e+01" y="-7.40922318e+01" z="5.10907097e+01" unit="cm" />
+            <rotation name="_30_rot_0x55ac936adf70" x="2.17447811e+00" y="4.51036859e-01" z="8.23772068e-01" unit="rad" />
+            <position name="_31_pos_0x55ac936ae150" x="-7.13880920e+01" y="-2.98145447e+01" z="-6.33627090e+01" unit="cm" />
+            <rotation name="_31_rot_0x55ac936ae150" x="4.39801137e-01" y="-7.95024664e-01" z="-1.87143685e-01" unit="rad" />
+            <position name="_32_pos_0x55ac936ae330" x="4.97688065e+01" y="5.70208549e+01" z="-6.53581543e+01" unit="cm" />
+            <rotation name="_32_rot_0x55ac936ae330" x="-7.17376440e-01" y="5.20931241e-01" z="-1.99178891e-01" unit="rad" />
+            <position name="_33_pos_0x55ac936ae510" x="-9.08519287e+01" y="-4.48002577e+00" z="4.15434189e+01" unit="cm" />
+            <rotation name="_33_rot_0x55ac936ae510" x="3.03416809e+00" y="-1.13972662e+00" z="-2.97417570e+00" unit="rad" />
+            <position name="_34_pos_0x55ac936ae6f0" x="3.05219593e+01" y="-6.98728485e+01" z="6.47008133e+01" unit="cm" />
+            <rotation name="_34_rot_0x55ac936ae6f0" x="2.31778068e+00" y="3.10169135e-01" z="6.87284122e-01" unit="rad" />
+            <position name="_35_pos_0x55ac936ae8d0" x="8.66839447e+01" y="2.56295609e+00" z="4.97928162e+01" unit="cm" />
+            <rotation name="_35_rot_0x55ac936ae8d0" x="-3.09016564e+00" y="1.04882794e+00" z="-3.05272484e+00" unit="rad" />
+            <position name="_36_pos_0x55ac936aeab0" x="-1.93675327e+01" y="-5.67279358e+01" z="-8.00427399e+01" unit="cm" />
+            <rotation name="_36_rot_0x55ac936aeab0" x="6.16554814e-01" y="-1.94907189e-01" z="-6.22412675e-02" unit="rad" />
+            <position name="_37_pos_0x55ac936aec90" x="8.82775497e+01" y="-4.22438736e+01" z="2.05555134e+01" unit="cm" />
+            <rotation name="_37_rot_0x55ac936aec90" x="2.02365982e+00" y="1.08173764e+00" z="1.53018706e+00" unit="rad" />
+            <position name="_38_pos_0x55ac936aee70" x="8.56965103e+01" y="-3.57601051e+01" z="3.71123009e+01" unit="cm" />
+            <rotation name="_38_rot_0x55ac936aee70" x="2.37474799e+00" y="1.02935180e+00" z="1.90238681e+00" unit="rad" />
+            <position name="_39_pos_0x55ac936af050" x="-2.39201012e+01" y="-2.43374557e+01" z="9.39974289e+01" unit="cm" />
+            <rotation name="_39_rot_0x55ac936af050" x="2.88824003e+00" y="-2.41542885e-01" z="-1.52258921e+00" unit="rad" />
+            <position name="_40_pos_0x55ac936af230" x="7.68556900e+01" y="-4.99018021e+01" z="-4.00376434e+01" unit="cm" />
+            <rotation name="_40_rot_0x55ac936af230" x="8.94637085e-01" y="8.76582484e-01" z="4.42357261e-01" unit="rad" />
+            <position name="_41_pos_0x55ac936af410" x="9.61502380e+01" y="-1.11067991e+01" z="-2.51350498e+01" unit="cm" />
+            <rotation name="_41_rot_0x55ac936af410" x="4.16084892e-01" y="1.29241814e+00" z="3.15784634e-01" unit="rad" />
+            <position name="_42_pos_0x55ac936af5f0" x="-2.21570072e+01" y="-9.31214676e+01" z="2.89388847e+01" unit="cm" />
+            <rotation name="_42_rot_0x55ac936af5f0" x="1.87209974e+00" y="-2.23424181e-01" z="-3.02340652e-01" unit="rad" />
+            <position name="_43_pos_0x55ac936af7d0" x="-9.04974365e+01" y="-2.32157574e+01" z="3.56544876e+01" unit="cm" />
+            <rotation name="_43_rot_0x55ac936af7d0" x="2.56442250e+00" y="-1.13131947e+00" z="-2.26677758e+00" unit="rad" />
+            <position name="_44_pos_0x55ac936af9b0" x="7.87945023e+01" y="5.72031860e+01" z="-2.27864399e+01" unit="cm" />
+            <rotation name="_44_rot_0x55ac936af9b0" x="-1.19171991e+00" y="9.07464482e-01" z="-6.38712402e-01" unit="rad" />
+            <position name="_45_pos_0x55ac936afb90" x="8.42817230e+01" y="-5.18597450e+01" z="-1.43929939e+01" unit="cm" />
+            <rotation name="_45_rot_0x55ac936afb90" x="1.30007325e+00" y="1.00249635e+00" z="7.89410884e-01" unit="rad" />
+            <position name="_46_pos_0x55ac936afd70" x="-8.67547417e+00" y="6.40380783e+01" z="7.63142242e+01" unit="cm" />
+            <rotation name="_46_rot_0x55ac936afd70" x="-2.44343908e+00" y="-8.68639065e-02" z="2.37673492e-01" unit="rad" />
+            <position name="_47_pos_0x55ac936aff50" x="2.96855335e+01" y="-8.41984787e+01" z="-4.50487061e+01" unit="cm" />
+            <rotation name="_47_rot_0x55ac936aff50" x="1.07951900e+00" y="3.01397958e-01" z="1.81448323e-01" unit="rad" />
+            <position name="_48_pos_0x55ac936b0130" x="9.12572250e+01" y="1.25835476e+01" z="-3.89072418e+01" unit="cm" />
+            <rotation name="_48_rot_0x55ac936b0130" x="-3.12806030e-01" y="1.14953090e+00" z="-2.03570819e-01" unit="rad" />
+            <position name="_49_pos_0x55ac936b0310" x="8.55253296e+01" y="5.04670563e+01" z="-1.17683353e+01" unit="cm" />
+            <rotation name="_49_rot_0x55ac936b0310" x="-1.34170182e+00" y="1.02603949e+00" z="-8.40848147e-01" unit="rad" />
+            <position name="_50_pos_0x55ac936b04f0" x="-2.67300777e+01" y="-6.73754654e+01" z="-6.88915787e+01" unit="cm" />
+            <rotation name="_50_rot_0x55ac936b04f0" x="7.74272476e-01" y="-2.70590797e-01" z="-1.10887250e-01" unit="rad" />
+            <position name="_51_pos_0x55ac936b06d0" x="-4.80795288e+01" y="8.50266647e+01" z="2.14201946e+01" unit="cm" />
+            <rotation name="_51_rot_0x55ac936b06d0" x="-1.81758431e+00" y="-5.01561557e-01" z="6.35174715e-01" unit="rad" />
+            <position name="_52_pos_0x55ac936b08b0" x="-7.58531418e+01" y="-6.03764343e+01" z="2.45150356e+01" unit="cm" />
+            <rotation name="_52_rot_0x55ac936b08b0" x="1.95649572e+00" y="-8.61056475e-01" z="-1.19729287e+00" unit="rad" />
+            <position name="_53_pos_0x55ac936b0a90" x="8.85032043e+01" y="4.00921059e+01" z="-2.36602077e+01" unit="cm" />
+            <rotation name="_53_rot_0x55ac936b0a90" x="-1.03765379e+00" y="1.08656292e+00" z="-6.64122260e-01" unit="rad" />
+            <position name="_54_pos_0x55ac936b0c70" x="-4.75239334e+01" y="-6.89393234e+01" z="-5.46703300e+01" unit="cm" />
+            <rotation name="_54_rot_0x55ac936b0c70" x="9.00325390e-01" y="-4.95236050e-01" z="-2.43135213e-01" unit="rad" />
+            <position name="_55_pos_0x55ac936b0e50" x="1.99496841e+01" y="-8.06310043e+01" z="-5.56834984e+01" unit="cm" />
+            <rotation name="_55_rot_0x55ac936b0e50" x="9.66409385e-01" y="2.00844399e-01" z="1.05638566e-01" unit="rad" />
+            <position name="_56_pos_0x55ac936b1030" x="9.62541351e+01" y="2.19385834e+01" z="1.59323683e+01" unit="cm" />
+            <rotation name="_56_rot_0x55ac936b1030" x="-2.19890754e+00" y="1.29622434e+00" z="-1.95677049e+00" unit="rad" />
+            <position name="_57_pos_0x55ac936b1210" x="2.35262260e+01" y="1.34701834e+01" z="9.62552414e+01" unit="cm" />
+            <rotation name="_57_rot_0x55ac936b1210" x="-3.00255327e+00" y="2.37488393e-01" z="-2.08498040e+00" unit="rad" />
+            <position name="_58_pos_0x55ac936b13f0" x="7.90043182e+01" y="5.39518433e+01" z="2.91121311e+01" unit="cm" />
+            <rotation name="_58_rot_0x55ac936b13f0" x="-2.06561572e+00" y="9.10879461e-01" z="-1.37461495e+00" unit="rad" />
+            <position name="_59_pos_0x55ac936b15d0" x="3.58824692e+01" y="5.72803879e+01" z="7.36980667e+01" unit="cm" />
+            <rotation name="_59_rot_0x55ac936b15d0" x="-2.48089059e+00" y="3.67008433e-01" z="-9.92147903e-01" unit="rad" />
+            <position name="_60_pos_0x55ac936b17b0" x="2.72195759e+01" y="5.33950005e+01" z="-8.00504150e+01" unit="cm" />
+            <rotation name="_60_rot_0x55ac936b17b0" x="-5.88245327e-01" y="2.75674264e-01" z="-8.39874541e-02" unit="rad" />
+            <position name="_61_pos_0x55ac936b1990" x="8.38970642e+01" y="-9.66872120e+00" z="-5.35518265e+01" unit="cm" />
+            <rotation name="_61_rot_0x55ac936b1990" x="1.78624357e-01" y="9.95388890e-01" z="9.72310604e-02" unit="rad" />
+            <position name="_62_pos_0x55ac936b1b70" x="2.60888710e+01" y="9.64672852e+01" z="3.66515946e+00" unit="cm" />
+            <rotation name="_62_rot_0x55ac936b1b70" x="-1.60877185e+00" y="2.63942645e-01" z="-2.74036176e-01" unit="rad" />
+            <position name="_63_pos_0x55ac936b1d50" x="5.06883087e+01" y="-8.38106461e+01" z="-2.01611366e+01" unit="cm" />
+            <rotation name="_63_rot_0x55ac936b1d50" x="1.33472595e+00" y="5.31565043e-01" z="4.22603512e-01" unit="rad" />
+            <position name="_64_pos_0x55ac936b1f30" x="5.08045845e+01" y="4.95079851e+00" z="-8.59906006e+01" unit="cm" />
+            <rotation name="_64_rot_0x55ac936b1f30" x="-5.75102237e-02" y="5.32914452e-01" z="-1.57012899e-02" unit="rad" />
+            <position name="_65_pos_0x55ac936b2110" x="5.78797607e+01" y="2.51583405e+01" z="-7.75692673e+01" unit="cm" />
+            <rotation name="_65_rot_0x55ac936b2110" x="-3.13629340e-01" y="6.17253504e-01" z="-1.00731917e-01" unit="rad" />
+            <position name="_66_pos_0x55ac936b22f0" x="-9.22798996e+01" y="-2.29203963e+00" z="3.84599419e+01" unit="cm" />
+            <rotation name="_66_rot_0x55ac936b22f0" x="3.08206752e+00" y="-1.17528319e+00" z="-3.05226813e+00" unit="rad" />
+            <position name="_67_pos_0x55ac936b24d0" x="5.90149231e+01" y="1.22421551e+01" z="-7.97957916e+01" unit="cm" />
+            <rotation name="_67_rot_0x55ac936b24d0" x="-1.52231625e-01" y="6.31243780e-01" z="-4.97952650e-02" unit="rad" />
+            <position name="_68_pos_0x55ac936b26b0" x="9.34738312e+01" y="-5.56105089e+00" z="-3.50958290e+01" unit="cm" />
+            <rotation name="_68_rot_0x55ac936b26b0" x="1.57147345e-01" y="1.20752200e+00" z="1.08497219e-01" unit="rad" />
+            <position name="_69_pos_0x55ac936b2890" x="-7.83965836e+01" y="-2.58589764e+01" z="5.64383621e+01" unit="cm" />
+            <rotation name="_69_rot_0x55ac936b2890" x="2.71195634e+00" y="-9.01028535e-01" z="-2.29408223e+00" unit="rad" />
+            <position name="_70_pos_0x55ac936b2a70" x="2.16981602e+01" y="7.99487991e+01" z="-5.60123100e+01" unit="cm" />
+            <rotation name="_70_rot_0x55ac936b2a70" x="-9.59666361e-01" y="2.18721329e-01" z="-1.14154142e-01" unit="rad" />
+            <position name="_71_pos_0x55ac936b2c50" x="-1.96207750e+00" y="9.82565155e+01" z="1.84880257e+01" unit="cm" />
+            <rotation name="_71_rot_0x55ac936b2c50" x="-1.75678255e+00" y="-1.96220462e-02" z="2.36581344e-02" unit="rad" />
+            <position name="_72_pos_0x55ac936b2e30" x="-4.04922104e+01" y="-3.53340378e+01" z="8.43320007e+01" unit="cm" />
+            <rotation name="_72_rot_0x55ac936b2e30" x="2.74482587e+00" y="-4.16893699e-01" z="-1.62164854e+00" unit="rad" />
+            <position name="_73_pos_0x55ac936b3010" x="8.40950089e+01" y="3.72556597e-01" z="-5.41099892e+01" unit="cm" />
+            <rotation name="_73_rot_0x55ac936b3010" x="-6.88506449e-03" y="9.99036709e-01" z="-3.75703358e-03" unit="rad" />
+            <position name="_74_pos_0x55ac936b31f0" x="5.45004616e+01" y="8.35016403e+01" z="7.56146717e+00" unit="cm" />
+            <rotation name="_74_rot_0x55ac936b31f0" x="-1.66110470e+00" y="5.76394615e-01" z="-6.27574756e-01" unit="rad" />
+            <position name="_75_pos_0x55ac936b33d0" x="7.61165924e+01" y="8.39136124e+00" z="-6.43105698e+01" unit="cm" />
+            <rotation name="_75_rot_0x55ac936b33d0" x="-1.29748792e-01" y="8.65108905e-01" z="-5.99733472e-02" unit="rad" />
+            <position name="_76_pos_0x55ac936b35b0" x="-2.23658772e+01" y="3.08870277e+01" z="9.24432755e+01" unit="cm" />
+            <rotation name="_76_rot_0x55ac936b35b0" x="-2.81913542e+00" y="-2.25566743e-01" z="1.21662231e+00" unit="rad" />
+            <position name="_77_pos_0x55ac936b3790" x="-4.70882339e+01" y="3.86197014e+01" z="7.93171921e+01" unit="cm" />
+            <rotation name="_77_rot_0x55ac936b3790" x="-2.68847821e+00" y="-4.90290645e-01" z="1.65255921e+00" unit="rad" />
+            <position name="_78_pos_0x55ac936b3970" x="7.08703613e+01" y="-9.13517094e+00" z="6.99567032e+01" unit="cm" />
+            <rotation name="_78_rot_0x55ac936b3970" x="3.01174431e+00" y="7.87659047e-01" z="2.83118740e+00" unit="rad" />
+            <position name="_79_pos_0x55ac936b3b50" x="2.41181755e+01" y="-7.29425278e+01" z="-6.40132904e+01" unit="cm" />
+            <rotation name="_79_rot_0x55ac936b3b50" x="8.50503889e-01" y="2.43583327e-01" z="1.10751016e-01" unit="rad" />
+            <position name="_80_pos_0x55ac936b3d30" x="7.64005966e+01" y="6.38996506e+01" z="8.93213558e+00" unit="cm" />
+            <rotation name="_80_rot_0x55ac936b3d30" x="-1.70968018e+00" y="8.69499295e-01" z="-9.80657226e-01" unit="rad" />
+            <position name="_81_pos_0x55ac936b3f10" x="-4.55075340e+01" y="-8.90442047e+01" z="4.39635664e-01" unit="cm" />
+            <rotation name="_81_rot_0x55ac936b3f10" x="1.57573359e+00" y="-4.72456750e-01" z="-4.74708528e-01" unit="rad" />
+            <position name="_82_pos_0x55ac936b40f0" x="2.00518513e+01" y="-6.77558365e+01" z="-7.07606506e+01" unit="cm" />
+            <rotation name="_82_rot_0x55ac936b40f0" x="7.63708831e-01" y="2.01887023e-01" z="8.13023474e-02" unit="rad" />
+            <position name="_83_pos_0x55ac936b42d0" x="5.82154770e+01" y="-8.09971390e+01" z="7.10081482e+00" unit="cm" />
+            <rotation name="_83_rot_0x55ac936b42d0" x="1.65824030e+00" y="6.21376362e-01" z="6.74181298e-01" unit="rad" />
+            <position name="_84_pos_0x55ac936b44b0" x="7.79600191e+00" y="6.08135300e+01" z="7.89996033e+01" unit="cm" />
+            <rotation name="_84_rot_0x55ac936b44b0" x="-2.48554240e+00" y="7.80392027e-02" z="-2.28429342e-01" unit="rad" />
+            <position name="_85_pos_0x55ac936b4690" x="2.21212482e+01" y="-9.51297073e+01" z="2.14706650e+01" unit="cm" />
+            <rotation name="_85_rot_0x55ac936b4690" x="1.79277579e+00" y="2.23057767e-01" z="2.78363497e-01" unit="rad" />
+            <position name="_86_pos_0x55ac936b4870" x="-9.63616791e+01" y="-1.26379976e+01" z="-2.35522385e+01" unit="cm" />
+            <rotation name="_86_rot_0x55ac936b4870" x="4.92492779e-01" y="-1.30021912e+00" z="-3.77683173e-01" unit="rad" />
+            <position name="_87_pos_0x55ac936b4a50" x="2.56838856e+01" y="8.52985916e+01" z="-4.54366455e+01" unit="cm" />
+            <rotation name="_87_rot_0x55ac936b4a50" x="-1.08134955e+00" y="2.59749837e-01" z="-1.56502604e-01" unit="rad" />
+            <position name="_88_pos_0x55ac936b4c30" x="4.69274940e+01" y="8.44096603e+01" z="-2.59387684e+01" unit="cm" />
+            <rotation name="_88_rot_0x55ac936b4c30" x="-1.27265925e+00" y="4.88469545e-01" z="-3.64180287e-01" unit="rad" />
+            <position name="_89_pos_0x55ac936b4e10" x="4.90075607e+01" y="5.45415497e+01" z="6.79961624e+01" unit="cm" />
+            <rotation name="_89_rot_0x55ac936b4e10" x="-2.46555618e+00" y="5.12176514e-01" z="-1.28045267e+00" unit="rad" />
+            <position name="_90_pos_0x55ac936b4ff0" x="-3.82810402e+01" y="-8.03436813e+01" z="4.56010361e+01" unit="cm" />
+            <rotation name="_90_rot_0x55ac936b4ff0" x="2.08703233e+00" y="-3.92836622e-01" z="-6.58592175e-01" unit="rad" />
+            <position name="_91_pos_0x55ac936b51d0" x="-7.12826920e+01" y="-4.18835068e+01" z="-5.62543335e+01" unit="cm" />
+            <rotation name="_91_rot_0x55ac936b51d0" x="6.39996615e-01" y="-7.93520684e-01" z="-2.75925217e-01" unit="rad" />
+            <position name="_92_pos_0x55ac936b53b0" x="3.16493988e+01" y="-9.48263474e+01" z="2.50601602e+00" unit="cm" />
+            <rotation name="_92_rot_0x55ac936b53b0" x="1.59721757e+00" y="3.22031120e-01" z="3.30499852e-01" unit="rad" />
+            <position name="_93_pos_0x55ac936b5590" x="1.05159216e+01" y="-7.27664042e+00" z="-9.91789627e+01" unit="cm" />
+            <rotation name="_93_rot_0x55ac936b5590" x="7.32375968e-02" y="1.05354089e-01" z="3.86323466e-03" unit="rad" />
+            <position name="_94_pos_0x55ac936b5770" x="-7.56002045e+01" y="5.73749046e+01" z="-3.15076103e+01" unit="cm" />
+            <rotation name="_94_rot_0x55ac936b5770" x="-1.06860347e+00" y="-8.57183532e-01" z="5.28099981e-01" unit="rad" />
+            <position name="_95_pos_0x55ac936b5950" x="2.33041039e+01" y="-9.66520538e+01" z="1.07377768e+01" unit="cm" />
+            <rotation name="_95_rot_0x55ac936b5950" x="1.68143981e+00" y="2.35203737e-01" z="2.62481985e-01" unit="rad" />
+            <position name="_96_pos_0x55ac936b5b30" x="8.95948944e+01" y="-4.39640656e+01" z="6.31788445e+00" unit="cm" />
+            <rotation name="_96_rot_0x55ac936b5b30" x="1.71352482e+00" y="1.11056328e+00" z="1.24266630e+00" unit="rad" />
+            <position name="_97_pos_0x55ac936b5d10" x="-2.27029896e+01" y="-6.24904327e+01" z="7.46961899e+01" unit="cm" />
+            <rotation name="_97_rot_0x55ac936b5d10" x="2.44493272e+00" y="-2.29026812e-01" z="-6.13468689e-01" unit="rad" />
+            <position name="_98_pos_0x55ac936b5ef0" x="-2.31420155e+01" y="-6.34904099e+01" z="7.37117004e+01" unit="cm" />
+            <rotation name="_98_rot_0x55ac936b5ef0" x="2.43055520e+00" y="-2.33537185e-01" z="-6.12007922e-01" unit="rad" />
+            <position name="_99_pos_0x55ac936b60d0" x="6.42739868e+01" y="5.81728058e+01" z="4.98475609e+01" unit="cm" />
+            <rotation name="_99_rot_0x55ac936b60d0" x="-2.27927548e+00" y="6.98069363e-01" z="-1.33860751e+00" unit="rad" />
+            <position name="_100_pos_0x55ac936b62b0" x="-8.75236664e+01" y="4.31843643e+01" z="-2.17880306e+01" unit="cm" />
+            <rotation name="_100_rot_0x55ac936b62b0" x="-1.10352709e+00" y="-1.06592496e+00" z="6.96604644e-01" unit="rad" />
+            <position name="_101_pos_0x55ac936b6490" x="-9.51687012e+01" y="-3.07015610e+01" z="5.76493979e-01" unit="cm" />
+            <rotation name="_101_rot_0x55ac936b6490" x="1.58957130e+00" y="-1.25868390e+00" z="-1.27660350e+00" unit="rad" />
+            <position name="_102_pos_0x55ac936b6670" x="-5.83816414e+01" y="-2.91463718e+01" z="7.57764664e+01" unit="cm" />
+            <rotation name="_102_rot_0x55ac936b6670" x="2.77440074e+00" y="-6.23421469e-01" z="-2.09599634e+00" unit="rad" />
+            <position name="_103_pos_0x55ac936b6850" x="5.44405937e+01" y="-7.08345795e+01" z="-4.49297676e+01" unit="cm" />
+            <rotation name="_103_rot_0x55ac936b6850" x="1.00554339e+00" y="5.75680853e-01" z="3.22781498e-01" unit="rad" />
+            <position name="_104_pos_0x55ac936b6a30" x="-3.00441189e+01" y="7.02775803e+01" z="6.44857559e+01" unit="cm" />
+            <rotation name="_104_rot_0x55ac936b6a30" x="-2.31324320e+00" y="-3.05155193e-01" z="6.72990769e-01" unit="rad" />
+            <position name="_105_pos_0x55ac936b6c10" x="-3.77866707e+01" y="5.33054314e+01" z="-7.57013779e+01" unit="cm" />
+            <rotation name="_105_rot_0x55ac936b6c10" x="-6.13508413e-01" y="-3.87491032e-01" z="1.24138214e-01" unit="rad" />
+            <position name="_106_pos_0x55ac936b6df0" x="5.75895653e+01" y="1.89268513e+01" z="-7.95312271e+01" unit="cm" />
+            <rotation name="_106_rot_0x55ac936b6df0" x="-2.33634277e-01" y="6.13699395e-01" z="-7.43331000e-02" unit="rad" />
+            <position name="_107_pos_0x55ac936b6fd0" x="-6.46136475e+01" y="6.68494949e+01" z="3.68269157e+01" unit="cm" />
+            <rotation name="_107_rot_0x55ac936b6fd0" x="-2.07432492e+00" y="-7.02511461e-01" z="1.11035999e+00" unit="rad" />
+            <position name="_108_pos_0x55ac936b71b0" x="-1.62135868e+01" y="2.19110603e+01" z="9.62134323e+01" unit="cm" />
+            <rotation name="_108_rot_0x55ac936b71b0" x="-2.91767757e+00" y="-1.62854787e-01" z="1.25575595e+00" unit="rad" />
+            <position name="_109_pos_0x55ac936b7390" x="-8.98278580e+01" y="-4.18712234e+01" z="-1.33325396e+01" unit="cm" />
+            <rotation name="_109_rot_0x55ac936b7390" x="1.26252945e+00" y="-1.11583624e+00" z="-8.56022669e-01" unit="rad" />
+            <position name="_110_pos_0x55ac936b7570" x="4.75874901e-01" y="8.43347702e+01" z="5.37347183e+01" unit="cm" />
+            <rotation name="_110_rot_0x55ac936b7570" x="-2.13809202e+00" y="4.75874950e-03" z="-8.67467191e-03" unit="rad" />
+            <position name="_111_pos_0x55ac936b7750" x="-6.48480988e+01" y="-5.42162857e+01" z="-5.34351807e+01" unit="cm" />
+            <rotation name="_111_rot_0x55ac936b7750" x="7.92653950e-01" y="-7.05587303e-01" z="-3.05755088e-01" unit="rad" />
+            <position name="_112_pos_0x55ac936b7930" x="-5.80573893e+00" y="-8.86567078e+01" z="-4.58942451e+01" unit="cm" />
+            <rotation name="_112_rot_0x55ac936b7930" x="1.09311893e+00" y="-5.80902672e-02" z="-3.53472949e-02" unit="rad" />
+            <position name="_113_pos_0x55ac936b7b10" x="7.35204620e+01" y="-6.30678101e+01" z="-2.48433762e+01" unit="cm" />
+            <rotation name="_113_rot_0x55ac936b7b10" x="1.19554633e+00" y="8.25968350e-01" z="5.79879784e-01" unit="rad" />
+            <position name="_114_pos_0x55ac936b7cf0" x="-1.29622955e+01" y="7.49521713e+01" z="6.49164886e+01" unit="cm" />
+            <rotation name="_114_rot_0x55ac936b7cf0" x="-2.28456650e+00" y="-1.29988717e-01" z="2.83046076e-01" unit="rad" />
+            <position name="_115_pos_0x55ac936b7ed0" x="2.30930634e+01" y="5.47354660e+01" z="-8.04409027e+01" unit="cm" />
+            <rotation name="_115_rot_0x55ac936b7ed0" x="-5.97479567e-01" y="2.33034027e-01" z="-7.20595606e-02" unit="rad" />
+            <position name="_116_pos_0x55ac936b80b0" x="7.56634903e+01" y="3.48861389e+01" z="5.52991295e+01" unit="cm" />
+            <rotation name="_116_rot_0x55ac936b80b0" x="-2.57878878e+00" y="8.58150960e-01" z="-2.01457317e+00" unit="rad" />
+            <position name="_117_pos_0x55ac936b8290" x="-8.61629791e+01" y="-3.89263611e+01" z="-3.25680695e+01" unit="cm" />
+            <rotation name="_117_rot_0x55ac936b8290" x="8.74098895e-01" y="-1.03847215e+00" z="-5.21857637e-01" unit="rad" />
+            <position name="_118_pos_0x55ac936b8470" x="2.24049044e+00" y="8.72601089e+01" z="4.87919464e+01" unit="cm" />
+            <rotation name="_118_rot_0x55ac936b8470" x="-2.08064135e+00" y="2.24067846e-02" z="-3.81975333e-02" unit="rad" />
+            <position name="_119_pos_0x55ac936b8650" x="9.28182602e+01" y="-1.29410162e+01" z="-3.48898277e+01" unit="cm" />
+            <rotation name="_119_rot_0x55ac936b8650" x="3.55180657e-01" y="1.18949895e+00" z="2.41639644e-01" unit="rad" />
+            <position name="_120_pos_0x55ac936b8830" x="9.70740128e+01" y="-1.14215422e+01" z="2.11230927e+01" unit="cm" />
+            <rotation name="_120_rot_0x55ac936b8830" x="2.64590702e+00" y="1.32829393e+00" z="2.51626247e+00" unit="rad" />
+            <position name="_121_pos_0x55ac936b8a10" x="-8.83513718e+01" y="-1.77210064e+01" z="-4.33589821e+01" unit="cm" />
+            <rotation name="_121_rot_0x55ac936b8a10" x="3.87987585e-01" y="-1.08331144e+00" z="-2.35326520e-01" unit="rad" />
+            <position name="_122_pos_0x55ac936b8bf0" x="-7.43017817e+00" y="7.75235291e+01" z="6.27287369e+01" unit="cm" />
+            <rotation name="_122_rot_0x55ac936b8bf0" x="-2.25109617e+00" y="-7.43702828e-02" z="1.55601776e-01" unit="rad" />
+            <position name="_123_pos_0x55ac934c7010" x="8.88505173e+01" y="-2.85909863e+01" z="3.58906822e+01" unit="cm" />
+            <rotation name="_123_rot_0x55ac934c7010" x="2.46892043e+00" y="1.09407727e+00" z="2.09934874e+00" unit="rad" />
+            <position name="_124_pos_0x55ac934c71f0" x="3.27426758e+01" y="6.01400566e+00" z="9.42960663e+01" unit="cm" />
+            <rotation name="_124_rot_0x55ac934c71f0" x="-3.07790102e+00" y="3.33578933e-01" z="-2.76756613e+00" unit="rad" />
+            <position name="_125_pos_0x55ac934c73d0" x="-6.92991486e+01" y="5.55004044e+01" z="-4.60144844e+01" unit="cm" />
+            <rotation name="_125_rot_0x55ac934c73d0" x="-8.78571110e-01" y="-7.65630276e-01" z="3.74023569e-01" unit="rad" />
+            <position name="_126_pos_0x55ac934c75b0" x="3.78069992e+01" y="4.53843269e+01" z="8.06901093e+01" unit="cm" />
+            <rotation name="_126_rot_0x55ac934c75b0" x="-2.62923956e+00" y="3.87710657e-01" z="-1.28637661e+00" unit="rad" />
+            <position name="_127_pos_0x55ac936b9d50" x="8.58897095e+01" y="9.19556522e+00" z="-5.03825302e+01" unit="cm" />
+            <rotation name="_127_rot_0x55ac936b9d50" x="-1.80527892e-01" y="1.03311230e+00" z="-1.02728433e-01" unit="rad" />
+            <position name="_128_pos_0x55ac936b9f30" x="-7.23230057e+01" y="-5.44348869e+01" z="4.24997177e+01" unit="cm" />
+            <rotation name="_128_rot_0x55ac936b9f30" x="2.23368497e+00" y="-8.08467999e-01" z="-1.43961948e+00" unit="rad" />
+            <position name="_129_pos_0x55ac936ba920" x="-4.01937981e+01" y="-9.00761566e+01" z="1.64542999e+01" unit="cm" />
+            <rotation name="_129_rot_0x55ac936ba920" x="1.75147527e+00" y="-4.13632500e-01" z="-4.92997277e-01" unit="rad" />
+            <position name="_130_pos_0x55ac936bab00" x="3.00282555e+01" y="-5.05104027e+01" z="-8.09135513e+01" unit="cm" />
+            <rotation name="_130_rot_0x55ac936bab00" x="5.58060728e-01" y="3.04988931e-01" z="8.80076406e-02" unit="rad" />
+            <position name="_131_pos_0x55ac936bace0" x="-5.33278198e+01" y="6.85081177e+01" z="4.96264191e+01" unit="cm" />
+            <rotation name="_131_rot_0x55ac936bace0" x="-2.19770291e+00" y="-5.62471075e-01" z="1.03008135e+00" unit="rad" />
+            <position name="_132_pos_0x55ac936baec0" x="9.36327133e+01" y="-3.48181877e+01" z="4.53970242e+00" unit="cm" />
+            <rotation name="_132_rot_0x55ac936baec0" x="1.70044804e+00" y="1.21202001e+00" z="1.33626237e+00" unit="rad" />
+            <position name="_133_pos_0x55ac936bb0a0" x="-5.72231712e+01" y="8.08146973e+01" z="1.39460955e+01" unit="cm" />
+            <rotation name="_133_rot_0x55ac936bb0a0" x="-1.74168200e+00" y="-6.09224586e-01" z="7.14557602e-01" unit="rad" />
+            <position name="_134_pos_0x55ac936bb280" x="-5.46110649e+01" y="8.09110947e+01" z="2.17031288e+01" unit="cm" />
+            <rotation name="_134_rot_0x55ac936bb280" x="-1.83286168e+00" y="-5.77714331e-01" z="7.39167418e-01" unit="rad" />
+            <position name="_135_pos_0x55ac936bb460" x="8.31450958e+01" y="-2.69051914e+01" z="4.86107368e+01" unit="cm" />
+            <rotation name="_135_rot_0x55ac936bb460" x="2.63607962e+00" y="9.81714167e-01" z="2.24131252e+00" unit="rad" />
+            <position name="_136_pos_0x55ac936bb640" x="-2.76039906e+01" y="-5.07304916e+01" z="8.16360016e+01" unit="cm" />
+            <rotation name="_136_rot_0x55ac936bb640" x="2.58556968e+00" y="-2.79671406e-01" z="-9.16350536e-01" unit="rad" />
+            <position name="_137_pos_0x55ac936bb820" x="-2.22116852e+01" y="2.87148590e+01" z="-9.31777725e+01" unit="cm" />
+            <rotation name="_137_rot_0x55ac936bb820" x="-2.98937871e-01" y="-2.23984993e-01" z="3.38688551e-02" unit="rad" />
+            <position name="_138_pos_0x55ac936bba00" x="3.29986191e+01" y="9.43045044e+01" z="4.21326685e+00" unit="cm" />
+            <rotation name="_138_rot_0x55ac936bba00" x="-1.61544384e+00" y="3.36288965e-01" z="-3.51341457e-01" unit="rad" />
+            <position name="_139_pos_0x55ac936bbbe0" x="1.69052925e+01" y="-2.56317673e+01" z="9.51694489e+01" unit="cm" />
+            <rotation name="_139_rot_0x55ac936bbbe0" x="2.87850751e+00" y="1.69868643e-01" z="1.14358303e+00" unit="rad" />
+            <position name="_140_pos_0x55ac936bbdc0" x="5.48182964e-01" y="4.47533989e+01" z="-8.94250107e+01" unit="cm" />
+            <rotation name="_140_rot_0x55ac936bbdc0" x="-4.64013269e-01" y="5.48185482e-03" z="-1.29515159e-03" unit="rad" />
+            <position name="_141_pos_0x55ac936bbfa0" x="-3.01996632e+01" y="2.56562843e+01" z="-9.18135910e+01" unit="cm" />
+            <rotation name="_141_rot_0x55ac936bbfa0" x="-2.72488395e-01" y="-3.06786450e-01" z="4.23850918e-02" unit="rad" />
+            <position name="_142_pos_0x55ac936bc180" x="-9.51497269e+01" y="-3.03875237e+01" z="-4.80913353e+00" unit="cm" />
+            <rotation name="_142_rot_0x55ac936bc180" x="1.41383786e+00" y="-1.25806646e+00" z="-1.11220792e+00" unit="rad" />
+            <position name="_143_pos_0x55ac936bc360" x="1.12031240e+01" y="8.43851852e+01" z="-5.24750481e+01" unit="cm" />
+            <rotation name="_143_rot_0x55ac936bc360" x="-1.01446435e+00" y="1.12266949e-01" z="-6.24354897e-02" unit="rad" />
+            <position name="_144_pos_0x55ac936bc540" x="7.05078602e-01" y="7.97389755e+01" z="6.03423386e+01" unit="cm" />
+            <rotation name="_144_rot_0x55ac936bc540" x="-2.21860243e+00" y="7.05081596e-03" z="-1.41776656e-02" unit="rad" />
+            <position name="_145_pos_0x55ac936bc720" x="-7.31226044e+01" y="2.03449936e+01" z="-6.51088791e+01" unit="cm" />
+            <rotation name="_145_rot_0x55ac936bc720" x="-3.02863432e-01" y="-8.20117727e-01" z="1.32476675e-01" unit="rad" />
+            <position name="_146_pos_0x55ac936bc900" x="4.58623352e+01" y="-6.57179947e+01" z="5.98146400e+01" unit="cm" />
+            <rotation name="_146_rot_0x55ac936bc900" x="2.30920258e+00" y="4.76445367e-01" z="1.00472980e+00" unit="rad" />
+            <position name="_147_pos_0x55ac936bcae0" x="7.36951523e+01" y="-1.36866627e+01" z="-6.61944122e+01" unit="cm" />
+            <rotation name="_147_rot_0x55ac936bcae0" x="2.03891504e-01" y="8.28549135e-01" z="8.99070131e-02" unit="rad" />
+            <position name="_148_pos_0x55ac936bccc0" x="1.28332434e+01" y="8.54487076e+01" z="5.03371201e+01" unit="cm" />
+            <rotation name="_148_rot_0x55ac936bccc0" x="-2.10315639e+00" y="1.28687340e-01" z="-2.24528410e-01" unit="rad" />
+            <position name="_149_pos_0x55ac936bcea0" x="-2.31829929e+01" y="8.39649353e+01" z="4.91165733e+01" unit="cm" />
+            <rotation name="_149_rot_0x55ac936bcea0" x="-2.10008756e+00" y="-2.33958414e-01" z="4.04181750e-01" unit="rad" />
+            <position name="_150_pos_0x55ac936bd080" x="5.69045448e+01" y="7.92040939e+01" z="-2.21039581e+01" unit="cm" />
+            <rotation name="_150_rot_0x55ac936bd080" x="-1.29864469e+00" y="6.05344535e-01" z="-4.65512786e-01" unit="rad" />
+            <position name="_151_pos_0x55ac936bd260" x="7.75143051e+01" y="1.95634480e+01" z="6.00733185e+01" unit="cm" />
+            <rotation name="_151_rot_0x55ac936bd260" x="-2.82676434e+00" y="8.86941532e-01" z="-2.49663350e+00" unit="rad" />
+            <position name="_152_pos_0x55ac936bd440" x="6.60735931e+01" y="-6.65968170e+01" z="-3.46286659e+01" unit="cm" />
+            <rotation name="_152_rot_0x55ac936bd440" x="1.09129679e+00" y="7.21798915e-01" z="4.50522923e-01" unit="rad" />
+            <position name="_153_pos_0x55ac936bd620" x="9.59209671e+01" y="-4.07554102e+00" z="-2.79742336e+01" unit="cm" />
+            <rotation name="_153_rot_0x55ac936bd620" x="1.44671714e-01" y="1.28419314e+00" z="1.08269826e-01" unit="rad" />
+            <position name="_154_pos_0x55ac936bd800" x="-8.60914383e+01" y="-3.92145615e+01" z="3.24111519e+01" unit="cm" />
+            <rotation name="_154_rot_0x55ac936bd800" x="2.26149308e+00" y="-1.03706432e+00" z="-1.76181646e+00" unit="rad" />
+            <position name="_155_pos_0x55ac936bd9e0" x="-3.10041542e+01" y="-4.78046799e+01" z="-8.21794052e+01" unit="cm" />
+            <rotation name="_155_rot_0x55ac936bd9e0" x="5.26863256e-01" y="-3.15236835e-01" z="-8.56778595e-02" unit="rad" />
+            <position name="_156_pos_0x55ac936bdbc0" x="-2.67429428e+01" y="4.44050636e+01" z="-8.55161133e+01" unit="cm" />
+            <rotation name="_156_rot_0x55ac936bdbc0" x="-4.78936226e-01" y="-2.70724291e-01" z="6.64803463e-02" unit="rad" />
+            <position name="_157_pos_0x55ac936bdda0" x="-7.44576788e+00" y="4.73392906e+01" z="-8.77698822e+01" unit="cm" />
+            <rotation name="_157_rot_0x55ac936bdda0" x="-4.94635193e-01" y="-7.45266577e-02" z="1.88251389e-02" unit="rad" />
+            <position name="_158_pos_0x55ac936bdf80" x="5.02817268e+01" y="-7.09801788e+01" z="4.93311462e+01" unit="cm" />
+            <rotation name="_158_rot_0x55ac936bdf80" x="2.17815795e+00" y="5.26854953e-01" z="9.52526799e-01" unit="rad" />
+            <position name="_159_pos_0x55ac936be160" x="4.10219688e+01" y="9.06346359e+01" z="1.01272297e+01" unit="cm" />
+            <rotation name="_159_rot_0x55ac936be160" x="-1.68207164e+00" y="4.22694899e-01" z="-4.70825253e-01" unit="rad" />
+            <position name="_160_pos_0x55ac936be340" x="-6.61799383e+00" y="-4.97234459e+01" z="-8.65088501e+01" unit="cm" />
+            <rotation name="_160_rot_0x55ac936be340" x="5.21668093e-01" y="-6.62284112e-02" z="-1.76833472e-02" unit="rad" />
+            <position name="_161_pos_0x55ac936be520" x="-5.94847565e+01" y="7.98983231e+01" z="-8.82170486e+00" unit="cm" />
+            <rotation name="_161_rot_0x55ac936be520" x="-1.46083011e+00" y="-6.37075976e-01" z="5.74391577e-01" unit="rad" />
+            <position name="_162_pos_0x55ac936be700" x="1.33051701e+01" y="8.64581146e+01" z="4.84558296e+01" unit="cm" />
+            <rotation name="_162_rot_0x55ac936be700" x="-2.08163050e+00" y="1.33447479e-01" z="-2.27125387e-01" unit="rad" />
+            <position name="_163_pos_0x55ac936be8e0" x="-2.85990257e+01" y="9.56534500e+01" z="-5.70198965e+00" unit="cm" />
+            <rotation name="_163_rot_0x55ac936be8e0" x="-1.51125584e+00" y="-2.90039674e-01" z="2.73479580e-01" unit="rad" />
+            <position name="_164_pos_0x55ac936beac0" x="3.59889259e+01" y="4.68797379e+01" z="8.06665192e+01" unit="cm" />
+            <rotation name="_164_rot_0x55ac936beac0" x="-2.61514514e+00" y="3.68149206e-01" z="-1.20918963e+00" unit="rad" />
+            <position name="_165_pos_0x55ac936beca0" x="4.69560165e+01" y="8.80879822e+01" z="-5.96997595e+00" unit="cm" />
+            <rotation name="_165_rot_0x55ac936beca0" x="-1.50312699e+00" y="4.88792538e-01" z="-4.57930392e-01" unit="rad" />
+            <position name="_166_pos_0x55ac936bee80" x="6.59715347e+01" y="6.77237701e+01" z="3.25767937e+01" unit="cm" />
+            <rotation name="_166_rot_0x55ac936bee80" x="-2.01914867e+00" y="7.20439882e-01" z="-1.07958019e+00" unit="rad" />
+            <position name="_167_pos_0x55ac936bf060" x="7.38784714e+01" y="2.96940823e+01" z="6.04998589e+01" unit="cm" />
+            <rotation name="_167_rot_0x55ac936bf060" x="-2.68532209e+00" y="8.31265276e-01" z="-2.17302450e+00" unit="rad" />
+            <position name="_168_pos_0x55ac936bf240" x="-3.24074478e+01" y="8.50733337e+01" z="4.13797607e+01" unit="cm" />
+            <rotation name="_168_rot_0x55ac936bf240" x="-2.02350571e+00" y="-3.30033222e-01" z="5.20307846e-01" unit="rad" />
+            <position name="_169_pos_0x55ac936bf420" x="-7.61945801e+01" y="6.47635498e+01" z="-2.60970771e-01" unit="cm" />
+            <rotation name="_169_rot_0x55ac936bf420" x="-1.56676684e+00" y="-8.66312237e-01" z="8.63245988e-01" unit="rad" />
+            <position name="_170_pos_0x55ac936bf600" x="7.51675186e+01" y="3.93281555e+01" z="-5.29446907e+01" unit="cm" />
+            <rotation name="_170_rot_0x55ac936bf600" x="-6.38887315e-01" y="8.50598348e-01" z="-2.97429988e-01" unit="rad" />
+            <position name="_171_pos_0x55ac936bf7e0" x="-5.54821358e+01" y="5.99253769e+01" z="5.77120590e+01" unit="cm" />
+            <rotation name="_171_rot_0x55ac936bf7e0" x="-2.33738197e+00" y="-5.88148209e-01" z="1.23764907e+00" unit="rad" />
+            <position name="_172_pos_0x55ac936bf9c0" x="-4.59147911e+01" y="-6.58789749e+01" z="5.95969200e+01" unit="cm" />
+            <rotation name="_172_rot_0x55ac936bf9c0" x="2.30617052e+00" y="-4.77035898e-01" z="-1.00236210e+00" unit="rad" />
+            <position name="_173_pos_0x55ac936bfba0" x="-7.27601547e+01" y="-1.13134584e+01" z="-6.76606674e+01" unit="cm" />
+            <rotation name="_173_rot_0x55ac936bfba0" x="1.65676110e-01" y="-8.14819156e-01" z="-7.16316858e-02" unit="rad" />
+            <position name="_174_pos_0x55ac936bfd80" x="5.35581512e+01" y="-8.75188351e+00" z="8.39936218e+01" unit="cm" />
+            <rotation name="_174_rot_0x55ac936bfd80" x="3.03777018e+00" y="5.65196154e-01" z="2.78746578e+00" unit="rad" />
+            <position name="_175_pos_0x55ac936bff60" x="3.10411358e+01" y="-4.51176147e+01" z="8.36710739e+01" unit="cm" />
+            <rotation name="_175_rot_0x55ac936bff60" x="2.64705893e+00" y="3.15625770e-01" z="1.12496116e+00" unit="rad" />
+            <position name="_176_pos_0x55ac936c0140" x="6.55714560e+00" y="1.70038147e+01" z="9.83253479e+01" unit="cm" />
+            <rotation name="_176_rot_0x55ac936c0140" x="-2.97035211e+00" y="6.56185277e-02" z="-7.30477024e-01" unit="rad" />
+            <position name="_177_pos_0x55ac936c0320" x="-5.33163567e+01" y="7.87845612e+01" z="3.08278904e+01" unit="cm" />
+            <rotation name="_177_rot_0x55ac936c0320" x="-1.94377467e+00" y="-5.62335488e-01" z="8.00614704e-01" unit="rad" />
+            <position name="_178_pos_0x55ac936c0500" x="2.15578842e+01" y="9.51953812e+01" z="-2.17507896e+01" unit="cm" />
+            <rotation name="_178_rot_0x55ac936c0500" x="-1.34616658e+00" y="2.17284591e-01" z="-1.73486135e-01" unit="rad" />
+            <position name="_179_pos_0x55ac936c06e0" x="1.42448893e+01" y="-9.89166565e+01" z="-3.54660201e+00" unit="cm" />
+            <rotation name="_179_rot_0x55ac936c06e0" x="1.53495718e+00" y="1.42935289e-01" z="1.37918491e-01" unit="rad" />
+            <position name="_180_pos_0x55ac936c08c0" x="-3.18747311e+01" y="-7.01945877e+01" z="-6.36923943e+01" unit="cm" />
+            <rotation name="_180_rot_0x55ac936c08c0" x="8.33924776e-01" y="-3.24407658e-01" z="-1.44711717e-01" unit="rad" />
+            <position name="_181_pos_0x55ac936c0aa0" x="-5.51034775e+01" y="-3.48946457e+01" z="7.58021774e+01" unit="cm" />
+            <rotation name="_181_rot_0x55ac936c0aa0" x="2.71017471e+00" y="-5.83603746e-01" z="-1.88111707e+00" unit="rad" />
+            <position name="_182_pos_0x55ac936c0c80" x="1.53786001e+01" y="9.47793655e+01" z="-2.79351044e+01" unit="cm" />
+            <rotation name="_182_rot_0x55ac936c0c80" x="-1.28417380e+00" y="1.54398747e-01" z="-1.15559392e-01" unit="rad" />
+            <position name="_183_pos_0x55ac936c0e60" x="6.76174021e+00" y="6.56203766e+01" z="-7.51548080e+01" unit="cm" />
+            <rotation name="_183_rot_0x55ac936c0e60" x="-7.17773418e-01" y="6.76690196e-02" z="-2.53931657e-02" unit="rad" />
+            <position name="_184_pos_0x55ac936c1040" x="1.89094222e+00" y="-3.04681911e+01" z="9.52266464e+01" unit="cm" />
+            <rotation name="_184_rot_0x55ac936c1040" x="2.83193102e+00" y="1.89104841e-02" z="1.21014606e-01" unit="rad" />
+            <position name="_185_pos_0x55ac936c1220" x="6.23845825e+01" y="7.70985031e+01" z="-1.28056660e+01" unit="cm" />
+            <rotation name="_185_rot_0x55ac936c1220" x="-1.40620397e+00" y="6.73653847e-01" z="-5.77048758e-01" unit="rad" />
+            <position name="_186_pos_0x55ac936c1400" x="-4.59521790e+01" y="5.89732170e+00" z="8.86206436e+01" unit="cm" />
+            <rotation name="_186_rot_0x55ac936c1400" x="-3.07514488e+00" y="-4.77456682e-01" z="2.87013872e+00" unit="rad" />
+            <position name="_187_pos_0x55ac936c15e0" x="1.15219555e+01" y="9.86419449e+01" z="-1.17051487e+01" unit="cm" />
+            <rotation name="_187_rot_0x55ac936c15e0" x="-1.45268561e+00" y="1.15476058e-01" z="-1.02607510e-01" unit="rad" />
+            <position name="_188_pos_0x55ac936c17c0" x="4.00137062e+01" y="3.54099045e+01" z="-8.45283508e+01" unit="cm" />
+            <rotation name="_188_rot_0x55ac936c17c0" x="-3.96702425e-01" y="4.11666435e-01" z="-8.38819675e-02" unit="rad" />
+            <position name="_189_pos_0x55ac936c19a0" x="3.66217918e+01" y="8.15910187e+01" z="-4.47409210e+01" unit="cm" />
+            <rotation name="_189_rot_0x55ac936c19a0" x="-1.06921613e+00" y="3.74941345e-01" z="-2.23711976e-01" unit="rad" />
+            <position name="_190_pos_0x55ac936c1b80" x="-2.71576347e+01" y="8.95868835e+01" z="-3.51660767e+01" unit="cm" />
+            <rotation name="_190_rot_0x55ac936c1b80" x="-1.19674090e+00" y="-2.75030587e-01" z="1.88135368e-01" unit="rad" />
+            <position name="_191_pos_0x55ac936c1d60" x="-4.81600838e+01" y="8.09892197e+01" z="3.34866104e+01" unit="cm" />
+            <rotation name="_191_rot_0x55ac936c1d60" x="-1.96286058e+00" y="-5.02480307e-01" z="7.33031306e-01" unit="rad" />
+            <position name="_192_pos_0x55ac936c1f40" x="4.21256561e+01" y="-8.80080719e+01" z="-2.19090958e+01" unit="cm" />
+            <rotation name="_192_rot_0x55ac936c1f40" x="1.32681162e+00" y="4.34830524e-01" z="3.41940347e-01" unit="rad" />
+            <position name="_193_pos_0x55ac936c2120" x="3.13857594e+01" y="3.26592140e+01" z="-8.91532974e+01" unit="cm" />
+            <rotation name="_193_rot_0x55ac936c2120" x="-3.51144991e-01" y="3.19253270e-01" z="-5.71056975e-02" unit="rad" />
+            <position name="_194_pos_0x55ac936c2300" x="-5.62080727e+01" y="2.96784649e+01" z="-7.72000046e+01" unit="cm" />
+            <rotation name="_194_rot_0x55ac936c2300" x="-3.67017593e-01" y="-5.96899450e-01" z="1.14069598e-01" unit="rad" />
+            <position name="_195_pos_0x55ac936c24e0" x="4.09749756e+01" y="9.04539490e+01" z="-1.17955341e+01" unit="cm" />
+            <rotation name="_195_rot_0x55ac936c24e0" x="-1.44112427e+00" y="4.22179761e-01" z="-3.71957733e-01" unit="rad" />
+            <position name="_196_pos_0x55ac936c26c0" x="9.95871964e+01" y="1.86722410e+00" z="8.88274288e+00" unit="cm" />
+            <rotation name="_196_rot_0x55ac936c26c0" x="-2.93440113e+00" y="1.47990251e+00" z="-2.91481937e+00" unit="rad" />
+            <position name="_197_pos_0x55ac936c28a0" x="-8.55803146e+01" y="5.17297668e+01" z="2.01581106e-01" unit="cm" />
+            <rotation name="_197_rot_0x55ac936c28a0" x="-1.57469307e+00" y="-1.02710142e+00" z="1.03043962e+00" unit="rad" />
+            <position name="_198_pos_0x55ac936c2a80" x="-3.77614632e+01" y="3.37373227e-01" z="-9.25956726e+01" unit="cm" />
+            <rotation name="_198_rot_0x55ac936c2a80" x="-3.64352728e-03" y="-3.87218801e-01" z="7.14370229e-04" unit="rad" />
+            <position name="_199_pos_0x55ac936c2c60" x="4.87743645e+01" y="4.71483536e+01" z="7.34717255e+01" unit="cm" />
+            <rotation name="_199_rot_0x55ac936c2c60" x="-2.57105944e+00" y="5.09503246e-01" z="-1.45225342e+00" unit="rad" />
+            <position name="_200_pos_0x55ac936c2e40" x="-3.03259716e+01" y="-1.97897243e+01" z="9.32132111e+01" unit="cm" />
+            <rotation name="_200_rot_0x55ac936c2e40" x="2.93239288e+00" y="-3.08111632e-01" z="-1.95263562e+00" unit="rad" />
+            <position name="_201_pos_0x55ac936c3020" x="2.32176857e+01" y="1.26455431e+01" z="9.64418411e+01" unit="cm" />
+            <rotation name="_201_rot_0x55ac936c3020" x="-3.01121553e+00" y="2.34315079e-01" z="-2.12877131e+00" unit="rad" />
+            <position name="_202_pos_0x55ac936c3200" x="-4.26934853e+01" y="-6.01530228e+01" z="-6.75194778e+01" unit="cm" />
+            <rotation name="_202_rot_0x55ac936c3200" x="7.27763930e-01" y="-4.41100605e-01" z="-1.70354022e-01" unit="rad" />
+            <position name="_203_pos_0x55ac936c33e0" x="5.95784760e+01" y="5.94945183e+01" z="-5.39519005e+01" unit="cm" />
+            <rotation name="_203_rot_0x55ac936c33e0" x="-8.34216157e-01" y="6.38242456e-01" z="-2.90753021e-01" unit="rad" />
+            <position name="_204_pos_0x55ac936c35c0" x="-5.16991282e+00" y="-8.56654053e+01" z="-5.13294373e+01" unit="cm" />
+            <rotation name="_204_rot_0x55ac936c35c0" x="1.03097620e+00" y="-5.17221973e-02" z="-2.93095198e-02" unit="rad" />
+            <position name="_205_pos_0x55ac936c37a0" x="2.86726513e+01" y="9.48459549e+01" z="-1.34953260e+01" unit="cm" />
+            <rotation name="_205_rot_0x55ac936c37a0" x="-1.42945832e+00" y="2.90808135e-01" z="-2.52797733e-01" unit="rad" />
+            <position name="_206_pos_0x55ac936c3980" x="-1.58874063e+01" y="-8.06820908e+01" z="-5.69033432e+01" unit="cm" />
+            <rotation name="_206_rot_0x55ac936c3980" x="9.56536582e-01" y="-1.59550025e-01" z="-8.28411116e-02" unit="rad" />
+            <position name="_207_pos_0x55ac936c3b60" x="5.98525715e+00" y="2.51181602e+01" z="9.66087723e+01" unit="cm" />
+            <rotation name="_207_rot_0x55ac936c3b60" x="-2.88722577e+00" y="5.98883571e-02" z="-4.60183288e-01" unit="rad" />
+            <position name="_208_pos_0x55ac936c3d40" x="-9.72592735e+00" y="7.33353958e+01" z="6.72854080e+01" unit="cm" />
+            <rotation name="_208_rot_0x55ac936c3d40" x="-2.31319758e+00" y="-9.74132996e-02" z="2.20853067e-01" unit="rad" />
+            <position name="_209_pos_0x55ac936c3f20" x="-6.70127945e+01" y="4.03884430e+01" z="6.22740631e+01" unit="cm" />
+            <rotation name="_209_rot_0x55ac936c3f20" x="-2.56623072e+00" y="-7.34381196e-01" z="1.83014851e+00" unit="rad" />
+            <position name="_210_pos_0x55ac936c4100" x="3.22091103e-01" y="-3.13972435e+01" z="9.49426651e+01" unit="cm" />
+            <rotation name="_210_rot_0x55ac936c4100" x="2.82221679e+00" y="3.22091346e-03" z="1.99976610e-02" unit="rad" />
+            <position name="_211_pos_0x55ac936c42e0" x="1.07556257e+01" y="7.87167587e+01" z="-6.07288132e+01" unit="cm" />
+            <rotation name="_211_rot_0x55ac936c42e0" x="-9.13685974e-01" y="1.07764738e-01" z="-5.30077461e-02" unit="rad" />
+            <position name="_212_pos_0x55ac936c44c0" x="-7.59984207e+01" y="6.30721169e+01" z="-1.56890907e+01" unit="cm" />
+            <rotation name="_212_rot_0x55ac936c44c0" x="-1.32699590e+00" y="-8.63288960e-01" z="6.91239806e-01" unit="rad" />
+            <position name="_213_pos_0x55ac936c46a0" x="-1.26484470e+01" y="-8.90021744e+01" z="-4.38021698e+01" unit="cm" />
+            <rotation name="_213_rot_0x55ac936c46a0" x="1.11345056e+00" y="-1.26824143e-01" z="-7.89998214e-02" unit="rad" />
+            <position name="_214_pos_0x55ac936c4880" x="2.82291050e+01" y="-8.28392792e+01" z="-4.83815231e+01" unit="cm" />
+            <rotation name="_214_rot_0x55ac936c4880" x="1.04219417e+00" y="2.86181553e-01" z="1.65028652e-01" unit="rad" />
+            <position name="_215_pos_0x55ac936c4a60" x="-7.66772079e+01" y="4.52272034e+01" z="-4.55533333e+01" unit="cm" />
+            <rotation name="_215_rot_0x55ac936c4a60" x="-7.81805714e-01" y="-8.73797487e-01" z="3.80259998e-01" unit="rad" />
+            <position name="_216_pos_0x55ac936c4c40" x="-4.82922478e+01" y="-8.75656052e+01" z="-3.50958347e-01" unit="cm" />
+            <rotation name="_216_rot_0x55ac936c4c40" x="1.56678843e+00" y="-5.03989149e-01" z="-5.02057034e-01" unit="rad" />
+            <position name="_217_pos_0x55ac936c4e20" x="9.26016617e+01" y="-3.73189735e+01" z="5.67687416e+00" unit="cm" />
+            <rotation name="_217_rot_0x55ac936c4e20" x="1.72175659e+00" y="1.18371983e+00" z="1.32764434e+00" unit="rad" />
+            <position name="_218_pos_0x55ac936c5000" x="4.84144287e+01" y="1.86903515e+01" z="-8.54793167e+01" unit="cm" />
+            <rotation name="_218_rot_0x55ac936c5000" x="-2.15265622e-01" y="5.05384991e-01" z="-5.57853271e-02" unit="rad" />
+            <position name="_219_pos_0x55ac936c51e0" x="1.72340603e+01" y="7.84207993e+01" z="-5.96084366e+01" unit="cm" />
+            <rotation name="_219_rot_0x55ac936c51e0" x="-9.20856082e-01" y="1.73205350e-01" z="-8.60689771e-02" unit="rad" />
+            <position name="_220_pos_0x55ac936c53c0" x="9.57271004e+00" y="7.55802383e+01" z="6.47764664e+01" unit="cm" />
+            <rotation name="_220_rot_0x55ac936c53c0" x="-2.27937225e+00" y="9.58739307e-02" z="-2.07845577e-01" unit="rad" />
+            <position name="_221_pos_0x55ac936c55a0" x="7.32705994e+01" y="-6.47130890e+01" z="2.10626564e+01" unit="cm" />
+            <rotation name="_221_rot_0x55ac936c55a0" x="1.88546012e+00" y="8.22289836e-01" z="1.08144397e+00" unit="rad" />
+            <position name="_222_pos_0x55ac936c5780" x="8.04682693e+01" y="-8.97047997e+00" z="-5.86889114e+01" unit="cm" />
+            <rotation name="_222_rot_0x55ac936c5780" x="1.51673831e-01" y="9.35140859e-01" z="7.66916589e-02" unit="rad" />
+            <position name="_223_pos_0x55ac936c5960" x="-4.30703583e+01" y="2.56365356e+01" z="-8.65315704e+01" unit="cm" />
+            <rotation name="_223_rot_0x55ac936c5960" x="-2.88029391e-01" y="-4.45272237e-01" z="6.56376823e-02" unit="rad" />
+            <position name="_224_pos_0x55ac936c5b40" x="-8.51136017e+01" y="-9.49420512e-01" z="5.24859390e+01" unit="cm" />
+            <rotation name="_224_rot_0x55ac936c5b40" x="3.12350561e+00" y="-1.01814553e+00" z="-3.10918880e+00" unit="rad" />
+            <position name="_225_pos_0x55ac936c5d20" x="-9.83049393e+01" y="7.48413181e+00" z="1.67369823e+01" unit="cm" />
+            <rotation name="_225_rot_0x55ac936c5d20" x="-2.72110235e+00" y="-1.38641252e+00" z="2.63871021e+00" unit="rad" />
+            <position name="_226_pos_0x55ac936c5f00" x="8.27410049e+01" y="-5.13331871e+01" z="2.27778473e+01" unit="cm" />
+            <rotation name="_226_rot_0x55ac936c5f00" x="1.98842008e+00" y="9.74480051e-01" z="1.36737029e+00" unit="rad" />
+            <position name="_227_pos_0x55ac936c60e0" x="-1.01357727e+01" y="-8.71184235e+01" z="-4.80379677e+01" unit="cm" />
+            <rotation name="_227_rot_0x55ac936c60e0" x="1.06687121e+00" y="-1.01532232e-01" z="-5.99925465e-02" unit="rad" />
+            <position name="_228_pos_0x55ac936c62c0" x="-4.60665169e+01" y="5.44994431e+01" z="7.00548859e+01" unit="cm" />
+            <rotation name="_228_rot_0x55ac936c62c0" x="-2.48044003e+00" y="-4.78744483e-01" z="1.23636672e+00" unit="rad" />
+            <position name="_229_pos_0x55ac936c64a0" x="6.66752396e+01" y="1.27263546e+01" z="7.34333191e+01" unit="cm" />
+            <rotation name="_229_rot_0x55ac936c64a0" x="-2.96999217e+00" y="7.29842742e-01" z="-2.69869360e+00" unit="rad" />
+            <position name="_230_pos_0x55ac936c6680" x="8.53832169e+01" y="-2.83788795e+01" z="4.36388092e+01" unit="cm" />
+            <rotation name="_230_rot_0x55ac936c6680" x="2.56499741e+00" y="1.02330311e+00" z="2.16979916e+00" unit="rad" />
+            <position name="_231_pos_0x55ac936c6860" x="8.51193390e+01" y="1.74836636e+01" z="-4.94875755e+01" unit="cm" />
+            <rotation name="_231_rot_0x55ac936c6860" x="-3.39606374e-01" y="1.01825489e+00" z="-1.90834921e-01" unit="rad" />
+            <position name="_232_pos_0x55ac936c6a40" x="7.79098740e+01" y="5.60560417e+01" z="2.80672722e+01" unit="cm" />
+            <rotation name="_232_rot_0x55ac936c6a40" x="-2.03500397e+00" y="8.93226857e-01" z="-1.31904203e+00" unit="rad" />
+            <position name="_233_pos_0x55ac936c6c20" x="1.69392090e+01" y="-8.87717056e+01" z="-4.28094406e+01" unit="cm" />
+            <rotation name="_233_rot_0x55ac936c6c20" x="1.12145573e+00" y="1.70212766e-01" z="1.07043968e-01" unit="rad" />
+            <position name="_234_pos_0x55ac936c6e00" x="-4.66871719e+01" y="6.33620567e+01" z="6.16892014e+01" unit="cm" />
+            <rotation name="_234_rot_0x55ac936c6e00" x="-2.34281793e+00" y="-4.85749947e-01" z="1.06164752e+00" unit="rad" />
+            <position name="_235_pos_0x55ac936c6fe0" x="1.38018262e+00" y="-4.05926094e+01" z="9.13801651e+01" unit="cm" />
+            <rotation name="_235_rot_0x55ac936c6fe0" x="2.72355840e+00" y="1.38021801e-02" z="6.50473724e-02" unit="rad" />
+            <position name="_236_pos_0x55ac936c71c0" x="-6.65505219e+01" y="4.15728951e+01" z="6.19897003e+01" unit="cm" />
+            <rotation name="_236_rot_0x55ac936c71c0" x="-2.55084290e+00" y="-7.28170417e-01" z="1.79397944e+00" unit="rad" />
+            <position name="_237_pos_0x55ac936c73a0" x="9.59913330e+01" y="-3.10092235e+00" z="2.78576298e+01" unit="cm" />
+            <rotation name="_237_rot_0x55ac936c73a0" x="3.03073516e+00" y="1.28669297e+00" z="2.99385275e+00" unit="rad" />
+            <position name="_238_pos_0x55ac936c7580" x="2.23525105e+01" y="7.67508316e+01" z="-6.00805702e+01" unit="cm" />
+            <rotation name="_238_rot_0x55ac936c7580" x="-9.06631490e-01" y="2.25429563e-01" z="-1.10174119e-01" unit="rad" />
+            <position name="_239_pos_0x55ac936c7760" x="-3.15348110e+01" y="2.18793316e+01" z="-9.23409500e+01" unit="cm" />
+            <rotation name="_239_rot_0x55ac936c7760" x="-2.32650312e-01" y="-3.20823455e-01" z="3.78094813e-02" unit="rad" />
+            <position name="_240_pos_0x55ac936c7940" x="-5.85759277e+01" y="7.99620895e+01" z="1.32259378e+01" unit="cm" />
+            <rotation name="_240_rot_0x55ac936c7940" x="-1.73471490e+00" y="-6.25816617e-01" z="7.28821571e-01" unit="rad" />
+            <position name="_241_pos_0x55ac936c7b20" x="5.16137924e+01" y="-6.40448380e+01" z="5.68706894e+01" unit="cm" />
+            <rotation name="_241_rot_0x55ac936c7b20" x="2.29693200e+00" y="5.42335538e-01" z="1.10808080e+00" unit="rad" />
+            <position name="_242_pos_0x55ac936c7d00" x="-7.13697433e+01" y="9.90233612e+00" z="-6.93419266e+01" unit="cm" />
+            <rotation name="_242_rot_0x55ac936c7d00" x="-1.41845498e-01" y="-7.94762704e-01" z="5.96163149e-02" unit="rad" />
+            <position name="_243_pos_0x55ac936c7ee0" x="1.48905277e+01" y="7.35629272e+01" z="-6.60815201e+01" unit="cm" />
+            <rotation name="_243_rot_0x55ac936c7ee0" x="-8.38921648e-01" y="1.49461107e-01" z="-6.67481479e-02" unit="rad" />
+            <position name="_244_pos_0x55ac936c80c0" x="-1.14360456e+01" y="-9.32298965e+01" z="3.43133163e+01" unit="cm" />
+            <rotation name="_244_rot_0x55ac936c80c0" x="1.92346047e+00" y="-1.14610997e-01" z="-1.64120566e-01" unit="rad" />
+            <position name="_245_pos_0x55ac936c82a0" x="-3.78069925e+00" y="7.59420166e+01" z="-6.49501038e+01" unit="cm" />
+            <rotation name="_245_rot_0x55ac936c82a0" x="-8.63257088e-01" y="-3.78160277e-02" z="1.74194550e-02" unit="rad" />
+            <position name="_246_pos_0x55ac936c8480" x="-2.67723713e+01" y="-9.42906265e+01" z="-1.98120575e+01" unit="cm" />
+            <rotation name="_246_rot_0x55ac936c8480" x="1.36369210e+00" y="-2.71029491e-01" z="-2.20459253e-01" unit="rad" />
+            <position name="_247_pos_0x55ac936c8660" x="4.41728668e+01" y="6.56171570e+01" z="-6.11812553e+01" unit="cm" />
+            <rotation name="_247_rot_0x55ac936c8660" x="-8.20367689e-01" y="4.57524570e-01" z="-2.01811513e-01" unit="rad" />
+            <position name="_248_pos_0x55ac936c8840" x="6.59671736e+00" y="7.59099121e+01" z="6.47624054e+01" unit="cm" />
+            <rotation name="_248_rot_0x55ac936c8840" x="-2.27711526e+00" y="6.60151353e-02" z="-1.42904672e-01" unit="rad" />
+            <position name="_249_pos_0x55ac936c8a20" x="-4.24989605e+00" y="6.71922684e+01" z="-7.39400940e+01" unit="cm" />
+            <rotation name="_249_rot_0x55ac936c8a20" x="-7.37622463e-01" y="-4.25117308e-02" z="1.64327270e-02" unit="rad" />
+            <position name="_250_pos_0x55ac936c8c00" x="4.30175133e+01" y="-9.01835556e+01" z="4.05209064e+00" unit="cm" />
+            <rotation name="_250_rot_0x55ac936c8c00" x="1.61569765e+00" y="4.44686659e-01" z="4.64404400e-01" unit="rad" />
+            <position name="_251_pos_0x55ac936b8dd0" x="1.22241478e+01" y="8.09362030e+01" z="-5.74447632e+01" unit="cm" />
+            <rotation name="_251_rot_0x55ac936b8dd0" x="-9.53554343e-01" y="1.22547956e-01" z="-6.33567725e-02" unit="rad" />
+            <position name="_252_pos_0x55ac936b8fb0" x="-1.07532835e+01" y="9.65879135e+01" z="2.35614471e+01" unit="cm" />
+            <rotation name="_252_rot_0x55ac936b8fb0" x="-1.81006129e+00" y="-1.07741117e-01" z="1.37100232e-01" unit="rad" />
+            <position name="_253_pos_0x55ac936b9190" x="-6.02339745e+01" y="-5.10502701e+01" z="-6.13656120e+01" unit="cm" />
+            <rotation name="_253_rot_0x55ac936b9190" x="6.93893836e-01" y="-6.46428978e-01" z="-2.41051109e-01" unit="rad" />
+            <position name="_254_pos_0x55ac936b9370" x="3.70717125e+01" y="4.47616577e+01" z="8.13761749e+01" unit="cm" />
+            <rotation name="_254_rot_0x55ac936b9370" x="-2.63870451e+00" y="3.79781034e-01" z="-1.28473694e+00" unit="rad" />
+            <position name="_255_pos_0x55ac936b9550" x="1.54511061e+01" y="-5.32933769e+01" z="-8.31930237e+01" unit="cm" />
+            <rotation name="_255_rot_0x55ac936b9550" x="5.69738206e-01" y="1.55132452e-01" z="4.55114437e-02" unit="rad" />
+            <position name="_256_pos_0x55ac936b9730" x="-5.08437347e+01" y="-4.79390488e+01" z="7.15315475e+01" unit="cm" />
+            <rotation name="_256_rot_0x55ac936b9730" x="2.55116138e+00" y="-5.33369118e-01" z="-1.46381340e+00" unit="rad" />
+            <position name="_257_pos_0x55ac936b9910" x="4.31074142e+01" y="9.01508255e+01" z="3.81832933e+00" unit="cm" />
+            <rotation name="_257_rot_0x55ac936b9910" x="-1.61312594e+00" y="4.45682851e-01" z="-4.64287605e-01" unit="rad" />
+            <position name="_258_pos_0x55ac936b9af0" x="7.27150574e+01" y="-6.81926117e+01" z="-7.89229441e+00" unit="cm" />
+            <rotation name="_258_rot_0x55ac936b9af0" x="1.45557357e+00" y="8.14161728e-01" z="7.33522812e-01" unit="rad" />
+            <position name="_259_pos_0x55ac936ba110" x="9.57596512e+01" y="2.40215836e+01" z="1.59076099e+01" unit="cm" />
+            <rotation name="_259_rot_0x55ac936ba110" x="-2.15571540e+00" y="1.27854105e+00" z="-1.89016097e+00" unit="rad" />
+            <position name="_260_pos_0x55ac936ba2f0" x="-9.61542664e+01" y="-2.60571623e+00" z="2.73416767e+01" unit="cm" />
+            <rotation name="_260_rot_0x55ac936ba2f0" x="3.04657735e+00" y="-1.29256476e+00" z="-3.01570859e+00" unit="rad" />
+            <position name="_261_pos_0x55ac936ba4d0" x="2.35602608e+01" y="-3.15961266e+01" z="9.19053802e+01" unit="cm" />
+            <rotation name="_261_rot_0x55ac936ba4d0" x="2.81046104e+00" y="2.37838601e-01" z="1.24152259e+00" unit="rad" />
+            <position name="_262_pos_0x55ac936ba6b0" x="-2.63508053e+01" y="-6.66552505e+01" z="-6.97331543e+01" unit="cm" />
+            <rotation name="_262_rot_0x55ac936ba6b0" x="7.62834857e-01" y="-2.66657031e-01" z="-1.07479378e-01" unit="rad" />
+            <position name="_263_pos_0x55ac936cbc90" x="3.04328365e+01" y="9.19752350e+01" z="-2.47870636e+01" unit="cm" />
+            <rotation name="_263_rot_0x55ac936cbc90" x="-1.30755327e+00" y="3.09233298e-01" z="-2.37709181e-01" unit="rad" />
+            <position name="_264_pos_0x55ac936cbe70" x="6.15370216e+01" y="6.15364647e+01" z="4.92590904e+01" unit="cm" />
+            <rotation name="_264_rot_0x55ac936cbe70" x="-2.24583366e+00" y="6.62855558e-01" z="-1.24310905e+00" unit="rad" />
+            <position name="_265_pos_0x55ac936cc050" x="-6.37622490e+01" y="7.65117340e+01" z="8.96272945e+00" unit="cm" />
+            <rotation name="_265_rot_0x55ac936cc050" x="-1.68740680e+00" y="-6.91408069e-01" z="7.69311275e-01" unit="rad" />
+            <position name="_266_pos_0x55ac936cc230" x="4.71832085e+01" y="-3.47811584e+01" z="8.10186157e+01" unit="cm" />
+            <rotation name="_266_rot_0x55ac936cc230" x="2.73608693e+00" y="4.91367520e-01" z="1.76813288e+00" unit="rad" />
+            <position name="_267_pos_0x55ac936cc410" x="2.72695904e+01" y="-8.91545181e+01" z="-3.61640968e+01" unit="cm" />
+            <rotation name="_267_rot_0x55ac936cc410" x="1.18544263e+00" y="2.76193805e-01" z="1.86665354e-01" unit="rad" />
+            <position name="_268_pos_0x55ac936cc5f0" x="3.21369743e+01" y="2.22665749e+01" z="9.20402908e+01" unit="cm" />
+            <rotation name="_268_rot_0x55ac936cc5f0" x="-2.90423110e+00" y="3.27175606e-01" z="-1.89039099e+00" unit="rad" />
+            <position name="_269_pos_0x55ac936cc7d0" x="-3.64680634e+01" y="-4.51579285e+01" z="-8.14299774e+01" unit="cm" />
+            <rotation name="_269_rot_0x55ac936cc7d0" x="5.06338656e-01" y="-3.73289769e-01" z="-9.76374478e-02" unit="rad" />
+            <position name="_270_pos_0x55ac936cc9b0" x="6.12566109e+01" y="7.41465073e+01" z="2.73847294e+01" unit="cm" />
+            <rotation name="_270_rot_0x55ac936cc9b0" x="-1.92458910e+00" y="6.59303069e-01" z="-9.12982762e-01" unit="rad" />
+            <position name="_271_pos_0x55ac936ccb90" x="-8.81086807e+01" y="-8.84012127e+00" z="-4.64619484e+01" unit="cm" />
+            <rotation name="_271_rot_0x55ac936ccb90" x="1.88018545e-01" y="-1.07815529e+00" z="-1.12681403e-01" unit="rad" />
+            <position name="_272_pos_0x55ac936ccd70" x="6.30161400e+01" y="-5.47249146e+01" z="-5.50831146e+01" unit="cm" />
+            <rotation name="_272_rot_0x55ac936ccd70" x="7.82136136e-01" y="6.81761274e-01" z="2.90452246e-01" unit="rad" />
+            <position name="_273_pos_0x55ac936ccf50" x="-7.57019272e+01" y="2.53223076e+01" z="-6.02328720e+01" unit="cm" />
+            <rotation name="_273_rot_0x55ac936ccf50" x="-3.97973722e-01" y="-8.58739108e-01" z="1.84137172e-01" unit="rad" />
+            <position name="_274_pos_0x55ac936cd130" x="9.90561905e+01" y="1.36022940e+01" z="1.68759012e+00" unit="cm" />
+            <rotation name="_274_rot_0x55ac936cd130" x="-1.69423180e+00" y="1.43329767e+00" z="-1.55661295e+00" unit="rad" />
+            <position name="_275_pos_0x55ac936cd310" x="5.69959831e+01" y="6.52741699e+01" z="4.99073181e+01" unit="cm" />
+            <rotation name="_275_rot_0x55ac936cd310" x="-2.22356337e+00" y="6.06456986e-01" z="-1.12876289e+00" unit="rad" />
+            <position name="_276_pos_0x55ac936cd4f0" x="9.95883560e+00" y="-7.14215088e+01" z="6.92805176e+01" unit="cm" />
+            <rotation name="_276_rot_0x55ac936cd4f0" x="2.34097918e+00" y="9.97536342e-02" z="2.34848201e-01" unit="rad" />
+            <position name="_277_pos_0x55ac936cd6d0" x="4.81977425e+01" y="-6.67943115e+01" z="-5.67053604e+01" unit="cm" />
+            <rotation name="_277_rot_0x55ac936cd6d0" x="8.66909337e-01" y="5.02910174e-01" z="2.36673289e-01" unit="rad" />
+            <position name="_278_pos_0x55ac936cd8b0" x="-3.58615041e+00" y="-8.69849396e+00" z="-9.95563965e+01" unit="cm" />
+            <rotation name="_278_rot_0x55ac936cd8b0" x="8.71512424e-02" y="-3.58692157e-02" z="-1.56418081e-03" unit="rad" />
+            <position name="_279_pos_0x55ac936cda90" x="-2.34093266e+01" y="-5.95387891e-02" z="-9.72213974e+01" unit="cm" />
+            <rotation name="_279_rot_0x55ac936cda90" x="6.12385911e-04" y="-2.36285774e-01" z="-7.26875415e-05" unit="rad" />
+            <position name="_280_pos_0x55ac936cdc70" x="6.33892365e+01" y="-3.28957214e+01" z="-6.99976883e+01" unit="cm" />
+            <rotation name="_280_rot_0x55ac936cdc70" x="4.39323617e-01" y="6.86575601e-01" z="1.59269856e-01" unit="rad" />
+            <position name="_281_pos_0x55ac936cde50" x="2.68004799e+01" y="-8.29221039e+01" z="4.90475159e+01" unit="cm" />
+            <rotation name="_281_rot_0x55ac936cde50" x="2.10493428e+00" y="2.71321361e-01" z="4.69817156e-01" unit="rad" />
+            <position name="_282_pos_0x55ac936ce030" x="-2.37697048e+01" y="8.65558624e+01" z="-4.40804253e+01" unit="cm" />
+            <rotation name="_282_rot_0x55ac936ce030" x="-1.09975911e+00" y="-2.39994280e-01" z="1.47543879e-01" unit="rad" />
+            <position name="_283_pos_0x55ac936ce210" x="-6.38510933e+01" y="1.95816956e+01" z="-7.44284515e+01" unit="cm" />
+            <rotation name="_283_rot_0x55ac936ce210" x="-2.57264106e-01" y="-6.92561945e-01" z="9.32736378e-02" unit="rad" />
+            <position name="_284_pos_0x55ac936ce3f0" x="-3.65522232e+01" y="5.73504639e+01" z="-7.33134308e+01" unit="cm" />
+            <rotation name="_284_rot_0x55ac936ce3f0" x="-6.63832434e-01" y="-3.74193749e-01" z="1.30313904e-01" unit="rad" />
+            <position name="_285_pos_0x55ac936ce5d0" x="4.54709778e+01" y="-8.22742844e+01" z="3.41076546e+01" unit="cm" />
+            <rotation name="_285_rot_0x55ac936ce5d0" x="1.96379130e+00" y="4.72046115e-01" z="6.91212931e-01" unit="rad" />
+            <position name="_286_pos_0x55ac936ce7b0" x="1.29222965e+01" y="8.48619003e+01" z="5.12978783e+01" unit="cm" />
+            <rotation name="_286_rot_0x55ac936ce7b0" x="-2.11450819e+00" y="1.29585349e-01" z="-2.29068835e-01" unit="rad" />
+            <position name="_287_pos_0x55ac936ce990" x="7.63044662e+01" y="-6.05112267e+01" z="-2.27160740e+01" unit="cm" />
+            <rotation name="_287_rot_0x55ac936ce990" x="1.21167275e+00" y="8.68010650e-01" z="6.21345152e-01" unit="rad" />
+            <position name="_288_pos_0x55ac936ceb70" x="-1.27844343e+01" y="6.50142441e+01" z="7.48979721e+01" unit="cm" />
+            <rotation name="_288_rot_0x55ac936ceb70" x="-2.42671969e+00" y="-1.28195208e-01" z="3.40391786e-01" unit="rad" />
+            <position name="_289_pos_0x55ac936ced50" x="2.56965618e+01" y="5.45215912e+01" z="-7.97939987e+01" unit="cm" />
+            <rotation name="_289_rot_0x55ac936ced50" x="-5.99415619e-01" y="2.59881079e-01" z="-8.07186480e-02" unit="rad" />
+            <position name="_290_pos_0x55ac936cef30" x="3.55858459e+01" y="9.34328156e+01" z="-1.98921895e+00" unit="cm" />
+            <rotation name="_290_rot_0x55ac936cef30" x="-1.54950923e+00" y="3.63832528e-01" z="-3.56331695e-01" unit="rad" />
+            <position name="_291_pos_0x55ac936cf110" x="6.22094078e+01" y="-1.16482191e+01" z="-7.74229202e+01" unit="cm" />
+            <rotation name="_291_rot_0x55ac936cf110" x="1.49329404e-01" y="6.71414482e-01" z="5.21883486e-02" unit="rad" />
+            <position name="_292_pos_0x55ac936cf2f0" x="-8.19404907e+01" y="-3.58381882e+01" z="-4.47367859e+01" unit="cm" />
+            <rotation name="_292_rot_0x55ac936cf2f0" x="6.75405013e-01" y="-9.60372118e-01" z="-3.61796412e-01" unit="rad" />
+            <position name="_293_pos_0x55ac936cf4d0" x="9.26275330e+01" y="-2.73503876e+00" z="-3.75853691e+01" unit="cm" />
+            <rotation name="_293_rot_0x55ac936cf4d0" x="7.26411753e-02" y="1.18440579e+00" z="4.88811760e-02" unit="rad" />
+            <position name="_294_pos_0x55ac936cf6b0" x="-1.82339382e+01" y="-4.06569366e+01" z="8.95239487e+01" unit="cm" />
+            <rotation name="_294_rot_0x55ac936cf6b0" x="2.71529636e+00" y="-1.83365284e-01" z="-8.03390354e-01" unit="rad" />
+            <position name="_295_pos_0x55ac936cf890" x="-4.42787323e+01" y="-5.42038994e+01" z="-7.14236069e+01" unit="cm" />
+            <rotation name="_295_rot_0x55ac936cf890" x="6.49177506e-01" y="-4.58705079e-01" z="-1.56792195e-01" unit="rad" />
+            <position name="_296_pos_0x55ac936cfa70" x="3.36042595e+01" y="8.37404861e+01" z="-4.31078300e+01" unit="cm" />
+            <rotation name="_296_rot_0x55ac936cfa70" x="-1.09539569e+00" y="3.42711956e-01" z="-2.10325939e-01" unit="rad" />
+            <position name="_297_pos_0x55ac936cfc50" x="-6.70306778e+01" y="-1.16230333e+00" z="7.41993103e+01" unit="cm" />
+            <rotation name="_297_rot_0x55ac936cfc50" x="3.12592933e+00" y="-7.34622048e-01" z="-3.10088948e+00" unit="rad" />
+            <position name="_298_pos_0x55ac936cfe30" x="2.05135174e+01" y="1.19349136e+01" z="9.71429520e+01" unit="cm" />
+            <rotation name="_298_rot_0x55ac936cfe30" x="-3.01934599e+00" y="2.06601812e-01" z="-2.07503351e+00" unit="rad" />
+            <position name="_299_pos_0x55ac936d0010" x="1.40527992e+01" y="6.77531204e+01" z="7.21944122e+01" unit="cm" />
+            <rotation name="_299_rot_0x55ac936d0010" x="-2.38791925e+00" y="1.40994690e-01" z="-3.53147509e-01" unit="rad" />
+            <position name="_300_pos_0x55ac936d01f0" x="7.38725815e+01" y="6.65802536e+01" z="-1.04838696e+01" unit="cm" />
+            <rotation name="_300_rot_0x55ac936d01f0" x="-1.41461662e+00" y="8.31177938e-01" z="-7.21470823e-01" unit="rad" />
+            <position name="_301_pos_0x55ac936d03d0" x="5.23200607e+01" y="8.71354961e+00" z="-8.47743225e+01" unit="cm" />
+            <rotation name="_301_rot_0x55ac936d03d0" x="-1.02425567e-01" y="5.50602347e-01" z="-2.89558358e-02" unit="rad" />
+            <position name="_302_pos_0x55ac936d05b0" x="9.54843369e+01" y="8.97073746e+00" z="2.83243313e+01" unit="cm" />
+            <rotation name="_302_rot_0x55ac936d05b0" x="-2.83487244e+00" y="1.26913212e+00" z="-2.72764415e+00" unit="rad" />
+            <position name="_303_pos_0x55ac936d0790" x="-9.13485527e+00" y="2.09040661e+01" z="-9.73631058e+01" unit="cm" />
+            <rotation name="_303_rot_0x55ac936d0790" x="-2.11491396e-01" y="-9.14760792e-02" z="9.71611940e-03" unit="rad" />
+            <position name="_304_pos_0x55ac936d0970" x="-6.15067024e+01" y="3.21156273e+01" z="7.20104980e+01" unit="cm" />
+            <rotation name="_304_rot_0x55ac936d0970" x="-2.72208230e+00" y="-6.62470981e-01" z="2.03300968e+00" unit="rad" />
+        </define>
+        <materials>
+            <material name="dummy">
+                <D value="1.00000000e-10" unit="g/cm3" type="density" />
+            </material>
+            <element name="N" formula="N" Z="7">
+                <atom type="A" unit="g/mol" value="1.40068000e+01" />
+            </element>
+            <element name="O" formula="O" Z="8">
+                <atom type="A" unit="g/mol" value="1.59994000e+01" />
+            </element>
+            <element name="Ar" formula="Ar" Z="18">
+                <atom type="A" unit="g/mol" value="3.99477000e+01" />
+            </element>
+            <element name="C" formula="C" Z="6">
+                <atom type="A" unit="g/mol" value="1.20107000e+01" />
+            </element>
+            <material name="Air">
+                <D value="1.20500000e-03" unit="g/cm3" type="density" />
+                <fraction n="7.55000000e-01" ref="N" />
+                <fraction n="2.32100000e-01" ref="O" />
+                <fraction n="1.28000000e-02" ref="Ar" />
+                <fraction n="1.00000000e-04" ref="C" />
+            </material>
+            <material name="Vacuum">
+                <D value="1.00000000e-05" unit="g/cm3" type="density" />
+                <fraction n="7.55000000e-01" ref="N" />
+                <fraction n="2.32100000e-01" ref="O" />
+                <fraction n="1.28000000e-02" ref="Ar" />
+                <fraction n="1.00000000e-04" ref="C" />
+            </material>
+            <element name="Si" formula="Si" Z="14">
+                <atom type="A" unit="g/mol" value="2.80854000e+01" />
+            </element>
+            <element name="B" formula="B" Z="5">
+                <atom type="A" unit="g/mol" value="1.08110000e+01" />
+            </element>
+            <element name="Na" formula="Na" Z="11">
+                <atom type="A" unit="g/mol" value="2.29898000e+01" />
+            </element>
+            <material name="Pyrex">
+                <D value="2.23000000e+00" unit="g/cm3" type="density" />
+                <fraction n="3.73972375e-01" ref="Si" />
+                <fraction n="5.21678202e-01" ref="O" />
+                <fraction n="5.24199023e-02" ref="B" />
+                <fraction n="5.19295206e-02" ref="Na" />
+            </material>
+            <element name="H" formula="H" Z="1">
+                <atom type="A" unit="g/mol" value="1.00794000e+00" />
+            </element>
+            <material name="vetoWater">
+                <D value="1.00000000e+00" unit="g/cm3" type="density" />
+                <fraction n="1.12097669e-01" ref="H" />
+                <fraction n="8.87902331e-01" ref="O" />
+            </material>
+        </materials>
+        <solids>
+            <sphere name="TGeoSphere" rmin="0.00000000e+00" rmax="4.00000000e+00" startphi="0.00000000e+00" deltaphi="3.60000000e+02" starttheta="0.00000000e+00" deltatheta="1.80000000e+02" aunit="deg" lunit="cm" />
+            <scale name="PMT_body_solid_shape_0x55ac93609a30_left" shape="TGeoSphere" x="1.00000000e+00" y="1.00000000e+00" z="5.62500000e-01" aunit="deg" lunit="cm" />
+            <polycone name="PMT_body_solid_shape_0x55ac93609a30_right" startphi="0.00000000e+00" deltaphi="3.60000000e+02" aunit="deg" lunit="cm">
+                <zplane z="-8.75000000e+00" rmin="0.00000000e+00" rmax="2.82500000e+00" />
+                <zplane z="-5.55000000e+00" rmin="0.00000000e+00" rmax="2.82500000e+00" />
+                <zplane z="-5.55000000e+00" rmin="0.00000000e+00" rmax="2.59500000e+00" />
+                <zplane z="0.00000000e+00" rmin="0.00000000e+00" rmax="2.59500000e+00" />
+            </polycone>
+            <union name="PMT_body_solid_shape_0x55ac93609a30">
+                <first ref="PMT_body_solid_shape_0x55ac93609a30_left" />
+                <second ref="PMT_body_solid_shape_0x55ac93609a30_right" />
+            </union>
+            <sphere name="TGeoSphere" rmin="0.00000000e+00" rmax="3.00000000e+00" startphi="0.00000000e+00" deltaphi="3.60000000e+02" starttheta="0.00000000e+00" deltatheta="1.80000000e+02" aunit="deg" lunit="cm" />
+            <scale name="_left_left" shape="TGeoSphere" x="1.00000000e+00" y="1.00000000e+00" z="4.16666667e-01" aunit="deg" lunit="cm" />
+            <polycone name="_left_right" startphi="0.00000000e+00" deltaphi="3.60000000e+02" aunit="deg" lunit="cm">
+                <zplane z="-7.75000000e+00" rmin="0.00000000e+00" rmax="1.82500000e+00" />
+                <zplane z="-6.55000000e+00" rmin="0.00000000e+00" rmax="1.82500000e+00" />
+                <zplane z="-6.55000000e+00" rmin="0.00000000e+00" rmax="1.59500000e+00" />
+                <zplane z="0.00000000e+00" rmin="0.00000000e+00" rmax="1.59500000e+00" />
+            </polycone>
+            <union name="PMT_inner_solid">
+                <first ref="_left_left" />
+                <second ref="_left_right" />
+            </union>
+            <tube name="_shape_0x55ac9360a0c0_right" rmin="0.00000000e+00" rmax="4.00000000e+00" z="2.25000000e+00" startphi="0.00000000e+00" deltaphi="3.60000000e+02" aunit="deg" lunit="cm" />
+            <intersection name="_shape_0x55ac9360a0c0">
+                <first ref="PMT_inner_solid" />
+                <second ref="_shape_0x55ac9360a0c0_right" />
+                <positionref ref="_shape_0x55ac9360a0c0_right_pos_0x55ac9360a060" />
+            </intersection>
+            <subtraction name="_shape_0x55ac9360a240">
+                <first ref="PMT_inner_solid" />
+                <second ref="_shape_0x55ac9360a0c0_right" />
+                <positionref ref="_shape_0x55ac9360a0c0_right_pos_0x55ac9360a1e0" />
+            </subtraction>
+            <tube name="_shape_0x55ac9360ee20" rmin="0.00000000e+00" rmax="2.17500000e+03" z="4.35000000e+03" startphi="0.00000000e+00" deltaphi="3.60000000e+02" aunit="deg" lunit="cm" />
+            <box name="world_volume_shape_0x55ac93644400" x="1.00000000e+04" y="1.00000000e+04" z="1.00000000e+04" lunit="cm" />
+        </solids>
+        <structure>
+            <volume name="_0x55ac935f7c20">
+                <materialref ref="Vacuum" />
+                <solidref ref="_shape_0x55ac9360a0c0" />
+                <visref ref="inner1Vis" />
+            </volume>
+            <volume name="_0x55ac935f7e30">
+                <materialref ref="Vacuum" />
+                <solidref ref="_shape_0x55ac9360a240" />
+                <visref ref="inner2Vis" />
+            </volume>
+            <volume name="_0x55ac9360a4e0">
+                <materialref ref="Pyrex" />
+                <solidref ref="PMT_body_solid_shape_0x55ac93609a30" />
+                <physvol>
+                    <volumeref ref="_0x55ac935f7c20" />
+                    <positionref ref="identity_pos" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac935f7e30" />
+                    <positionref ref="identity_pos" />
+                </physvol>
+                <visref ref="bodyVis" />
+            </volume>
+            <volume name="_0x55ac9360ec70">
+                <materialref ref="vetoWater" />
+                <solidref ref="_shape_0x55ac9360ee20" />
+                <visref ref="WaterPoolVis" />
+            </volume>
+            <assembly name="PMT_type1_0x55ac9361af00">
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_0_pos_0x55ac936156a0" />
+                    <rotationref ref="_0_rot_0x55ac936156a0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_1_pos_0x55ac936aa890" />
+                    <rotationref ref="_1_rot_0x55ac936aa890" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_2_pos_0x55ac936aaa70" />
+                    <rotationref ref="_2_rot_0x55ac936aaa70" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_3_pos_0x55ac936aac50" />
+                    <rotationref ref="_3_rot_0x55ac936aac50" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_4_pos_0x55ac936aae30" />
+                    <rotationref ref="_4_rot_0x55ac936aae30" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_5_pos_0x55ac936ab010" />
+                    <rotationref ref="_5_rot_0x55ac936ab010" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_6_pos_0x55ac936ab1f0" />
+                    <rotationref ref="_6_rot_0x55ac936ab1f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_7_pos_0x55ac936ab3d0" />
+                    <rotationref ref="_7_rot_0x55ac936ab3d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_8_pos_0x55ac936ab5b0" />
+                    <rotationref ref="_8_rot_0x55ac936ab5b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_9_pos_0x55ac936ab790" />
+                    <rotationref ref="_9_rot_0x55ac936ab790" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_10_pos_0x55ac936ab970" />
+                    <rotationref ref="_10_rot_0x55ac936ab970" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_11_pos_0x55ac936abb50" />
+                    <rotationref ref="_11_rot_0x55ac936abb50" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_12_pos_0x55ac936abd30" />
+                    <rotationref ref="_12_rot_0x55ac936abd30" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_13_pos_0x55ac936abf10" />
+                    <rotationref ref="_13_rot_0x55ac936abf10" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_14_pos_0x55ac936ac0f0" />
+                    <rotationref ref="_14_rot_0x55ac936ac0f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_15_pos_0x55ac936ac2d0" />
+                    <rotationref ref="_15_rot_0x55ac936ac2d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_16_pos_0x55ac936ac4b0" />
+                    <rotationref ref="_16_rot_0x55ac936ac4b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_17_pos_0x55ac936ac710" />
+                    <rotationref ref="_17_rot_0x55ac936ac710" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_18_pos_0x55ac936ac8f0" />
+                    <rotationref ref="_18_rot_0x55ac936ac8f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_19_pos_0x55ac936acad0" />
+                    <rotationref ref="_19_rot_0x55ac936acad0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_20_pos_0x55ac936accb0" />
+                    <rotationref ref="_20_rot_0x55ac936accb0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_21_pos_0x55ac936ace90" />
+                    <rotationref ref="_21_rot_0x55ac936ace90" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_22_pos_0x55ac936ad070" />
+                    <rotationref ref="_22_rot_0x55ac936ad070" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_23_pos_0x55ac936ad250" />
+                    <rotationref ref="_23_rot_0x55ac936ad250" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_24_pos_0x55ac936ad430" />
+                    <rotationref ref="_24_rot_0x55ac936ad430" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_25_pos_0x55ac936ad610" />
+                    <rotationref ref="_25_rot_0x55ac936ad610" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_26_pos_0x55ac936ad7f0" />
+                    <rotationref ref="_26_rot_0x55ac936ad7f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_27_pos_0x55ac936ad9d0" />
+                    <rotationref ref="_27_rot_0x55ac936ad9d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_28_pos_0x55ac936adbb0" />
+                    <rotationref ref="_28_rot_0x55ac936adbb0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_29_pos_0x55ac936add90" />
+                    <rotationref ref="_29_rot_0x55ac936add90" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_30_pos_0x55ac936adf70" />
+                    <rotationref ref="_30_rot_0x55ac936adf70" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_31_pos_0x55ac936ae150" />
+                    <rotationref ref="_31_rot_0x55ac936ae150" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_32_pos_0x55ac936ae330" />
+                    <rotationref ref="_32_rot_0x55ac936ae330" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_33_pos_0x55ac936ae510" />
+                    <rotationref ref="_33_rot_0x55ac936ae510" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_34_pos_0x55ac936ae6f0" />
+                    <rotationref ref="_34_rot_0x55ac936ae6f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_35_pos_0x55ac936ae8d0" />
+                    <rotationref ref="_35_rot_0x55ac936ae8d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_36_pos_0x55ac936aeab0" />
+                    <rotationref ref="_36_rot_0x55ac936aeab0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_37_pos_0x55ac936aec90" />
+                    <rotationref ref="_37_rot_0x55ac936aec90" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_38_pos_0x55ac936aee70" />
+                    <rotationref ref="_38_rot_0x55ac936aee70" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_39_pos_0x55ac936af050" />
+                    <rotationref ref="_39_rot_0x55ac936af050" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_40_pos_0x55ac936af230" />
+                    <rotationref ref="_40_rot_0x55ac936af230" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_41_pos_0x55ac936af410" />
+                    <rotationref ref="_41_rot_0x55ac936af410" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_42_pos_0x55ac936af5f0" />
+                    <rotationref ref="_42_rot_0x55ac936af5f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_43_pos_0x55ac936af7d0" />
+                    <rotationref ref="_43_rot_0x55ac936af7d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_44_pos_0x55ac936af9b0" />
+                    <rotationref ref="_44_rot_0x55ac936af9b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_45_pos_0x55ac936afb90" />
+                    <rotationref ref="_45_rot_0x55ac936afb90" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_46_pos_0x55ac936afd70" />
+                    <rotationref ref="_46_rot_0x55ac936afd70" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_47_pos_0x55ac936aff50" />
+                    <rotationref ref="_47_rot_0x55ac936aff50" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_48_pos_0x55ac936b0130" />
+                    <rotationref ref="_48_rot_0x55ac936b0130" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_49_pos_0x55ac936b0310" />
+                    <rotationref ref="_49_rot_0x55ac936b0310" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_50_pos_0x55ac936b04f0" />
+                    <rotationref ref="_50_rot_0x55ac936b04f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_51_pos_0x55ac936b06d0" />
+                    <rotationref ref="_51_rot_0x55ac936b06d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_52_pos_0x55ac936b08b0" />
+                    <rotationref ref="_52_rot_0x55ac936b08b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_53_pos_0x55ac936b0a90" />
+                    <rotationref ref="_53_rot_0x55ac936b0a90" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_54_pos_0x55ac936b0c70" />
+                    <rotationref ref="_54_rot_0x55ac936b0c70" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_55_pos_0x55ac936b0e50" />
+                    <rotationref ref="_55_rot_0x55ac936b0e50" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_56_pos_0x55ac936b1030" />
+                    <rotationref ref="_56_rot_0x55ac936b1030" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_57_pos_0x55ac936b1210" />
+                    <rotationref ref="_57_rot_0x55ac936b1210" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_58_pos_0x55ac936b13f0" />
+                    <rotationref ref="_58_rot_0x55ac936b13f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_59_pos_0x55ac936b15d0" />
+                    <rotationref ref="_59_rot_0x55ac936b15d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_60_pos_0x55ac936b17b0" />
+                    <rotationref ref="_60_rot_0x55ac936b17b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_61_pos_0x55ac936b1990" />
+                    <rotationref ref="_61_rot_0x55ac936b1990" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_62_pos_0x55ac936b1b70" />
+                    <rotationref ref="_62_rot_0x55ac936b1b70" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_63_pos_0x55ac936b1d50" />
+                    <rotationref ref="_63_rot_0x55ac936b1d50" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_64_pos_0x55ac936b1f30" />
+                    <rotationref ref="_64_rot_0x55ac936b1f30" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_65_pos_0x55ac936b2110" />
+                    <rotationref ref="_65_rot_0x55ac936b2110" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_66_pos_0x55ac936b22f0" />
+                    <rotationref ref="_66_rot_0x55ac936b22f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_67_pos_0x55ac936b24d0" />
+                    <rotationref ref="_67_rot_0x55ac936b24d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_68_pos_0x55ac936b26b0" />
+                    <rotationref ref="_68_rot_0x55ac936b26b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_69_pos_0x55ac936b2890" />
+                    <rotationref ref="_69_rot_0x55ac936b2890" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_70_pos_0x55ac936b2a70" />
+                    <rotationref ref="_70_rot_0x55ac936b2a70" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_71_pos_0x55ac936b2c50" />
+                    <rotationref ref="_71_rot_0x55ac936b2c50" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_72_pos_0x55ac936b2e30" />
+                    <rotationref ref="_72_rot_0x55ac936b2e30" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_73_pos_0x55ac936b3010" />
+                    <rotationref ref="_73_rot_0x55ac936b3010" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_74_pos_0x55ac936b31f0" />
+                    <rotationref ref="_74_rot_0x55ac936b31f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_75_pos_0x55ac936b33d0" />
+                    <rotationref ref="_75_rot_0x55ac936b33d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_76_pos_0x55ac936b35b0" />
+                    <rotationref ref="_76_rot_0x55ac936b35b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_77_pos_0x55ac936b3790" />
+                    <rotationref ref="_77_rot_0x55ac936b3790" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_78_pos_0x55ac936b3970" />
+                    <rotationref ref="_78_rot_0x55ac936b3970" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_79_pos_0x55ac936b3b50" />
+                    <rotationref ref="_79_rot_0x55ac936b3b50" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_80_pos_0x55ac936b3d30" />
+                    <rotationref ref="_80_rot_0x55ac936b3d30" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_81_pos_0x55ac936b3f10" />
+                    <rotationref ref="_81_rot_0x55ac936b3f10" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_82_pos_0x55ac936b40f0" />
+                    <rotationref ref="_82_rot_0x55ac936b40f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_83_pos_0x55ac936b42d0" />
+                    <rotationref ref="_83_rot_0x55ac936b42d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_84_pos_0x55ac936b44b0" />
+                    <rotationref ref="_84_rot_0x55ac936b44b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_85_pos_0x55ac936b4690" />
+                    <rotationref ref="_85_rot_0x55ac936b4690" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_86_pos_0x55ac936b4870" />
+                    <rotationref ref="_86_rot_0x55ac936b4870" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_87_pos_0x55ac936b4a50" />
+                    <rotationref ref="_87_rot_0x55ac936b4a50" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_88_pos_0x55ac936b4c30" />
+                    <rotationref ref="_88_rot_0x55ac936b4c30" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_89_pos_0x55ac936b4e10" />
+                    <rotationref ref="_89_rot_0x55ac936b4e10" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_90_pos_0x55ac936b4ff0" />
+                    <rotationref ref="_90_rot_0x55ac936b4ff0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_91_pos_0x55ac936b51d0" />
+                    <rotationref ref="_91_rot_0x55ac936b51d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_92_pos_0x55ac936b53b0" />
+                    <rotationref ref="_92_rot_0x55ac936b53b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_93_pos_0x55ac936b5590" />
+                    <rotationref ref="_93_rot_0x55ac936b5590" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_94_pos_0x55ac936b5770" />
+                    <rotationref ref="_94_rot_0x55ac936b5770" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_95_pos_0x55ac936b5950" />
+                    <rotationref ref="_95_rot_0x55ac936b5950" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_96_pos_0x55ac936b5b30" />
+                    <rotationref ref="_96_rot_0x55ac936b5b30" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_97_pos_0x55ac936b5d10" />
+                    <rotationref ref="_97_rot_0x55ac936b5d10" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_98_pos_0x55ac936b5ef0" />
+                    <rotationref ref="_98_rot_0x55ac936b5ef0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_99_pos_0x55ac936b60d0" />
+                    <rotationref ref="_99_rot_0x55ac936b60d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_100_pos_0x55ac936b62b0" />
+                    <rotationref ref="_100_rot_0x55ac936b62b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_101_pos_0x55ac936b6490" />
+                    <rotationref ref="_101_rot_0x55ac936b6490" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_102_pos_0x55ac936b6670" />
+                    <rotationref ref="_102_rot_0x55ac936b6670" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_103_pos_0x55ac936b6850" />
+                    <rotationref ref="_103_rot_0x55ac936b6850" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_104_pos_0x55ac936b6a30" />
+                    <rotationref ref="_104_rot_0x55ac936b6a30" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_105_pos_0x55ac936b6c10" />
+                    <rotationref ref="_105_rot_0x55ac936b6c10" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_106_pos_0x55ac936b6df0" />
+                    <rotationref ref="_106_rot_0x55ac936b6df0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_107_pos_0x55ac936b6fd0" />
+                    <rotationref ref="_107_rot_0x55ac936b6fd0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_108_pos_0x55ac936b71b0" />
+                    <rotationref ref="_108_rot_0x55ac936b71b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_109_pos_0x55ac936b7390" />
+                    <rotationref ref="_109_rot_0x55ac936b7390" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_110_pos_0x55ac936b7570" />
+                    <rotationref ref="_110_rot_0x55ac936b7570" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_111_pos_0x55ac936b7750" />
+                    <rotationref ref="_111_rot_0x55ac936b7750" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_112_pos_0x55ac936b7930" />
+                    <rotationref ref="_112_rot_0x55ac936b7930" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_113_pos_0x55ac936b7b10" />
+                    <rotationref ref="_113_rot_0x55ac936b7b10" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_114_pos_0x55ac936b7cf0" />
+                    <rotationref ref="_114_rot_0x55ac936b7cf0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_115_pos_0x55ac936b7ed0" />
+                    <rotationref ref="_115_rot_0x55ac936b7ed0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_116_pos_0x55ac936b80b0" />
+                    <rotationref ref="_116_rot_0x55ac936b80b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_117_pos_0x55ac936b8290" />
+                    <rotationref ref="_117_rot_0x55ac936b8290" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_118_pos_0x55ac936b8470" />
+                    <rotationref ref="_118_rot_0x55ac936b8470" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_119_pos_0x55ac936b8650" />
+                    <rotationref ref="_119_rot_0x55ac936b8650" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_120_pos_0x55ac936b8830" />
+                    <rotationref ref="_120_rot_0x55ac936b8830" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_121_pos_0x55ac936b8a10" />
+                    <rotationref ref="_121_rot_0x55ac936b8a10" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_122_pos_0x55ac936b8bf0" />
+                    <rotationref ref="_122_rot_0x55ac936b8bf0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_123_pos_0x55ac934c7010" />
+                    <rotationref ref="_123_rot_0x55ac934c7010" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_124_pos_0x55ac934c71f0" />
+                    <rotationref ref="_124_rot_0x55ac934c71f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_125_pos_0x55ac934c73d0" />
+                    <rotationref ref="_125_rot_0x55ac934c73d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_126_pos_0x55ac934c75b0" />
+                    <rotationref ref="_126_rot_0x55ac934c75b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_127_pos_0x55ac936b9d50" />
+                    <rotationref ref="_127_rot_0x55ac936b9d50" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_128_pos_0x55ac936b9f30" />
+                    <rotationref ref="_128_rot_0x55ac936b9f30" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_129_pos_0x55ac936ba920" />
+                    <rotationref ref="_129_rot_0x55ac936ba920" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_130_pos_0x55ac936bab00" />
+                    <rotationref ref="_130_rot_0x55ac936bab00" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_131_pos_0x55ac936bace0" />
+                    <rotationref ref="_131_rot_0x55ac936bace0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_132_pos_0x55ac936baec0" />
+                    <rotationref ref="_132_rot_0x55ac936baec0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_133_pos_0x55ac936bb0a0" />
+                    <rotationref ref="_133_rot_0x55ac936bb0a0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_134_pos_0x55ac936bb280" />
+                    <rotationref ref="_134_rot_0x55ac936bb280" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_135_pos_0x55ac936bb460" />
+                    <rotationref ref="_135_rot_0x55ac936bb460" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_136_pos_0x55ac936bb640" />
+                    <rotationref ref="_136_rot_0x55ac936bb640" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_137_pos_0x55ac936bb820" />
+                    <rotationref ref="_137_rot_0x55ac936bb820" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_138_pos_0x55ac936bba00" />
+                    <rotationref ref="_138_rot_0x55ac936bba00" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_139_pos_0x55ac936bbbe0" />
+                    <rotationref ref="_139_rot_0x55ac936bbbe0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_140_pos_0x55ac936bbdc0" />
+                    <rotationref ref="_140_rot_0x55ac936bbdc0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_141_pos_0x55ac936bbfa0" />
+                    <rotationref ref="_141_rot_0x55ac936bbfa0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_142_pos_0x55ac936bc180" />
+                    <rotationref ref="_142_rot_0x55ac936bc180" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_143_pos_0x55ac936bc360" />
+                    <rotationref ref="_143_rot_0x55ac936bc360" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_144_pos_0x55ac936bc540" />
+                    <rotationref ref="_144_rot_0x55ac936bc540" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_145_pos_0x55ac936bc720" />
+                    <rotationref ref="_145_rot_0x55ac936bc720" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_146_pos_0x55ac936bc900" />
+                    <rotationref ref="_146_rot_0x55ac936bc900" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_147_pos_0x55ac936bcae0" />
+                    <rotationref ref="_147_rot_0x55ac936bcae0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_148_pos_0x55ac936bccc0" />
+                    <rotationref ref="_148_rot_0x55ac936bccc0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_149_pos_0x55ac936bcea0" />
+                    <rotationref ref="_149_rot_0x55ac936bcea0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_150_pos_0x55ac936bd080" />
+                    <rotationref ref="_150_rot_0x55ac936bd080" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_151_pos_0x55ac936bd260" />
+                    <rotationref ref="_151_rot_0x55ac936bd260" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_152_pos_0x55ac936bd440" />
+                    <rotationref ref="_152_rot_0x55ac936bd440" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_153_pos_0x55ac936bd620" />
+                    <rotationref ref="_153_rot_0x55ac936bd620" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_154_pos_0x55ac936bd800" />
+                    <rotationref ref="_154_rot_0x55ac936bd800" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_155_pos_0x55ac936bd9e0" />
+                    <rotationref ref="_155_rot_0x55ac936bd9e0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_156_pos_0x55ac936bdbc0" />
+                    <rotationref ref="_156_rot_0x55ac936bdbc0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_157_pos_0x55ac936bdda0" />
+                    <rotationref ref="_157_rot_0x55ac936bdda0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_158_pos_0x55ac936bdf80" />
+                    <rotationref ref="_158_rot_0x55ac936bdf80" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_159_pos_0x55ac936be160" />
+                    <rotationref ref="_159_rot_0x55ac936be160" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_160_pos_0x55ac936be340" />
+                    <rotationref ref="_160_rot_0x55ac936be340" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_161_pos_0x55ac936be520" />
+                    <rotationref ref="_161_rot_0x55ac936be520" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_162_pos_0x55ac936be700" />
+                    <rotationref ref="_162_rot_0x55ac936be700" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_163_pos_0x55ac936be8e0" />
+                    <rotationref ref="_163_rot_0x55ac936be8e0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_164_pos_0x55ac936beac0" />
+                    <rotationref ref="_164_rot_0x55ac936beac0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_165_pos_0x55ac936beca0" />
+                    <rotationref ref="_165_rot_0x55ac936beca0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_166_pos_0x55ac936bee80" />
+                    <rotationref ref="_166_rot_0x55ac936bee80" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_167_pos_0x55ac936bf060" />
+                    <rotationref ref="_167_rot_0x55ac936bf060" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_168_pos_0x55ac936bf240" />
+                    <rotationref ref="_168_rot_0x55ac936bf240" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_169_pos_0x55ac936bf420" />
+                    <rotationref ref="_169_rot_0x55ac936bf420" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_170_pos_0x55ac936bf600" />
+                    <rotationref ref="_170_rot_0x55ac936bf600" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_171_pos_0x55ac936bf7e0" />
+                    <rotationref ref="_171_rot_0x55ac936bf7e0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_172_pos_0x55ac936bf9c0" />
+                    <rotationref ref="_172_rot_0x55ac936bf9c0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_173_pos_0x55ac936bfba0" />
+                    <rotationref ref="_173_rot_0x55ac936bfba0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_174_pos_0x55ac936bfd80" />
+                    <rotationref ref="_174_rot_0x55ac936bfd80" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_175_pos_0x55ac936bff60" />
+                    <rotationref ref="_175_rot_0x55ac936bff60" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_176_pos_0x55ac936c0140" />
+                    <rotationref ref="_176_rot_0x55ac936c0140" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_177_pos_0x55ac936c0320" />
+                    <rotationref ref="_177_rot_0x55ac936c0320" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_178_pos_0x55ac936c0500" />
+                    <rotationref ref="_178_rot_0x55ac936c0500" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_179_pos_0x55ac936c06e0" />
+                    <rotationref ref="_179_rot_0x55ac936c06e0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_180_pos_0x55ac936c08c0" />
+                    <rotationref ref="_180_rot_0x55ac936c08c0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_181_pos_0x55ac936c0aa0" />
+                    <rotationref ref="_181_rot_0x55ac936c0aa0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_182_pos_0x55ac936c0c80" />
+                    <rotationref ref="_182_rot_0x55ac936c0c80" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_183_pos_0x55ac936c0e60" />
+                    <rotationref ref="_183_rot_0x55ac936c0e60" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_184_pos_0x55ac936c1040" />
+                    <rotationref ref="_184_rot_0x55ac936c1040" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_185_pos_0x55ac936c1220" />
+                    <rotationref ref="_185_rot_0x55ac936c1220" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_186_pos_0x55ac936c1400" />
+                    <rotationref ref="_186_rot_0x55ac936c1400" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_187_pos_0x55ac936c15e0" />
+                    <rotationref ref="_187_rot_0x55ac936c15e0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_188_pos_0x55ac936c17c0" />
+                    <rotationref ref="_188_rot_0x55ac936c17c0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_189_pos_0x55ac936c19a0" />
+                    <rotationref ref="_189_rot_0x55ac936c19a0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_190_pos_0x55ac936c1b80" />
+                    <rotationref ref="_190_rot_0x55ac936c1b80" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_191_pos_0x55ac936c1d60" />
+                    <rotationref ref="_191_rot_0x55ac936c1d60" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_192_pos_0x55ac936c1f40" />
+                    <rotationref ref="_192_rot_0x55ac936c1f40" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_193_pos_0x55ac936c2120" />
+                    <rotationref ref="_193_rot_0x55ac936c2120" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_194_pos_0x55ac936c2300" />
+                    <rotationref ref="_194_rot_0x55ac936c2300" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_195_pos_0x55ac936c24e0" />
+                    <rotationref ref="_195_rot_0x55ac936c24e0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_196_pos_0x55ac936c26c0" />
+                    <rotationref ref="_196_rot_0x55ac936c26c0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_197_pos_0x55ac936c28a0" />
+                    <rotationref ref="_197_rot_0x55ac936c28a0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_198_pos_0x55ac936c2a80" />
+                    <rotationref ref="_198_rot_0x55ac936c2a80" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_199_pos_0x55ac936c2c60" />
+                    <rotationref ref="_199_rot_0x55ac936c2c60" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_200_pos_0x55ac936c2e40" />
+                    <rotationref ref="_200_rot_0x55ac936c2e40" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_201_pos_0x55ac936c3020" />
+                    <rotationref ref="_201_rot_0x55ac936c3020" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_202_pos_0x55ac936c3200" />
+                    <rotationref ref="_202_rot_0x55ac936c3200" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_203_pos_0x55ac936c33e0" />
+                    <rotationref ref="_203_rot_0x55ac936c33e0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_204_pos_0x55ac936c35c0" />
+                    <rotationref ref="_204_rot_0x55ac936c35c0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_205_pos_0x55ac936c37a0" />
+                    <rotationref ref="_205_rot_0x55ac936c37a0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_206_pos_0x55ac936c3980" />
+                    <rotationref ref="_206_rot_0x55ac936c3980" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_207_pos_0x55ac936c3b60" />
+                    <rotationref ref="_207_rot_0x55ac936c3b60" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_208_pos_0x55ac936c3d40" />
+                    <rotationref ref="_208_rot_0x55ac936c3d40" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_209_pos_0x55ac936c3f20" />
+                    <rotationref ref="_209_rot_0x55ac936c3f20" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_210_pos_0x55ac936c4100" />
+                    <rotationref ref="_210_rot_0x55ac936c4100" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_211_pos_0x55ac936c42e0" />
+                    <rotationref ref="_211_rot_0x55ac936c42e0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_212_pos_0x55ac936c44c0" />
+                    <rotationref ref="_212_rot_0x55ac936c44c0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_213_pos_0x55ac936c46a0" />
+                    <rotationref ref="_213_rot_0x55ac936c46a0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_214_pos_0x55ac936c4880" />
+                    <rotationref ref="_214_rot_0x55ac936c4880" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_215_pos_0x55ac936c4a60" />
+                    <rotationref ref="_215_rot_0x55ac936c4a60" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_216_pos_0x55ac936c4c40" />
+                    <rotationref ref="_216_rot_0x55ac936c4c40" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_217_pos_0x55ac936c4e20" />
+                    <rotationref ref="_217_rot_0x55ac936c4e20" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_218_pos_0x55ac936c5000" />
+                    <rotationref ref="_218_rot_0x55ac936c5000" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_219_pos_0x55ac936c51e0" />
+                    <rotationref ref="_219_rot_0x55ac936c51e0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_220_pos_0x55ac936c53c0" />
+                    <rotationref ref="_220_rot_0x55ac936c53c0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_221_pos_0x55ac936c55a0" />
+                    <rotationref ref="_221_rot_0x55ac936c55a0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_222_pos_0x55ac936c5780" />
+                    <rotationref ref="_222_rot_0x55ac936c5780" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_223_pos_0x55ac936c5960" />
+                    <rotationref ref="_223_rot_0x55ac936c5960" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_224_pos_0x55ac936c5b40" />
+                    <rotationref ref="_224_rot_0x55ac936c5b40" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_225_pos_0x55ac936c5d20" />
+                    <rotationref ref="_225_rot_0x55ac936c5d20" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_226_pos_0x55ac936c5f00" />
+                    <rotationref ref="_226_rot_0x55ac936c5f00" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_227_pos_0x55ac936c60e0" />
+                    <rotationref ref="_227_rot_0x55ac936c60e0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_228_pos_0x55ac936c62c0" />
+                    <rotationref ref="_228_rot_0x55ac936c62c0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_229_pos_0x55ac936c64a0" />
+                    <rotationref ref="_229_rot_0x55ac936c64a0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_230_pos_0x55ac936c6680" />
+                    <rotationref ref="_230_rot_0x55ac936c6680" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_231_pos_0x55ac936c6860" />
+                    <rotationref ref="_231_rot_0x55ac936c6860" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_232_pos_0x55ac936c6a40" />
+                    <rotationref ref="_232_rot_0x55ac936c6a40" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_233_pos_0x55ac936c6c20" />
+                    <rotationref ref="_233_rot_0x55ac936c6c20" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_234_pos_0x55ac936c6e00" />
+                    <rotationref ref="_234_rot_0x55ac936c6e00" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_235_pos_0x55ac936c6fe0" />
+                    <rotationref ref="_235_rot_0x55ac936c6fe0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_236_pos_0x55ac936c71c0" />
+                    <rotationref ref="_236_rot_0x55ac936c71c0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_237_pos_0x55ac936c73a0" />
+                    <rotationref ref="_237_rot_0x55ac936c73a0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_238_pos_0x55ac936c7580" />
+                    <rotationref ref="_238_rot_0x55ac936c7580" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_239_pos_0x55ac936c7760" />
+                    <rotationref ref="_239_rot_0x55ac936c7760" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_240_pos_0x55ac936c7940" />
+                    <rotationref ref="_240_rot_0x55ac936c7940" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_241_pos_0x55ac936c7b20" />
+                    <rotationref ref="_241_rot_0x55ac936c7b20" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_242_pos_0x55ac936c7d00" />
+                    <rotationref ref="_242_rot_0x55ac936c7d00" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_243_pos_0x55ac936c7ee0" />
+                    <rotationref ref="_243_rot_0x55ac936c7ee0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_244_pos_0x55ac936c80c0" />
+                    <rotationref ref="_244_rot_0x55ac936c80c0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_245_pos_0x55ac936c82a0" />
+                    <rotationref ref="_245_rot_0x55ac936c82a0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_246_pos_0x55ac936c8480" />
+                    <rotationref ref="_246_rot_0x55ac936c8480" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_247_pos_0x55ac936c8660" />
+                    <rotationref ref="_247_rot_0x55ac936c8660" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_248_pos_0x55ac936c8840" />
+                    <rotationref ref="_248_rot_0x55ac936c8840" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_249_pos_0x55ac936c8a20" />
+                    <rotationref ref="_249_rot_0x55ac936c8a20" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_250_pos_0x55ac936c8c00" />
+                    <rotationref ref="_250_rot_0x55ac936c8c00" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_251_pos_0x55ac936b8dd0" />
+                    <rotationref ref="_251_rot_0x55ac936b8dd0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_252_pos_0x55ac936b8fb0" />
+                    <rotationref ref="_252_rot_0x55ac936b8fb0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_253_pos_0x55ac936b9190" />
+                    <rotationref ref="_253_rot_0x55ac936b9190" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_254_pos_0x55ac936b9370" />
+                    <rotationref ref="_254_rot_0x55ac936b9370" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_255_pos_0x55ac936b9550" />
+                    <rotationref ref="_255_rot_0x55ac936b9550" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_256_pos_0x55ac936b9730" />
+                    <rotationref ref="_256_rot_0x55ac936b9730" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_257_pos_0x55ac936b9910" />
+                    <rotationref ref="_257_rot_0x55ac936b9910" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_258_pos_0x55ac936b9af0" />
+                    <rotationref ref="_258_rot_0x55ac936b9af0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_259_pos_0x55ac936ba110" />
+                    <rotationref ref="_259_rot_0x55ac936ba110" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_260_pos_0x55ac936ba2f0" />
+                    <rotationref ref="_260_rot_0x55ac936ba2f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_261_pos_0x55ac936ba4d0" />
+                    <rotationref ref="_261_rot_0x55ac936ba4d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_262_pos_0x55ac936ba6b0" />
+                    <rotationref ref="_262_rot_0x55ac936ba6b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_263_pos_0x55ac936cbc90" />
+                    <rotationref ref="_263_rot_0x55ac936cbc90" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_264_pos_0x55ac936cbe70" />
+                    <rotationref ref="_264_rot_0x55ac936cbe70" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_265_pos_0x55ac936cc050" />
+                    <rotationref ref="_265_rot_0x55ac936cc050" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_266_pos_0x55ac936cc230" />
+                    <rotationref ref="_266_rot_0x55ac936cc230" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_267_pos_0x55ac936cc410" />
+                    <rotationref ref="_267_rot_0x55ac936cc410" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_268_pos_0x55ac936cc5f0" />
+                    <rotationref ref="_268_rot_0x55ac936cc5f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_269_pos_0x55ac936cc7d0" />
+                    <rotationref ref="_269_rot_0x55ac936cc7d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_270_pos_0x55ac936cc9b0" />
+                    <rotationref ref="_270_rot_0x55ac936cc9b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_271_pos_0x55ac936ccb90" />
+                    <rotationref ref="_271_rot_0x55ac936ccb90" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_272_pos_0x55ac936ccd70" />
+                    <rotationref ref="_272_rot_0x55ac936ccd70" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_273_pos_0x55ac936ccf50" />
+                    <rotationref ref="_273_rot_0x55ac936ccf50" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_274_pos_0x55ac936cd130" />
+                    <rotationref ref="_274_rot_0x55ac936cd130" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_275_pos_0x55ac936cd310" />
+                    <rotationref ref="_275_rot_0x55ac936cd310" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_276_pos_0x55ac936cd4f0" />
+                    <rotationref ref="_276_rot_0x55ac936cd4f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_277_pos_0x55ac936cd6d0" />
+                    <rotationref ref="_277_rot_0x55ac936cd6d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_278_pos_0x55ac936cd8b0" />
+                    <rotationref ref="_278_rot_0x55ac936cd8b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_279_pos_0x55ac936cda90" />
+                    <rotationref ref="_279_rot_0x55ac936cda90" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_280_pos_0x55ac936cdc70" />
+                    <rotationref ref="_280_rot_0x55ac936cdc70" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_281_pos_0x55ac936cde50" />
+                    <rotationref ref="_281_rot_0x55ac936cde50" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_282_pos_0x55ac936ce030" />
+                    <rotationref ref="_282_rot_0x55ac936ce030" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_283_pos_0x55ac936ce210" />
+                    <rotationref ref="_283_rot_0x55ac936ce210" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_284_pos_0x55ac936ce3f0" />
+                    <rotationref ref="_284_rot_0x55ac936ce3f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_285_pos_0x55ac936ce5d0" />
+                    <rotationref ref="_285_rot_0x55ac936ce5d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_286_pos_0x55ac936ce7b0" />
+                    <rotationref ref="_286_rot_0x55ac936ce7b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_287_pos_0x55ac936ce990" />
+                    <rotationref ref="_287_rot_0x55ac936ce990" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_288_pos_0x55ac936ceb70" />
+                    <rotationref ref="_288_rot_0x55ac936ceb70" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_289_pos_0x55ac936ced50" />
+                    <rotationref ref="_289_rot_0x55ac936ced50" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_290_pos_0x55ac936cef30" />
+                    <rotationref ref="_290_rot_0x55ac936cef30" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_291_pos_0x55ac936cf110" />
+                    <rotationref ref="_291_rot_0x55ac936cf110" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_292_pos_0x55ac936cf2f0" />
+                    <rotationref ref="_292_rot_0x55ac936cf2f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_293_pos_0x55ac936cf4d0" />
+                    <rotationref ref="_293_rot_0x55ac936cf4d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_294_pos_0x55ac936cf6b0" />
+                    <rotationref ref="_294_rot_0x55ac936cf6b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_295_pos_0x55ac936cf890" />
+                    <rotationref ref="_295_rot_0x55ac936cf890" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_296_pos_0x55ac936cfa70" />
+                    <rotationref ref="_296_rot_0x55ac936cfa70" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_297_pos_0x55ac936cfc50" />
+                    <rotationref ref="_297_rot_0x55ac936cfc50" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_298_pos_0x55ac936cfe30" />
+                    <rotationref ref="_298_rot_0x55ac936cfe30" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_299_pos_0x55ac936d0010" />
+                    <rotationref ref="_299_rot_0x55ac936d0010" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_300_pos_0x55ac936d01f0" />
+                    <rotationref ref="_300_rot_0x55ac936d01f0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_301_pos_0x55ac936d03d0" />
+                    <rotationref ref="_301_rot_0x55ac936d03d0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_302_pos_0x55ac936d05b0" />
+                    <rotationref ref="_302_rot_0x55ac936d05b0" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_303_pos_0x55ac936d0790" />
+                    <rotationref ref="_303_rot_0x55ac936d0790" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="_0x55ac9360a4e0" />
+                    <positionref ref="_304_pos_0x55ac936d0970" />
+                    <rotationref ref="_304_rot_0x55ac936d0970" />
+                </physvol>
+            </assembly>
+            <volume name="world_volume_0x55ac933705d0">
+                <materialref ref="Air" />
+                <solidref ref="world_volume_shape_0x55ac93644400" />
+                <physvol>
+                    <volumeref ref="_0x55ac9360ec70" />
+                    <positionref ref="identity_pos" />
+                </physvol>
+                <physvol>
+                    <volumeref ref="PMT_type1_0x55ac9361af00" />
+                    <positionref ref="identity_pos" />
+                    <physvolid field_name="system" value="80" />
+                    <physvolid field_name="pmt" value="1" />
+                </physvol>
+                <visref ref="WorldVis" />
+            </volume>
+        </structure>
+        <setup name="default" version="1.0">
+            <world ref="world_volume_0x55ac933705d0" />
+        </setup>
+    </gdml>
+    <fields />
+</description>

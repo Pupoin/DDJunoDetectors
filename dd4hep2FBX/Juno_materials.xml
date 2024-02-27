@@ -1,0 +1,396 @@
+<lccdd>
+  <!--
+       copy materials section from /cvmfs/juno.ihep.ac.cn/centos7_amd64_gcc1120/Pre-Release/J23.1.x/data/Detector/Geometry/share/JunoGeom.gdml
+
+       delete line including <property.*>\n
+       delete 0x...... in name
+
+       Zhaoyang Yuan, 2023-07-28
+
+  -->
+  <properties>
+    <!-- HamamatsuR12860_PMT_20inch_Photocathode_opsurf -->
+    <matrix coldim="2" name="RINDEX0x660a7b0" values="3.26274e-06 1.92 4.13e-06 1.49 4.96e-06 0.564 1.55e-05 0.88"/>
+    <matrix coldim="2" name="REFLECTIVITY0x660b030" values="1.55e-06 0 6.2e-06 0 1.033e-05 0 1.55e-05 0"/>
+    <matrix coldim="2" name="EFFICIENCY0x660b200" values="1.55e-06 1 1.55e-05 1"/>
+    <matrix coldim="2" name="GROUPVEL0x660a8f0" values="3.26274e-06 156.142 3.69637e-06 175.831 4.545e-06 291.911 1.55e-05 259.038"/>
+    <matrix coldim="2" name="KINDEX0x660a9f0" values="3.26274e-06 1.69 4.13e-06 2 4.96e-06 1.79 1.55e-05 1.79"/>
+    <matrix coldim="2" name="THICKNESS0x660b3b0" values="0 2.6e-05 375 2.6e-05"/>
+    <!-- NNVTMCPPMT_PMT_20inch_Photocathode_opsurf -->
+    <matrix coldim="2" name="RINDEX0x66068c0" values="3.26274e-06 1.92 4.13e-06 1.49 4.96e-06 0.564 1.55e-05 0.88"/>
+    <matrix coldim="2" name="REFLECTIVITY0x66070a0" values="1.55e-06 0 6.2e-06 0 1.033e-05 0 1.55e-05 0"/>
+    <matrix coldim="2" name="EFFICIENCY0x6607db0" values="1.55e-06 1 1.55e-05 1"/>
+    <matrix coldim="2" name="GROUPVEL0x66069d0" values="3.26274e-06 156.142 3.69637e-06 175.831 4.545e-06 291.911 1.55e-05 259.038"/>
+    <matrix coldim="2" name="KINDEX0x6606f40" values="3.26274e-06 1.69 4.13e-06 2 4.96e-06 1.79 1.55e-05 1.79"/>
+    <matrix coldim="2" name="THICKNESS0x6607200" values="0 2.6e-05 375 2.6e-05"/>
+    <!-- Photocathode_opsurf_3inch -->
+    <matrix coldim="2" name="RINDEX0x6604740" values="1.55e-06 2.9 6.2e-06 2.9 1.033e-05 2.9 1.55e-05 2.9"/>
+    <matrix coldim="2" name="REFLECTIVITY0x6604590" values="1.55e-06 0 6.2e-06 0 1.033e-05 0 1.55e-05 0"/>
+    <matrix coldim="2" name="EFFICIENCY0x6605000" values="1.55e-06 1 1.55e-05 1"/>
+    <matrix coldim="2" name="GROUPVEL0x6604ca0" values="1.55e-06 103.377 3.875e-06 103.377 8.265e-06 103.377 1.55e-05 103.377"/>
+    <matrix coldim="2" name="KINDEX0x6604de0" values="1.55e-06 1.6 6.2e-06 1.6 1.033e-05 1.6 1.55e-05 1.6"/>
+    <matrix coldim="2" name="THICKNESS0x6605270" values="0 2.6e-05 375 2.6e-05"/>
+
+    <!-- test -->
+    <matrix name="RINDEX__Acrylic_PFRICH" coldim="2" values="
+      4.13281*eV  1.5017
+      4.22099*eV  1.5017
+      4.30916*eV  1.5017
+      4.39734*eV  1.5017
+      4.48552*eV  1.5017
+      4.57369*eV  1.5017
+      4.66187*eV  1.5017
+      4.75005*eV  1.5017
+      4.83822*eV  1.5017
+      4.9264*eV   1.5017
+      5.01458*eV  1.5017
+      5.10275*eV  1.5017
+      5.19093*eV  1.5017
+      5.27911*eV  1.5017
+      5.36728*eV  1.5017
+      5.45546*eV  1.5017
+      5.54364*eV  1.5017
+      5.63181*eV  1.5017
+      5.71999*eV  1.5017
+      5.80817*eV  1.5017
+      5.89634*eV  1.5017
+      5.98452*eV  1.5017
+      6.0727*eV   1.5017
+      6.16087*eV  1.5017
+      6.24905*eV  1.5017
+      6.33723*eV  1.5017
+      6.4254*eV   1.5017
+      6.51358*eV  1.5017
+      6.60176*eV  1.5017
+      6.68993*eV  1.5017
+      6.77811*eV  1.5017
+      6.86629*eV  1.5017
+      6.95446*eV  1.5017
+      7.04264*eV  1.5017
+      7.13082*eV  1.5017
+      7.21899*eV  1.5017
+      7.30717*eV  1.5017
+      7.39535*eV  1.5017
+      7.48353*eV  1.5017
+      7.5717*eV   1.5017
+      7.65988*eV  1.5017
+      7.74806*eV  1.5017
+      7.83623*eV  1.5017
+      7.92441*eV  1.5017
+      8.01259*eV  1.5017
+      8.10076*eV  1.5017
+      8.18894*eV  1.5017
+      8.27712*eV  1.5017
+      8.36529*eV  1.5017
+      8.45347*eV  1.5017
+      "/>
+    <matrix name="ABSLENGTH__Acrylic_PFRICH" coldim="2" values="
+      4.13281*eV  82.0704*mm
+      4.22099*eV  36.9138*mm
+      4.30916*eV  13.3325*mm
+      4.39734*eV  5.03627*mm
+      4.48552*eV  2.3393*mm
+      4.57369*eV  1.36177*mm
+      4.66187*eV  0.933192*mm
+      4.75005*eV  0.708268*mm
+      4.83822*eV  0.573082*mm
+      4.9264*eV   0.483641*mm
+      5.01458*eV  0.420282*mm
+      5.10275*eV  0.373102*mm
+      5.19093*eV  0.33662*mm
+      5.27911*eV  0.307572*mm
+      5.36728*eV  0.283902*mm
+      5.45546*eV  0.264235*mm
+      5.54364*eV  0.247641*mm
+      5.63181*eV  0.233453*mm
+      5.71999*eV  0.221177*mm
+      5.80817*eV  0.210456*mm
+      5.89634*eV  0.201012*mm
+      5.98452*eV  0.192627*mm
+      6.0727*eV   0.185134*mm
+      6.16087*eV  0.178399*mm
+      6.24905*eV  0.172309*mm
+      6.33723*eV  0.166779*mm
+      6.4254*eV   0.166779*mm
+      6.51358*eV  0.166779*mm
+      6.60176*eV  0.166779*mm
+      6.68993*eV  0.166779*mm
+      6.77811*eV  0.166779*mm
+      6.86629*eV  0.166779*mm
+      6.95446*eV  0.166779*mm
+      7.04264*eV  0.166779*mm
+      7.13082*eV  0.166779*mm
+      7.21899*eV  0.166779*mm
+      7.30717*eV  0.166779*mm
+      7.39535*eV  0.166779*mm
+      7.48353*eV  0.166779*mm
+      7.5717*eV   0.166779*mm
+      7.65988*eV  0.166779*mm
+      7.74806*eV  0.166779*mm
+      7.83623*eV  0.166779*mm
+      7.92441*eV  0.166779*mm
+      8.01259*eV  0.166779*mm
+      8.10076*eV  0.166779*mm
+      8.18894*eV  0.166779*mm
+      8.27712*eV  0.166779*mm
+      8.36529*eV  0.166779*mm
+      8.45347*eV  0.166779*mm
+      "/>
+  
+  
+  
+  </properties>
+
+  <!-- ********** I am surface ********** -->
+  <surfaces>
+    <opticalsurface finish="0" model="0" name="HamamatsuR12860_PMT_20inch_Photocathode_opsurf" type="0" value="1">
+      <property name="RINDEX" ref="RINDEX0x660a7b0"/>
+      <property name="REFLECTIVITY" ref="REFLECTIVITY0x660b030"/>
+      <property name="EFFICIENCY" ref="EFFICIENCY0x660b200"/>
+      <property name="GROUPVEL" ref="GROUPVEL0x660a8f0"/>
+      <property name="KINDEX" ref="KINDEX0x660a9f0"/>
+      <property name="THICKNESS" ref="THICKNESS0x660b3b0"/>
+    </opticalsurface>
+
+    <opticalsurface finish="0" model="0" name="NNVTMCPPMT_PMT_20inch_Photocathode_opsurf" type="0" value="1">
+      <property name="RINDEX" ref="RINDEX0x66068c0"/>
+      <property name="REFLECTIVITY" ref="REFLECTIVITY0x66070a0"/>
+      <property name="EFFICIENCY" ref="EFFICIENCY0x6607db0"/>
+      <property name="GROUPVEL" ref="GROUPVEL0x66069d0"/>
+      <property name="KINDEX" ref="KINDEX0x6606f40"/>
+      <property name="THICKNESS" ref="THICKNESS0x6607200"/>
+    </opticalsurface>
+
+    <opticalsurface finish="0" model="0" name="Photocathode_opsurf_3inch" type="0" value="1">
+      <property name="RINDEX" ref="RINDEX0x6604740"/>
+      <property name="REFLECTIVITY" ref="REFLECTIVITY0x6604590"/>
+      <property name="EFFICIENCY" ref="EFFICIENCY0x6605000"/>
+      <property name="GROUPVEL" ref="GROUPVEL0x6604ca0"/>
+      <property name="KINDEX" ref="KINDEX0x6604de0"/>
+      <property name="THICKNESS" ref="THICKNESS0x6605270"/>
+    </opticalsurface>
+
+
+  </surfaces>
+
+  <!-- ********** I am materials ********** -->
+  <materials>
+ 
+    <material name="Air" state="gas">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="85.6717540366814"/>
+      <D unit="g/cm3" value="0.001205"/>
+      <fraction n="0.755" ref="Nitrogen"/>
+      <fraction n="0.2321" ref="Oxygen"/>
+      <fraction n="0.0128" ref="Argon"/>
+      <fraction n="0.0001" ref="Carbon"/>
+    </material>
+
+
+    <material name="Rock" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="129.971753019961"/>
+      <D unit="g/cm3" value="2.7"/>
+      <fraction n="0.485" ref="Oxygen"/>
+      <fraction n="0.343" ref="Silicon"/>
+      <fraction n="0.08" ref="Aluminium"/>
+      <fraction n="0.02" ref="Iron"/>
+      <fraction n="0.001" ref="Magnesium"/>
+      <fraction n="0.002" ref="Calcium"/>
+      <fraction n="0.024" ref="Sodium"/>
+      <fraction n="0.045" ref="Potassium"/>
+    </material>
+
+    <material name="Galactic" state="gas">
+      <T unit="K" value="2.73"/>
+      <P unit="pascal" value="3e-18"/>
+      <MEE unit="eV" value="19.2"/>
+      <D unit="g/cm3" value="1e-25"/>
+      <fraction n="1" ref="H"/>
+    </material>
+
+    <material name="Steel" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="280.330055108221"/>
+      <D unit="g/cm3" value="8.1"/>
+      <fraction n="0.70845" ref="Iron"/>
+      <fraction n="0.0008" ref="Carbon"/>
+      <fraction n="0.02" ref="Mn"/>
+      <fraction n="0.00045" ref="Phosphorus"/>
+      <fraction n="0.0003" ref="Sulfur"/>
+      <fraction n="0.01" ref="Silicon"/>
+      <fraction n="0.18" ref="Cr"/>
+      <fraction n="0.08" ref="Ni"/>
+    </material>
+
+     <material name="LS" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="59.6228860352502"/>
+      <D unit="g/cm3" value="0.859"/>
+      <fraction n="0.87924" ref="TS_C_of_Graphite"/>
+      <fraction n="0.1201" ref="TS_H_of_Water"/>
+      <fraction n="0.00034" ref="Oxygen"/>
+      <fraction n="0.00027" ref="Nitrogen"/>
+      <fraction n="5e-05" ref="Sulfur"/>
+    </material>
+
+    <material name="Tyvek" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="56.5182975271737"/>
+      <D unit="g/cm3" value="0.94"/>
+      <fraction n="0.856022808267997" ref="Carbon"/>
+      <fraction n="0.143977191732003" ref="Hydrogen"/>
+    </material>
+    <material name="Scintillator" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="64.6844741120544"/>
+      <D unit="g/cm3" value="1.032"/>
+      <fraction n="0.0854556223030713" ref="Hydrogen"/>
+      <fraction n="0.914544377696929" ref="Carbon"/>
+    </material>
+
+        <material name="TiO2Coating" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="76.1184412056185"/>
+      <D unit="g/cm3" value="1.21"/>
+      <fraction n="0.119866778519288" ref="Titanium"/>
+      <fraction n="0.0801332214807117" ref="Oxygen"/>
+      <fraction n="0.0683644978424571" ref="Hydrogen"/>
+      <fraction n="0.731635502157543" ref="Carbon"/>
+    </material>
+    <material name="Adhesive" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="64.6844741120546"/>
+      <D unit="g/cm3" value="0.1"/>
+      <fraction n="0.0854556223030713" ref="Hydrogen"/>
+      <fraction n="0.914544377696929" ref="Carbon"/>
+    </material>
+    <material Z="13" name="Aluminium" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="166"/>
+      <D unit="g/cm3" value="2.7"/>
+      <atom unit="g/mole" value="26.98"/>
+    </material>
+    <material name="LatticedShellSteel" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="280.330055108221"/>
+      <D unit="g/cm3" value="8.1"/>
+      <fraction n="0.70845" ref="Iron"/>
+      <fraction n="0.0008" ref="Carbon"/>
+      <fraction n="0.02" ref="Mn"/>
+      <fraction n="0.00045" ref="Phosphorus"/>
+      <fraction n="0.0003" ref="Sulfur"/>
+      <fraction n="0.01" ref="Silicon"/>
+      <fraction n="0.18" ref="Cr"/>
+      <fraction n="0.08" ref="Ni"/>
+    </material>
+    <material name="Acrylic" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="68.6339531278178"/>
+      <D unit="g/cm3" value="1.18"/>
+      <fraction n="0.59984" ref="TS_C_of_Graphite"/>
+      <fraction n="0.08055" ref="TS_H_of_Polyethylene"/>
+      <fraction n="0.31961" ref="Oxygen"/>
+      <property name="RINDEX"    ref="RINDEX__Acrylic_PFRICH"/>
+      <property name="ABSLENGTH" ref="ABSLENGTH__Acrylic_PFRICH"/>
+    </material>
+    <material name="PE_PA" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="80.8782390529315"/>
+      <D unit="g/cm3" value="0.96"/>
+      <fraction n="0.69906868451688" ref="Carbon"/>
+      <fraction n="0.135913853317811" ref="Nitrogen"/>
+      <fraction n="0.00979821497865735" ref="Hydrogen"/>
+      <fraction n="0.155219247186651" ref="Oxygen"/>
+    </material>
+    <material name="StrutSteel" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="280.330055108221"/>
+      <D unit="g/cm3" value="8.1"/>
+      <fraction n="0.70845" ref="Iron"/>
+      <fraction n="0.0008" ref="Carbon"/>
+      <fraction n="0.02" ref="Mn"/>
+      <fraction n="0.00045" ref="Phosphorus"/>
+      <fraction n="0.0003" ref="Sulfur"/>
+      <fraction n="0.01" ref="Silicon"/>
+      <fraction n="0.18" ref="Cr"/>
+      <fraction n="0.08" ref="Ni"/>
+    </material>
+    <material name="AcrylicMask" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="68.6339531278178"/>
+      <D unit="g/cm3" value="1.18"/>
+      <fraction n="0.59984" ref="TS_C_of_Graphite"/>
+      <fraction n="0.08055" ref="TS_H_of_Polyethylene"/>
+      <fraction n="0.31961" ref="Oxygen"/>
+    </material>
+    <material name="CDReflectorSteel" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="280.330055108221"/>
+      <D unit="g/cm3" value="8.1"/>
+      <fraction n="0.70845" ref="Iron"/>
+      <fraction n="0.0008" ref="Carbon"/>
+      <fraction n="0.02" ref="Mn"/>
+      <fraction n="0.00045" ref="Phosphorus"/>
+      <fraction n="0.0003" ref="Sulfur"/>
+      <fraction n="0.01" ref="Silicon"/>
+      <fraction n="0.18" ref="Cr"/>
+      <fraction n="0.08" ref="Ni"/>
+    </material>
+    <material name="Vacuum" state="gas">
+      <P unit="pascal" value="785.46511627907"/>
+      <MEE unit="eV" value="85.6717540366814"/>
+      <D unit="g/cm3" value="1e-05"/>
+      <fraction n="0.755" ref="Nitrogen"/>
+      <fraction n="0.2321" ref="Oxygen"/>
+      <fraction n="0.0128" ref="Argon"/>
+      <fraction n="0.0001" ref="Carbon"/>
+    </material>
+    <material name="Pyrex" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="120.375141926703"/>
+      <D unit="g/cm3" value="2.23"/>
+      <fraction n="0.373972374771177" ref="Silicon"/>
+      <fraction n="0.521678202337138" ref="Oxygen"/>
+      <fraction n="0.0524199022789154" ref="Boron"/>
+      <fraction n="0.05192952061277" ref="Sodium"/>
+    </material>
+    <material name="Water" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="68.9984174679527"/>
+      <D unit="g/cm3" value="1"/>
+      <fraction n="0.112097669256382" ref="Hydrogen"/>
+      <fraction n="0.887902330743618" ref="Oxygen"/>
+    </material>
+    <material name="Teflon" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="87.8191047657801"/>
+      <D unit="g/cm3" value="2.2"/>
+      <fraction n="0.759814" ref="Carbon"/>
+      <fraction n="0.240186" ref="Fluorine"/>
+    </material>
+    <material name="vetoWater" state="solid">
+      <T unit="K" value="293.15"/>
+      <MEE unit="eV" value="68.9984174679527"/>
+      <D unit="g/cm3" value="1"/>
+      <fraction n="0.112097669256382" ref="Hydrogen"/>
+      <fraction n="0.887902330743618" ref="Oxygen"/>
+    </material>
+
+    <!-- add by Zhaoyang Yuan manually 2023-07-28 
+      junosw/Simulation/DetSimV2/DetSimOptions/src/LSExpDetectorConstructionMaterial.icc
+    -->
+    <material name="LAB" state="solid">
+      <D unit="g/cm3" value="0.859"/>
+      <fraction n="0.87924"  ref="TS_C_of_Graphite"/>
+      <fraction n="0.1201"   ref="TS_H_of_Water"/>
+      <fraction n="0.00034"  ref="O"/>
+      <fraction n="0.00027"  ref="N"/>
+      <fraction n="0.00005"  ref="S"/>
+    </material>
+
+
+  </materials>
+
+
+</lccdd>

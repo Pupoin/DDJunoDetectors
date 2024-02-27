@@ -1,0 +1,29 @@
+<!-- ====================================================================== -->
+<!--                                                                        -->
+<!--    XML description of the water pool calorimeter endcap detector  -->
+<!--    of the SiD linear collider detector design.                         -->
+<!--                                                                        -->
+<!-- ====================================================================== -->
+
+
+      
+<detectors>
+
+
+  <detector  id="80" name="TopTrigger" type="DD4hep_TopTrigger" >
+  
+    <layer>
+
+      <box name="SingleTT" x="47 *m" y="20 *m"  z="3 *m" material="Air">
+        <position x="0" y="0" z="0" />
+      </box>
+    
+    </layer>
+
+    
+  
+  
+  </detector>
+
+
+</detectors>

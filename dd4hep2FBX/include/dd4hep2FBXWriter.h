@@ -58,7 +58,7 @@ private:
   // void assignName(std::vector<std::string>*, unsigned int, const G4String&, int);
   std::vector<std::string> assignName(std::vector<std::string> names, string originalName, unsigned int mindex);
   // get all children detectors of det, include children's children
-  void getAllChildren(DetElement det);
+  void getDets(DetElement det);
 
   // //! Write FBX definition for each solid's polyhedron
   // void writeGeometryNode(G4VSolid*, const std::string&, unsigned long long);
@@ -116,10 +116,14 @@ private:
   HepPolyhedron* getBooleanSolidPolyhedron(Solid solid);
 
 
+
+void getVolSolid(TGeoVolume *node);
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Detector mm_lcdd;
   string  m_filePath;
-  // std::vector<DetElement> m_childrenDet;
+  // std::vector<DetElement> m_det;
   DetElement m_world;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
   //! User-specified flag to select whether to write and re-use logical- and physical-volume
@@ -130,23 +134,26 @@ private:
   std::ofstream m_File;
 
   //! Modified (legal-character and unique) physical-volume name
-  std::vector<std::string> m_DetName;
+  std::vector<std::string> m_detName;
 
   //! Modified (legal-character and unique) logical-volume name
-  std::vector<std::string> m_VolName;
+  std::vector<std::string> m_volName;
 
   //! Modified (legal-character and unique) solid name
-  std::vector<std::string> m_SolidName;
+  std::vector<std::string> m_solidName;
 
 
   //! Modified (legal-character and unique) physical-volume 
-  std::vector<DetElement> m_childrenDet;
+  std::vector<DetElement> m_det;
 
   //! Modified (legal-character and unique) logical-volume 
-  std::vector<Volume> m_childrenVol;
+  // std::vector<Volume> m_childrenVol;
+  std::vector<TGeoVolume*> m_vol;
+  std::vector<TGeoShape*> m_solid;
+  // std::vector<TGeoVolume*> m_Vol;
 
   //! Modified (legal-character and unique) solid 
-  std::vector<Solid> m_childrenSolid;
+  // std::vector<Solid> m_childrenSolid;
 
 
   //! Unique identifiers for physical volumes (Model nodes with transformation information)
@@ -184,6 +191,10 @@ private:
 
   //! Flag to indicate that a logical volume is referenced at most once (eligible for bypass)
     std::vector<bool>* m_LVUnique;
+  
+  //! logical Vol = phyVol + phyVol + phyVol + .... , get the num of logVol children
+  std::vector<double> m_VolChildrenNum;
+
 
 };
 

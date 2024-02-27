@@ -1,0 +1,112 @@
+<!-- ====================================================================== -->
+<!--                                                                        -->
+<!--    XML description of the complete SiD tracker detector                -->
+<!--    of the SiD linear collider detector design.                         -->
+<!--                                                                        -->
+<!--    Contained are the required                                          -->
+<!--      ++ global constants used uniquely by this module                  -->
+<!--      ++ visualization attributes                                       -->
+<!--      ++ the definition of the readout structure and the                -->
+<!--         readout segmentation (if necessary)                            -->
+<!--      ++ the include statements for the sensitive detectors and         -->
+<!--         the corresponding support structure(s)                         -->
+<!--                                                                        -->
+<!--                                                                        -->
+<!--   @author  M.Frank                                                     -->
+<!--   @date    14/11/2014                                                  -->
+<!--   @pupoin                                                                     -->
+<!-- ====================================================================== -->
+
+<lccdd>
+
+  <info name="clic_sid_cdr"
+        title="CLIC Silicon Detector CDR"
+        author="Christian Grefe"
+        url="https://twiki.cern.ch/twiki/bin/view/CLIC/ClicSidCdr"
+        status="development"
+        version="$Id: compact.xml 1374 2014-11-05 10:49:55Z markus.frank@cern.ch $">
+    <comment>The compact format for the CLIC Silicon Detector used for the conceptual design report</comment>        
+  </info>
+
+
+  <comment>Common Generic visualization attributes</comment>
+  <display>
+    <!-- https://www.tug.org/pracjourn/2007-4/walden/color.pdf -->
+    <vis name="LiquidScintillatorVis"     alpha="0.5" r="1."  g="0."  b="0.0"  drawingStyle="solid" showDaughters="false" visible="true"/>
+    <vis name="AcrylicVesselVis"    alpha="0.5" r="0"  g="1."  b="0.0"  drawingStyle="solid" showDaughters="false" visible="true"/>
+    <!-- pmt vis -->
+    <vis name="pmtVis"     alpha="0.5" r="1."  g="0."  b="0.0" drawingStyle="solid" showDaughters="false" visible="true"/>
+    <vis name="bodyVis"    alpha="0.5" r="1"  g="0."  b="0.0"  drawingStyle="solid" showDaughters="true" visible="true"/>
+    <vis name="inner1Vis"  alpha=".5" r="0.99215686"  g="0.96078431"  b="0.90196078" drawingStyle="solid" showDaughters="false" visible="true"/>
+    <vis name="inner2Vis"  alpha=".5" r="0.94117647"  g="0.97254902"  b="1"  drawingStyle="solid" showDaughters="false" visible="true"/>
+    <!-- water pool vis -->
+    <vis name="WaterPoolVis"  alpha=".2" r="0.77647059"  g="0.88627451"  b="1"  drawingStyle="solid" showDaughters="true" visible="true"/>
+
+  </display>
+
+  <define>
+    <include ref="Juno_Constants.xml"/>
+  </define>
+  
+  <includes>
+    <!-- 
+      if delete line: <gdmlFile  ref="${DD4hepINSTALL}/.../elements.xml"/>
+      Fatal in <TGeoMixture::AddElement>: Cannot add element having Z=26 to mixture Rock 
+      need to check
+    -->
+    <gdmlFile ref="${DD4hepINSTALL}/DDDetectors/compact/elements.xml"/>
+    <gdmlFile ref="Juno_elements.xml"/>
+
+    <!-- /home/wln/junosw/Simulation/DetSimV2/DetSimOptions/src/LSExpDetectorConstructionMaterial.icc 
+         /home/wln/junosw/Doc/detsim/material.md
+    -->
+    <file  ref="Juno_materials.xml"/>
+  </includes>
+
+  <surfaces>
+    <opticalsurface name="/world/BubbleDevice#WaterSurface" finish="ground" model="unified" type="dielectric_dielectric">
+      <property name="RINDEX"                  coldim="2" values="2.034*eV  1.35  4.136*eV  1.40"/>
+      <property name="SPECULARLOBECONSTANT"    coldim="2" values="2.034*eV  0.3   4.136*eV  0.3 "/>
+      <property name="SPECULARSPIKECONSTANT"   coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
+      <property name="BACKSCATTERCONSTANT"     coldim="2" values="2.034*eV  0.2   4.136*eV  0.2 "/>
+    </opticalsurface>
+    <!-- <opticalsurface name="/world/BubbleDevice#WaterSurface" finish="Rough_LUT" model="DAVIS" type="dielectric_LUTDAVIS"/> -->
+    <opticalsurface name="/world/BubbleDevice#AirSurface" finish="polished" model="glisur" type="dielectric_dielectric">
+      <property name="REFLECTIVITY"            coldim="2" values="2.034*eV  0.3   4.136*eV  0.5"/>
+      <property name="EFFICIENCY"              coldim="2" values="2.034*eV  0.8   4.136*eV  1.0"/>
+    </opticalsurface>
+  </surfaces>
+  
+  <comment> Central Detector </comment>
+  <!-- <include ref="WaterPool.xml"/> -->
+  <!-- <include ref="CentralDetector.xml"/>  -->
+  <!-- <include ref="TopTrigger.xml"/> -->
+  <include ref="CentralDetector_PMT.xml"/>
+
+
+
+
+
+
+</lccdd>
+
+<!-- 
+/home/wln/DD4hep_source/DDCore/include/XML/UnicodeValues.h
+
+UNICODE (bordersurface); 
+UNICODE (material);
+UNICODE (materialref);
+UNICODE (materials);
+UNICODE (matrices);
+UNICODE (matrix);
+UNICODE (member);
+UNICODE (mesh);
+UNICODE (MeV);
+UNICODE (mm);
+UNICODE (model);
+UNICODE (module);
+UNICODE (modules);
+UNICODE (module_component);
+
+
+-->

@@ -1,0 +1,58 @@
+<!-- ====================================================================== -->
+<!--                                                                        -->
+<!--    XML description of the water pool calorimeter endcap detector  -->
+<!--    of the SiD linear collider detector design.                         -->
+<!--                                                                        -->
+<!-- ====================================================================== -->
+
+
+      
+<detectors>
+
+
+  <!-- <detector id="EcalEndcap_ID" name="EcalEndcap" type="DD4hep_PolyhedraEndcapCalorimeter2" reflect="true" readout="EcalEndcapHits" vis="EcalEndcapVis" calorimeterType="EM_ENDCAP"> -->
+  
+  <!-- 
+
+  LS_rmin (LS) LS_ramx  
+  Balloon_rmin  balloon_rmax
+        
+   -->
+
+  <detector  id="80" name="CentralDetector" type="DD4hep_CentralDetector" >
+  
+    <layer>
+
+      <sphere name="LiquidScintillator" rmin="LiquidScintillator_rmin" rmax="LiquidScintillator_rmax" starttheta="0" endtheta="1*pi" 
+        startphi="0" endphi="2*pi" x="0" y="0" z="0" material="LS" vis="LiquidScintillatorVis"/>
+
+      <!-- material: PA, FEP, PE_PA , 
+        PA, FEP need to be added in juno_materials.xml, check FEP in Juno_materials.xml
+        /home/wln/junosw/Simulation/DetSimV2/DetSimOptions/src/LSExpDetectorConstructionMaterial.icc
+      -->
+      <!-- <sphere name="Balloon" rmin="Balloon_rmin" rmax="Balloon_rmax" starttheta="0" endtheta="1*pi" 
+        startphi="0" endphi="2*pi" x="0" y="0" z="0" material="PE_PA" vis="BalloonVis"/> -->
+
+      <sphere name="SpaceInArylicAndBalloon" rmin="SpaceInArylicAndBalloon_rmin" rmax="SpaceInArylicAndBalloon_rmax" starttheta="0" endtheta="1*pi" 
+        startphi="0" endphi="2*pi" x="0" y="0" z="0" material="LAB" vis="SpaceInArylicAndBalloonVis"/>
+
+      <sphere name="AcrylicVessel" rmin="AcrylicVessel_rmin" rmax="AcrylicVessel_rmax" starttheta="0" endtheta="1*pi" 
+        startphi="0" endphi="2*pi" x="0" y="0" z="0" material="Acrylic" vis="AcrylicVesselVis"/>
+    
+      <sphere name="Lab" rmin="Lab_rmin" rmax="Lab_rmax" starttheta="0" endtheta="1*pi" 
+        startphi="0" endphi="2*pi" x="0" y="0" z="0" material="LAB" vis="LabVis"/>
+
+      <!-- not apply physical placement -->
+      <sphere name="Steel" rmin="Steel_rmin" rmax="Steel_rmax" starttheta="0" endtheta="1*pi" 
+        startphi="0" endphi="2*pi" x="0" y="0" z="0" material="Steel"/>
+    
+    </layer>
+
+  
+    
+  
+  
+  </detector>
+
+
+</detectors>

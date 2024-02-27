@@ -1,0 +1,81 @@
+  <define>
+    <constant name="world_side" value="50000*mm"/>
+    <constant name="world_x" value="world_side"/>
+    <constant name="world_y" value="world_side"/>
+    <constant name="world_z" value="world_side"/>
+    
+
+
+    <!-- 
+      ****************** C E N T R A L    D E T E C T O R  **************
+
+      /home/wln/junosw/Simulation/DetSimV2/CentralDetector/src/DetSim2Construction.cc func: initVariables() 
+      
+      children Vol      in       mother Vol
+      ********************************************
+      lab               in       Steel
+      acrylic           in       lab
+      balloon           in       lab
+      LS                in       ballon 
+      ********************************************
+      steel vol do not apply any placement                     
+
+    -->
+    <!-- LiquidScintillator -->
+    <constant name="LiquidScintillator_rmin" value="0"/>
+    <constant name="LiquidScintillator_rmax" value="35400/2.0*mm"/>
+
+    <constant name="BalloonThickness" value="0.2 *mm"/>
+    <constant name="Balloon_rmin" value="LiquidScintillator_rmax"/>
+    <constant name="Balloon_rmax" value="LiquidScintillator_rmax + BalloonThickness"/>
+
+    <constant name="SpaceInArylicAndBalloon_rmin" value="Balloon_rmax"/>
+    <constant name="SpaceInArylicAndBalloon_rmax" value="Balloon_rmax + 0.1*mm"/>
+
+    <!-- AcrylicVessel, thickness=10.0*mm -->
+    <constant name="AcrylicVessel_thickness" value="10.0*mm"/>
+    <constant name="AcrylicVessel_rmin" value="Balloon_rmax + 0.1*mm"/>
+    <constant name="AcrylicVessel_rmax" value="AcrylicVessel_rmin + AcrylicVessel_thickness"/>
+    
+    <constant name="Lab_rmin" value="AcrylicVessel_rmax"/>
+    <constant name="Lab_rmax" value="AcrylicVessel_rmax + 2.5*m"/>
+
+    <constant name="Steel_thickness" value="4.0*cm"/>
+    <constant name="Steel_rmin" value="Lab_rmax"/>
+    <constant name="Steel_rmax" value="Lab_rmax + Steel_thickness"/>
+
+
+
+
+    <constant name="P1r" value="0.0" /> 
+    <constant name="P1z" value="22.5*mm" /> 
+    <constant name="P2r" value="40.0*mm" />  
+    <constant name="P2z" value="0.0*mm" /> 
+    <constant name="P3r" value="28.25*mm" />  
+    <constant name="P3z" value="-55.5*mm" /> 
+    <constant name="P4r" value="28.25*mm" />  
+    <constant name="P4z" value="-87.5*mm" /> 
+
+    
+    <constant name="thickness" value="0.0*mm" /> 
+    <constant name="aa_p1r"       value="P1r"  />           
+    <constant name="aa_p1z"       value="P1z+thickness"  />
+    <constant name="aa_p2r" value="P2r+thickness"  /> 
+    <constant name="aa_p2z"       value="P2z"  />
+    <constant name="aa_p3r"       value="P3r+thickness"  /> 
+    <constant name="aa_p3z"       value="P3z+thickness"  />
+    <constant name="aa_p4r"       value="P4r+thickness"  /> 
+    <constant name="aa_p4z"       value="P4z-thickness"  />
+    <constant name="r_bottom"   value="51.9*mm/2"  />
+    <constant name="r_botthin"  value="r_bottom+thickness"  /> 
+
+
+
+
+
+    <!-- ***
+        lines blow not be used 
+    -->
+  </define>
+
+

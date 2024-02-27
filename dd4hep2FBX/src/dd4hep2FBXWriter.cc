@@ -44,24 +44,52 @@ dd4hep2FBXWriter::dd4hep2FBXWriter(string filePath, bool usePrototypes)
   this->m_UsePrototypes = usePrototypes;
 }
 
-void dd4hep2FBXWriter::getAllChildren(DetElement det)
+void dd4hep2FBXWriter::getDets(DetElement det)
 {
-  m_childrenDet.push_back(det);
-  m_childrenVol.push_back(det.volume());
-  m_childrenSolid.push_back(det.solid());
+  m_det.push_back(det);
+  m_vol.push_back(det.volume());
+  m_solid.push_back(det.solid());
 
-  m_DetName.push_back(det.name());
-  m_VolName.push_back(det.volume().name());
+  m_detName.push_back(det.name());
+  m_volName.push_back(det.volume().name());
+  // m_VolChildrenNum.push_back(det.volume()->GetNdaughters());
   // det.volume()->setName("adf");
-  m_SolidName.push_back(det.solid().name());
+  m_solidName.push_back(det.solid().name());
   // det.solid().setName("adf");
-  // std::cout << " is assembly " << det.volume().isAssembly() << std::endl;
-  // std::cout << " in getname() " << det.name() << std::endl;
+  // std::cout << __LINE__ << " volume: " << det.volume().name() << " " << det.volume()->GetNdaughters() << std::endl;
+  // std::cout << __LINE__ << " solid: " << det.solid().name() << " " << det.solid().type() << std::endl;
   if (det.children().size() != 0)
   {
     for (const auto &[name, detchild] : det.children())
     {
-      getAllChildren(detchild);
+      getDets(detchild);
+    }
+  }
+}
+
+void dd4hep2FBXWriter::getVolSolid(TGeoVolume *vol) {
+  double nodeDaughters = vol->GetNdaughters();
+  std::cout << __LINE__ << " volname: " << vol->GetName() << "  nodeDaughtersN: " << nodeDaughters << std::endl;
+  
+  // m_vol.push_back(vol);
+  // m_solid.push_back(vol->GetShape());
+  // m_volName.push_back(vol->GetName());
+  // m_solidName.push_back(vol->GetShape()->GetName());
+
+  for (int i = 0; i < nodeDaughters; i++) {
+    TGeoNode *daug = vol->GetNode(i);
+    if (daug->GetNdaughters() == 0) {
+      // m_vol.push_back(daug->GetVolume());
+      // m_solid.push_back(daug->GetVolume()->GetShape());
+
+      // m_volName.push_back(daug->GetVolume()->GetName());
+      // m_solidName.push_back(daug->GetVolume()->GetShape()->GetName());
+
+      std::cout << __LINE__ << " vol: " << daug->GetVolume()->GetName() << " mother: " << daug->GetMotherVolume()->GetName() << std::endl;
+      std::cout << __LINE__ << " solid: " << daug->GetVolume()->GetShape()->GetName() << " type:" << daug->GetVolume()->GetShape()->IsA()<<std::endl;
+
+    } else {
+      getVolSolid(daug->GetVolume());
     }
   }
 }
@@ -82,40 +110,35 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
   {
     return false;
   }
+  // std::cout << __LINE__ << " " << 
+  // m_world.volume()->GetNode(0)->GetVolume()->GetName() << " " << 
+  // m_world.volume()->GetNode(1)->GetVolume()->GetName() << std::endl;
+  
 
   // Assign legal and unique names to each used physical volume, logical volume and solid
-  getAllChildren(m_world);
+  getDets(m_world);
+  getVolSolid( &*(m_world.volume()));
   // Assign new name if duplicate
-  // Compact          ERROR ++ FAILED    to convert subdetector:
-  // PMT_type1: dd4hep: Attempt to add an already existing object:PMT_type1.
-  // for (const auto subdet : m_childrenDet)
-  for (size_t i = 0; i < m_childrenDet.size(); i++)
+  for (size_t i = 0; i < m_det.size(); i++)
   {
-    DetElement subdet = m_childrenDet[i];
-    // DetElement subdet = DetElement(mdet);
-    // std::cout << __LINE__ << " name:" << subdet.name() << " children:" << subdet.children().size()
-    //           << " isassembly: " << subdet.volume().isAssembly() << std::endl;
-
-    Volume subdetVol = subdet.volume();
-    Solid subdetSolid = subdet.solid();
-
-    // auto c=subdetVol.IsReplicated();
-
+    DetElement subdet = m_det[i];
     string detName = subdet.name();
-    string detVolName = subdetVol.name();
-    string detSolidName = subdetSolid.name();
-
-    m_DetName = assignName(m_DetName, detName, i);
-    m_VolName = assignName(m_VolName, detName, i);
-    m_SolidName = assignName(m_SolidName, detName, i);
+    m_detName = assignName(m_detName, detName, i);
   }
+  for (size_t i = 0; i < m_vol.size(); i++)
+  {
+    string detVolName = m_volName[i]; 
+    string detSolidName = m_solidName[i];
 
+    m_volName = assignName(m_volName, detVolName, i);
+    m_solidName = assignName(m_solidName, detSolidName, i);
+  }
   // Count the number of references to each physical volume and logical volume and solid
   // so that these values can be placed in the FBX file's Definitions{} section.
   // countEntities(m_world);
-  unsigned int geometryCount = m_DetName.size();
-  unsigned int materialCount = m_VolName.size();
-  unsigned int modelCount = m_SolidName.size();
+  unsigned int geometryCount = m_solid.size();
+  unsigned int materialCount = m_vol.size();
+  unsigned int modelCount = m_vol.size();   // wrong 
   // Open the output file
   if (outputFilename.length() > 0)
   {
@@ -136,68 +159,73 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
   // Write all solids as Geometry nodes (replicas are written later).
   // Write all logical volumes as Material nodes (color information).
   // Write all physical and logical volumes as Model nodes (with replica-solids treated here).
-  m_PVID = new std::vector<unsigned long long>(m_childrenDet.size(), 0x0000010000000000LL);
-  m_LVID = new std::vector<unsigned long long>(m_childrenVol.size(), 0x000000C000000000LL);
-  m_SolidID = new std::vector<unsigned long long>(m_childrenSolid.size(), 0x0000008000000000LL);
-  m_MatID = new std::vector<unsigned long long>(m_childrenVol.size(), 0x0000004000000000LL);
-  m_Visible = new std::vector<bool>(m_childrenVol.size(), false);
+  m_PVID = new std::vector<unsigned long long>(m_det.size(), 0x0000010000000000LL);
+  m_LVID = new std::vector<unsigned long long>(m_vol.size(), 0x000000C000000000LL);
+  m_SolidID = new std::vector<unsigned long long>(m_solid.size(), 0x0000008000000000LL);
+  m_MatID = new std::vector<unsigned long long>(m_vol.size(), 0x0000004000000000LL);
+  m_Visible = new std::vector<bool>(m_vol.size(), false);
 
   m_File << "Objects:  {" << std::endl;
-  for (unsigned int solidIndex = 0; solidIndex < m_childrenSolid.size(); ++solidIndex)
+  // index=0 is the world, 
+
+
+  for (unsigned int solidIndex = 0; solidIndex < m_solid.size(); ++solidIndex)
   {
     (*m_SolidID)[solidIndex] += 0x0000000001000000LL * solidIndex;
-    if (m_SolidName[solidIndex].length() > 0)
+    if (m_solidName[solidIndex].length() > 0)
     {
-      std::cout << __LINE__ << " " << m_childrenSolid.size() << " " << m_SolidID->size()
-                << m_SolidName[solidIndex] << " "
+      std::cout << __LINE__ << " " << m_solid.size() << " " << m_SolidID->size()
+                << m_solidName[solidIndex] << " "
                 << " index " << solidIndex << " "
                 << (*m_SolidID)[solidIndex] << std::endl;
-      writeGeometryNode(m_childrenSolid[solidIndex], m_SolidName[solidIndex], (*m_SolidID)[solidIndex]);
+      writeGeometryNode(m_solid[solidIndex], m_solidName[solidIndex], (*m_SolidID)[solidIndex]);
     }
   }
 
   // write materials
-  for (unsigned int lvIndex = 0; lvIndex < m_childrenVol.size(); ++lvIndex)
+  for (unsigned int lvIndex = 0; lvIndex < m_vol.size(); ++lvIndex)
   {
     (*m_MatID)[lvIndex] += 0x0000000001000000LL * lvIndex;
     (*m_LVID)[lvIndex] += 0x0000000001000000LL * lvIndex;
-    // if (m_VolName[lvIndex].length() > 0) {
+    // if (m_volName[lvIndex].length() > 0) {
     // if (!(*m_LVUnique)[lvIndex])
     std::cout << __LINE__ << " materials_childVol_index: " << lvIndex << std::endl;
-    writeMaterialNode(lvIndex, m_VolName[lvIndex]);
+    writeMaterialNode(lvIndex, m_volName[lvIndex]);
 
     // }
   }
 
-  for (unsigned int pvIndex = 0; pvIndex < m_childrenDet.size(); ++pvIndex)
+  for (unsigned int pvIndex = 0; pvIndex < m_det.size(); ++pvIndex)
   {
     (*m_PVID)[pvIndex] += 0x0000000001000000LL * pvIndex;
   }
 
   //
 
-  // m_PVCount->assign(m_childrenDet.size(), 0);
-  // std::cout << __LINE__ << " addmodels " << std::endl;
-  // m_LVCount->assign(m_childrenVol.size(), 0);
-  // m_SolidCount->assign(m_childrenSolid.size(), 0);
-  for (unsigned int i = 0; i < m_childrenDet.size(); i++)
+  // m_PVCount = new std::vector<unsigned int>(pvStore->size(), 0);
+  // m_LVCount = new std::vector<unsigned int>(lvStore->size(), 0);
+  // m_SolidCount = new std::vector<unsigned int>(solidStore->size(), 0);
+  for (unsigned int i = 0; i < m_det.size(); i++)
   {
-    // if(m_childrenDet[i] == m_world)
+    // if(m_det[i] == m_world)
     // std::cout << __LINE__ << " addmodels " << i << std::endl;
-    addModels(m_childrenDet[i], 0, i);
+    addModels(m_det[i], 0, i);
     // else
-    //   addModels(m_childrenDet[i], 1);
+    //   addModels(m_det[i], 1);
   }
   m_File << "}" << std::endl
          << std::endl;
 
-  // Recursively write the connections among the solid and logical/physical volume elements
+  // Recursively write the connections among the solid and logical/physical volume elements  
+  m_PVCount = new std::vector<unsigned int>(m_detName.size(), 0);
+  m_LVCount = new std::vector<unsigned int>(m_volName.size(), 0);
+  m_SolidCount = new std::vector<unsigned int>(m_solidName.size(), 0);
   m_File << "Connections:  {" << std::endl;
   addConnections(m_world, 0);
 
-  // int pvIndex = std::find(m_childrenDet.begin(), m_childrenDet.end(), m_world) - m_childrenDet.begin();
+  int pvIndex = std::find(m_det.begin(), m_det.end(), m_world) - m_det.begin();
   m_File << "\t; Physical volume Model::" << m_world.name() << " to Model::RootNode" << std::endl
-         << "\tC: \"OO\"," << 0 << ",0" << std::endl
+         << "\tC: \"OO\"," << (*m_PVID)[pvIndex] << ",0" << std::endl
          << std::endl
          << "}" << std::endl
          << std::endl;
@@ -219,40 +247,40 @@ void dd4hep2FBXWriter::addConnections(DetElement physVol, int replica)
   // G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
   // G4SolidStore* solidStore = G4SolidStore::GetInstance();
   Volume logVol = physVol.volume(); // GetLogicalVolume();
-  int pvIndex = std::find(m_childrenDet.begin(), m_childrenDet.end(), physVol) - m_childrenDet.begin();
+  int pvIndex = std::find(m_det.begin(), m_det.end(), physVol) - m_det.begin();
   ; //
   /// std::find(pvStore->begin(), pvStore->end(), physVol) - pvStore->begin();
   unsigned long long pvID = (*m_PVID)[pvIndex];
-  // unsigned int pvCount = (*m_PVCount)[pvIndex];
-  std::string pvName = m_DetName[pvIndex];
+  unsigned int pvCount = (*m_PVCount)[pvIndex];
+  std::string pvName = m_detName[pvIndex];
   int lvIndex = pvIndex; // std::find(lvStore->begin(), lvStore->end(), logVol) - lvStore->begin();
   unsigned long long lvID = (*m_LVID)[lvIndex];
-  // unsigned int lvCount = (*m_LVCount)[lvIndex];
-  std::string lvName = m_VolName[lvIndex];
-  Children mchildren = physVol.children();
-  // for (long unsigned int daughter = 0; daughter < mchildren.size(); ++daughter) {
-  for (const auto &[name, physVolDaughter] : mchildren)
-  {
-    // DetElement physVolDaughter = mchildren.at(daughter).second ;// ->GetDaughter(daughter);
-    int pvIndexDaughter = std::find(m_childrenDet.begin(), m_childrenDet.end(), physVolDaughter) - m_childrenDet.begin();
-    unsigned long long pvIDDaughter = (*m_PVID)[pvIndexDaughter];
-    // unsigned int pvCountDaughter = (*m_PVCount)[pvIndexDaughter];
-    // for (int j = 0; j < physVolDaughter->GetMultiplicity(); ++j) {
-    //   if (m_UsePrototypes) {
-    //     if ((replica == 0) && (j == 0) && (lvCount == 0) && (pvCountDaughter == 0)) {
-    //       if ((*m_LVUnique)[lvIndex]) {
-    writePVToParentPV(m_DetName[pvIndexDaughter], pvName, pvIDDaughter, pvID);
-    //     } else {
-    //       writePVToParentLV(m_DetName[pvIndexDaughter], lvName, pvIDDaughter, lvID);
-    //     }
-    //   }
-    // } else {
-    //   //writePVToParentLV(m_DetName[pvIndexDaughter], lvName, pvIDDaughter+0x00010000*j+pvCountDaughter, lvID+0x00010000*replica+lvCount);
-    //   writePVToParentPV(m_DetName[pvIndexDaughter], pvName, pvIDDaughter + 0x00010000 * j + pvCountDaughter,
-    //                     pvID + 0x00010000 * replica + pvCount);
-    // }
-    addConnections(physVolDaughter, 0);
-    // }
+  unsigned int lvCount = (*m_LVCount)[lvIndex];
+  std::string lvName = m_volName[lvIndex];
+  Children mdetChildren = physVol.children();
+  // for (long unsigned int daughter = 0; daughter < mdetChildren.size(); ++daughter) {
+  for (const auto& [name, physVolDaughter] : mdetChildren) {
+      // DetElement physVolDaughter = mdetChildren.at(daughter).second ;// ->GetDaughter(daughter);
+      int pvIndexDaughter = std::find(m_det.begin(), m_det.end(), physVolDaughter) - m_det.begin();
+      unsigned long long pvIDDaughter = (*m_PVID)[pvIndexDaughter];
+      unsigned int pvCountDaughter = physVolDaughter.volume()->GetNdaughters();
+      // multiple phyVols in one logicalVol
+      for (int j = 0; j < pvCountDaughter + 1; ++j) {
+          //   if (m_UsePrototypes) {
+          if ((replica == 0) && (j == 0) && (lvCount == 0) && (pvCountDaughter == 0)) {
+              if (mdetChildren.size() != 0) {
+                  writePVToParentPV(m_detName[pvIndexDaughter], pvName, pvIDDaughter, pvID);
+              } else {
+                  writePVToParentLV(m_detName[pvIndexDaughter], lvName, pvIDDaughter, lvID);
+              }
+          }
+          // } else {
+          //   //writePVToParentLV(m_detName[pvIndexDaughter], lvName, pvIDDaughter+0x00010000*j+pvCountDaughter, lvID+0x00010000*replica+lvCount);
+          //   writePVToParentPV(m_detName[pvIndexDaughter], pvName, pvIDDaughter + 0x00010000 * j + pvCountDaughter,
+          //                     pvID + 0x00010000 * replica + pvCount);
+          // }
+          addConnections(physVolDaughter, j);
+      }
   }
 
   // Write the Geometry-LogVolModel, Material-LogVolModel and PhysVolModel-LogVolModel
@@ -261,7 +289,7 @@ void dd4hep2FBXWriter::addConnections(DetElement physVol, int replica)
   int solidIndex = pvIndex; // std::find(solidStore->begin(), solidStore->end(), solid) - solidStore->begin();
   unsigned long long solidID = (*m_SolidID)[solidIndex];
   unsigned long long matID = (*m_MatID)[lvIndex];
-  std::string solidName = m_SolidName[solidIndex];
+  std::string solidName = m_solidName[solidIndex];
   // if (physVol->IsReplicated()) {
   //   pvName.append("_R");
   //   pvName.append(std::to_string(replica));
@@ -332,32 +360,32 @@ void dd4hep2FBXWriter::addConnections(DetElement physVol, int replica)
   // } else
   {
     // if (m_UsePrototypes)
-    {
-      // if (lvCount == 0)
-      // {
-      // if ((*m_LVUnique)[lvIndex])
-      { // bypass the singleton logical volume
-        // writeSolidToPV(pvName, solidName, (*m_Visible)[lvIndex], matID, pvID, solidID);
-      }
-      // else
-      // {
-      writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID, solidID);
-      // }
-      // }
-      // if (pvCount == 0)
-      {
-        // if (!(*m_LVUnique)[lvIndex])
-        writeLVToPV(pvName, lvName, pvID, lvID);
-      }
-    }
+    // {
+    //   if (lvCount == 0)
+    //   {
+    //     if (physVol.children().size() == 0)
+    //     { // bypass the singleton logical volume
+    //       writeSolidToPV(pvName, solidName, (*m_Visible)[lvIndex], matID, pvID, solidID);
+    //     }
+    //     else
+    //     {
+          writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID, solidID);
+    //     }
+    //   }
+    //   if (pvCount == 0)
+    //   {
+    //     if (physVol.children().size() == 0)
+    //       writeLVToPV(pvName, lvName, pvID, lvID);
+    //   }
+    // }
     // else
     {
       // writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID+lvCount, solidID);
       // writeLVToPV(pvName, lvName, pvID+pvCount, lvID+lvCount);
       // writeSolidToPV(pvName, solidName, (*m_Visible)[lvIndex], matID, pvID + pvCount, solidID);
     }
-    // (*m_LVCount)[lvIndex]++;
-    // (*m_PVCount)[pvIndex]++;
+    (*m_LVCount)[lvIndex]++;
+    (*m_PVCount)[pvIndex]++;
   }
 }
 
@@ -378,11 +406,11 @@ void dd4hep2FBXWriter::addModels(DetElement physVol, int replica, unsigned long 
   // int pvIndex = std::find(pvStore->begin(), pvStore->end(), physVol) - pvStore->begin();
   unsigned long long pvID = (*m_PVID)[pvIndex];
   // unsigned int pvCount = (*m_PVCount)[pvIndex];  // 空的 0
-  std::string pvName = m_DetName[pvIndex];
+  std::string pvName = m_detName[pvIndex];
   int lvIndex = pvIndex; // std::find(lvStore->begin(), lvStore->end(), logVol) - lvStore->begin();
   unsigned long long lvID = (*m_LVID)[lvIndex];
   // unsigned int lvCount = (*m_LVCount)[lvIndex];  // 空的 0
-  std::string lvName = m_VolName[lvIndex];
+  std::string lvName = m_volName[lvIndex];
   // if ((*m_LVUnique)[lvIndex]) writeMaterialNode(lvIndex, (*m_PVName)[pvIndex]);
   /*if (physVol->IsReplicated()) {
     G4VSolid* solid = logVol->GetSolid();
@@ -402,7 +430,7 @@ void dd4hep2FBXWriter::addModels(DetElement physVol, int replica, unsigned long 
       physParameterisation->ComputeTransformation(replica, physVol);
       solidReplica->ComputeDimensions(physParameterisation, replica, physVol);
       if (!(*solidReplica == *solid)) {
-        std::string solidName = (*m_SolidName)[solidIndex];
+        std::string solidName = (*m_solidName)[solidIndex];
         solidName.append("_R");
         solidName.append(std::to_string(replica));
         writeGeometryNode(solidReplica, solidName, solidID + 0x00010000 * replica);
@@ -443,7 +471,7 @@ void dd4hep2FBXWriter::addModels(DetElement physVol, int replica, unsigned long 
             double originalRMax = ((G4Tubs*)solid)->GetOuterRadius();
             ((G4Tubs*)solid)->SetInnerRadius(offset + width * replica);
             ((G4Tubs*)solid)->SetOuterRadius(offset + width * (replica + 1));
-            std::string solidName = (*m_SolidName)[solidIndex];
+            std::string solidName = (*m_solidName)[solidIndex];
             solidName.append("_R");
             solidName.append(std::to_string(replica));
             writeGeometryNode(solid, solidName, (*m_SolidID)[solidIndex] + 0x00010000 * replica);
@@ -480,7 +508,7 @@ void dd4hep2FBXWriter::addModels(DetElement physVol, int replica, unsigned long 
   //   // if (lvCount == 0)
   //   {
   //     // if (!(*m_LVUnique)[lvIndex])
-  //       writeLVModelNode(m_childrenVol[lvIndex], lvName, lvID);
+        writeLVModelNode(physVol.volume(), lvName, lvID);
   //   }
   // if (pvCount == 0)
   writePVModelNode(physVol, pvName, pvID);
@@ -547,19 +575,10 @@ void dd4hep2FBXWriter::writePVModelNode(DetElement physVol, const std::string pv
 void dd4hep2FBXWriter::writeMaterialNode(int lvIndex, const std::string matName)
 {
   // G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-  Volume logVol = m_childrenVol[lvIndex];
+  Volume logVol = m_vol[lvIndex];
   unsigned long long matID = (*m_MatID)[lvIndex];
   float alpha = 0.5, red = 0, green = 1, blue = 0;
-  // float color[]= {0.0, 1.0, 0.0,0.5}; // " r, g, b, a// default is semi-transparent green
-  // BelleII EM calorimeter crystals
-  /*if ((matName.compare(0, 23, "eclBarrelCrystalLogical") == 0) ||
-      (matName.compare(0, 20, "eclFwdCrystalLogical") == 0) ||
-      (matName.compare(0, 20, "eclBwdCrystalLogical") == 0) ||
-      (matName.compare(0, 24, "eclBarrelCrystalPhysical") == 0) ||
-      (matName.compare(0, 21, "eclFwdCrystalPhysical") == 0) ||
-      (matName.compare(0, 21, "eclBwdCrystalPhysical") == 0)) {
-    color = G4Color(1.0, 1.0, 1.0, 1.0); // white since ECL crystals have no G4VisAttribute :(
-  }*/
+
   bool visible = true;
   string materialName = logVol.material().name();
   // Hide volumes that contain vacuum, air or gas
@@ -567,11 +586,6 @@ void dd4hep2FBXWriter::writeMaterialNode(int lvIndex, const std::string matName)
   //   visible = false;
   // if (materialName == "G4_AIR")
   //   visible = false;
-  // if (materialName == "CDCGas") visible = false; // BelleII
-  // if (materialName == "ColdAir") visible = false; // BelleII
-  // if (materialName == "STR-DryAir") visible = false; // BelleII
-  // if (materialName == "TOPAir") visible = false; // BelleII
-  // if (materialName == "TOPVacuum") visible = false; // BelleII
   // Hide volumes that are invisible in the GEANT4 geometry
   const VisAttr visAttr = logVol.visAttributes();
   if (!(visAttr == VisAttr()))
@@ -579,12 +593,12 @@ void dd4hep2FBXWriter::writeMaterialNode(int lvIndex, const std::string matName)
     logVol.visAttributes().argb(alpha, red, green, blue);
     if (!(visAttr.visible()))
       {
-        // visible = false;
+        visible = false;
       }
   }
   else
   {
-    // visible = false;
+    visible = false;
   }
   if (logVol.isSensitive())
     visible = true;
@@ -601,6 +615,25 @@ void dd4hep2FBXWriter::writeMaterialNode(int lvIndex, const std::string matName)
          << "\t}" << std::endl;
 }
 
+double GetCutZ	(	const CLHEP::Hep3Vector & p	, const CLHEP::Hep3Vector fLowNorm, const CLHEP::Hep3Vector fHighNorm, double fDz)
+{
+ double newz = p.z();  // p.z() should be either +fDz or -fDz
+ if (p.z()<0)
+ {
+   if(fLowNorm.z()!=0.)
+   {
+      newz = -fDz-(p.x()*fLowNorm.x()+p.y()*fLowNorm.y())/fLowNorm.z();
+   }
+ }
+ else
+ {
+   if(fHighNorm.z()!=0.)
+   {
+      newz = fDz-(p.x()*fHighNorm.x()+p.y()*fHighNorm.y())/fHighNorm.z();
+   }
+ }
+ return newz;
+}
 GPolyhedron *getPolyhedron(Solid solid)
 {
 
@@ -631,6 +664,22 @@ GPolyhedron *getPolyhedron(Solid solid)
   else if (solidtype == "TGeoPcon") //  Polycone
   {
     // https://apc.u-paris.fr/~franco/g4doxy/html/G4Polycone_8cc-source.html#l00898
+    Polycone tmp(solid);
+    const int nz=tmp.zPlaneZ().size();
+    double Z_values[nz];
+    double Rmin[nz];
+    double Rmax[nz]; 
+    for(int i=0;i<nz;i++){
+      Z_values[i] = tmp.z(i);
+      Rmin[i] = tmp.rMin(i);
+      Rmax[i] = tmp.rMax(i);
+    }
+    return new GPolyhedronPcon( tmp.startPhi(), //original_parameters->Start_angle,
+                                tmp.deltaPhi(),// original_parameters->Opening_angle,
+                                nz,// original_parameters->Num_z_planes,
+                                Z_values, // original_parameters->Z_values,
+                                Rmin, // original_parameters->Rmin,
+                                Rmax); // original_parameters->Rmax );
   }
   else if (solidtype == "TGeoConeSeg") // ConeSegment
   {
@@ -645,6 +694,64 @@ GPolyhedron *getPolyhedron(Solid solid)
   else if (solidtype == "TGeoCtub") // CutTube
   {
     // https://apc.u-paris.fr/~franco/g4doxy/html/G4CutTubs_8cc-source.html#l01975
+    CutTube tmp(solid);
+    typedef double double3[3];
+    typedef int int4[4];
+    double fRMin=tmp.rMin(), fRMax=tmp.rMax(), fDz=tmp.dZ(), fSPhi=tmp.startPhi(), fDPhi=tmp.endPhi();
+    double kCarTolerance=0;      // Cached geometrical tolerance ??
+
+    GPolyhedron *ph  = new GPolyhedron;
+    GPolyhedron *ph1 = new GPolyhedronTubs(fRMin, fRMax, fDz, fSPhi, fDPhi) ; //G4Tubs::CreatePolyhedron();
+    int nn=ph1->GetNoVertices();
+    int nf=ph1->GetNoFacets();
+    double3* xyz = new double3[nn];  // number of nodes 
+    int4*  faces = new int4[nf] ;    // number of faces
+  
+    std::vector<double> lowNormal=tmp.lowNormal() ;
+    std::vector<double> highNormal=tmp.highNormal();
+    const CLHEP::Hep3Vector fLowNorm(lowNormal[0], lowNormal[1], lowNormal[2]);
+    const CLHEP::Hep3Vector fHighNorm(highNormal[0], highNormal[1], highNormal[2]);
+    for(int i=0;i<nn;i++)
+    {
+      xyz[i][0]=ph1->GetVertex(i+1).x();
+      xyz[i][1]=ph1->GetVertex(i+1).y();
+      double tmpZ=ph1->GetVertex(i+1).z();
+      if(tmpZ>=fDz-kCarTolerance)
+      {
+        xyz[i][2]=GetCutZ(CLHEP::Hep3Vector(xyz[i][0],xyz[i][1],fDz), fLowNorm, fHighNorm, fDz);
+      }
+      else if(tmpZ<=-fDz+kCarTolerance)
+      {
+        xyz[i][2]=GetCutZ(CLHEP::Hep3Vector(xyz[i][0],xyz[i][1],-fDz), fLowNorm, fHighNorm, fDz);
+      }
+      else
+      {
+        xyz[i][2]=tmpZ;
+      }
+    }
+    int iNodes[4];
+    int *iEdge=0;
+    int n;
+    for(int i=0;i<nf;i++)
+    {
+      ph1->GetFacet(i+1,n,iNodes,iEdge);
+      for(int k=0;k<n;k++)
+      {
+        faces[i][k]=iNodes[k];
+      }
+      for(int k=n;k<4;k++)
+      {
+        faces[i][k]=0;
+      }
+    }
+    ph->createPolyhedron(nn,nf,xyz,faces);
+  
+    delete [] xyz;
+    delete [] faces;
+    delete ph1;
+  
+    return ph;
+   
   }
   else if (solidtype == "TGeoEltu") // EllipticalTube
   {

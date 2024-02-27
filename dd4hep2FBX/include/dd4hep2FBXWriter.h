@@ -70,12 +70,12 @@ private:
 
   // //! Write FBX definition for each logical volume
   // void writeLVModelNode(G4LogicalVolume*, const std::string&, unsigned long long);
-  void writeLVModelNode(Volume logVol, const std::string lvName, unsigned long long lvID);
+  void writeLVModelNode(TGeoVolume *Vol, const std::string lvName, unsigned long long lvID);
 
 
   // //! Write FBX definition for each physical volume
   // void writePVModelNode(G4VPhysicalVolume*, const std::string&, unsigned long long);
-  void writePVModelNode(DetElement physVol, const std::string pvName, unsigned long long pvID);
+  void writePVModelNode(TGeoNode *node, const std::string pvName, unsigned long long pvID);
 
   // //! Count the physical volumes, logical volumes, materials and solids (recursive)
   // void countEntities(G4VPhysicalVolume*);
@@ -83,7 +83,7 @@ private:
 
   // //! Process one physical volume for FBX-node writing (recursive)
   // void addModels(G4VPhysicalVolume*, int);
-  void addModels(DetElement physVol, int replica, unsigned long long pvIndex);
+  void addModels(TGeoNode *node, int replica, unsigned long long pvIndex);
 
   // //! Write FBX connections among all of the nodes in the tree (recursive)
   void addConnections(DetElement, int);
@@ -117,7 +117,7 @@ private:
 
 
 
-void getVolSolid(TGeoVolume *node);
+void getVolSolid(TGeoNode *node);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -142,7 +142,7 @@ void getVolSolid(TGeoVolume *node);
   //! Modified (legal-character and unique) solid name
   std::vector<std::string> m_solidName;
 
-
+  std::vector<std::string> m_placedVolName;
   //! Modified (legal-character and unique) physical-volume 
   std::vector<DetElement> m_det;
 
@@ -150,6 +150,8 @@ void getVolSolid(TGeoVolume *node);
   // std::vector<Volume> m_childrenVol;
   std::vector<TGeoVolume*> m_vol;
   std::vector<TGeoShape*> m_solid;
+  std::vector<TGeoNode*> m_placedVol;
+  std::vector<double> m_volChildrenNum;
   // std::vector<TGeoVolume*> m_Vol;
 
   //! Modified (legal-character and unique) solid 

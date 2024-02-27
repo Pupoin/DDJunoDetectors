@@ -47,14 +47,15 @@ dd4hep2FBXWriter::dd4hep2FBXWriter(string filePath, bool usePrototypes)
 void dd4hep2FBXWriter::getDets(DetElement det)
 {
   m_det.push_back(det);
-  m_vol.push_back(det.volume());
-  m_solid.push_back(det.solid());
+  // m_placedVol.push_back(det.placement());
+  // m_vol.push_back(det.volume());
+  // m_solid.push_back(det.solid());
 
-  m_detName.push_back(det.name());
-  m_volName.push_back(det.volume().name());
+  // m_detName.push_back(det.name());
+  // m_volName.push_back(det.volume().name());
   // m_VolChildrenNum.push_back(det.volume()->GetNdaughters());
   // det.volume()->setName("adf");
-  m_solidName.push_back(det.solid().name());
+  // m_solidName.push_back(det.solid().name());
   // det.solid().setName("adf");
   // std::cout << __LINE__ << " volume: " << det.volume().name() << " " << det.volume()->GetNdaughters() << std::endl;
   // std::cout << __LINE__ << " solid: " << det.solid().name() << " " << det.solid().type() << std::endl;
@@ -66,30 +67,39 @@ void dd4hep2FBXWriter::getDets(DetElement det)
     }
   }
 }
+// void dd4hep2FBXWriter::getVolSolid(TGeoNode *node) {
+// vis attributes
 
-void dd4hep2FBXWriter::getVolSolid(TGeoVolume *vol) {
-  double nodeDaughters = vol->GetNdaughters();
-  std::cout << __LINE__ << " volname: " << vol->GetName() << "  nodeDaughtersN: " << nodeDaughters << std::endl;
+// }
+void dd4hep2FBXWriter::getVolSolid(TGeoNode *node) {
+  double nodeDaughters = node->GetNdaughters();
+  std::cout << __LINE__ << " volname: " << node->GetName() << "  nodeDaughtersN: " << nodeDaughters << std::endl;
   
-  // m_vol.push_back(vol);
-  // m_solid.push_back(vol->GetShape());
-  // m_volName.push_back(vol->GetName());
-  // m_solidName.push_back(vol->GetShape()->GetName());
+  m_placedVol.push_back(node);
+  m_placedVolName.push_back(node->GetName());
+  m_vol.push_back(node->GetVolume());
+  m_volChildrenNum.push_back(nodeDaughters);
+  m_solid.push_back(node->GetVolume()->GetShape());
+  m_volName.push_back(node->GetVolume()->GetName());
+  m_solidName.push_back(node->GetVolume()->GetShape()->GetName());
 
   for (int i = 0; i < nodeDaughters; i++) {
-    TGeoNode *daug = vol->GetNode(i);
+    TGeoNode *daug = node->GetDaughter(i);
     if (daug->GetNdaughters() == 0) {
-      // m_vol.push_back(daug->GetVolume());
-      // m_solid.push_back(daug->GetVolume()->GetShape());
+        m_placedVol.push_back(daug);
+        m_placedVolName.push_back(daug->GetName());
+        m_vol.push_back(daug->GetVolume());
+        m_volChildrenNum.push_back(0);
+        m_solid.push_back(daug->GetVolume()->GetShape());
 
-      // m_volName.push_back(daug->GetVolume()->GetName());
-      // m_solidName.push_back(daug->GetVolume()->GetShape()->GetName());
+        m_volName.push_back(daug->GetVolume()->GetName());
+        m_solidName.push_back(daug->GetVolume()->GetShape()->GetName());
 
       std::cout << __LINE__ << " vol: " << daug->GetVolume()->GetName() << " mother: " << daug->GetMotherVolume()->GetName() << std::endl;
       std::cout << __LINE__ << " solid: " << daug->GetVolume()->GetShape()->GetName() << " type:" << daug->GetVolume()->GetShape()->IsA()<<std::endl;
 
     } else {
-      getVolSolid(daug->GetVolume());
+      getVolSolid(daug);
     }
   }
 }
@@ -117,7 +127,14 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
 
   // Assign legal and unique names to each used physical volume, logical volume and solid
   getDets(m_world);
-  getVolSolid( &*(m_world.volume()));
+  getVolSolid( &*(m_world.placement()));
+  // for(auto node : m_placedVol){
+  //   // std::cout << node->GetVolume()->GetName() << std::endl;
+
+  // }
+
+std:: cout << "***********************" << std::endl;
+
   // Assign new name if duplicate
   for (size_t i = 0; i < m_det.size(); i++)
   {
@@ -138,7 +155,7 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
   // countEntities(m_world);
   unsigned int geometryCount = m_solid.size();
   unsigned int materialCount = m_vol.size();
-  unsigned int modelCount = m_vol.size();   // wrong 
+  unsigned int modelCount = m_placedVol.size();   // wrong 
   // Open the output file
   if (outputFilename.length() > 0)
   {
@@ -190,7 +207,7 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
     // if (m_volName[lvIndex].length() > 0) {
     // if (!(*m_LVUnique)[lvIndex])
     std::cout << __LINE__ << " materials_childVol_index: " << lvIndex << std::endl;
-    writeMaterialNode(lvIndex, m_volName[lvIndex]);
+    // writeMaterialNode(lvIndex, m_volName[lvIndex]);
 
     // }
   }
@@ -205,13 +222,10 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
   // m_PVCount = new std::vector<unsigned int>(pvStore->size(), 0);
   // m_LVCount = new std::vector<unsigned int>(lvStore->size(), 0);
   // m_SolidCount = new std::vector<unsigned int>(solidStore->size(), 0);
-  for (unsigned int i = 0; i < m_det.size(); i++)
+  for (unsigned int i = 0; i < m_placedVol.size(); i++)
   {
-    // if(m_det[i] == m_world)
     // std::cout << __LINE__ << " addmodels " << i << std::endl;
-    addModels(m_det[i], 0, i);
-    // else
-    //   addModels(m_det[i], 1);
+    addModels(m_placedVol[i], 0, i);
   }
   m_File << "}" << std::endl
          << std::endl;
@@ -221,7 +235,38 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
   m_LVCount = new std::vector<unsigned int>(m_volName.size(), 0);
   m_SolidCount = new std::vector<unsigned int>(m_solidName.size(), 0);
   m_File << "Connections:  {" << std::endl;
-  addConnections(m_world, 0);
+  // addConnections(m_world, 0);
+  for (unsigned int i = 0; i < m_placedVol.size(); i++)
+  {
+    double pvIndex = i;
+    unsigned long long pvID = (*m_PVID)[pvIndex];
+    std::string pvName = m_placedVolName[pvIndex];
+
+    writePVToParentPV(m_detName[pvIndexDaughter], pvName, pvIDDaughter, pvID);
+  }
+  for (unsigned int i = 0; i < m_solid.size(); i++)
+  {
+    double lvIndex = i;
+    unsigned long long lvID = (*m_LVID)[lvIndex];
+    std::string lvName = m_volName[lvIndex];
+    // double pvIndex = i;
+    unsigned long long solidID = (*m_PVID)[i];
+    std::string solidName = m_solidName[i];
+
+    writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID, solidID);
+  }
+  for (unsigned int i = 0; i < m_vol.size(); i++)
+  {
+    double lvIndex = i;
+    unsigned long long lvID = (*m_LVID)[lvIndex];
+    std::string lvName = m_volName[lvIndex];
+    double pvIndex = i;
+    unsigned long long pvID = (*m_PVID)[pvIndex];
+    std::string pvName = m_placedVolName[pvIndex];
+
+     writeLVToPV(pvName, lvName, pvID, lvID);
+  }
+
 
   int pvIndex = std::find(m_det.begin(), m_det.end(), m_world) - m_det.begin();
   m_File << "\t; Physical volume Model::" << m_world.name() << " to Model::RootNode" << std::endl
@@ -389,129 +434,26 @@ void dd4hep2FBXWriter::addConnections(DetElement physVol, int replica)
   }
 }
 
-void dd4hep2FBXWriter::addModels(DetElement physVol, int replica, unsigned long long pvIndex)
+void dd4hep2FBXWriter::addModels(TGeoNode *node, int replica, unsigned long long pvIndex)
 {
-  // Descend to the leaves of the tree
-  // DetElement logVol = physVol.volume();
-  // for (int daughter = 0; daughter < logVol->GetNoDaughters(); ++daughter) {
-  //   G4VPhysicalVolume* physVolDaughter = logVol->GetDaughter(daughter);
-  //   for (int j = 0; j < physVolDaughter->GetMultiplicity(); ++j) {
-  //     addModels(physVolDaughter, j);
-  //   }
-  // }
-
-  // Write the physical- and logical-volume models as we ascend the recursive tree
-  // G4PhysicalVolumeStore* pvStore = G4PhysicalVolumeStore::GetInstance();
-  // G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-  // int pvIndex = std::find(pvStore->begin(), pvStore->end(), physVol) - pvStore->begin();
   unsigned long long pvID = (*m_PVID)[pvIndex];
   // unsigned int pvCount = (*m_PVCount)[pvIndex];  // 空的 0
-  std::string pvName = m_detName[pvIndex];
+  std::string pvName = m_placedVolName[pvIndex];
   int lvIndex = pvIndex; // std::find(lvStore->begin(), lvStore->end(), logVol) - lvStore->begin();
   unsigned long long lvID = (*m_LVID)[lvIndex];
   // unsigned int lvCount = (*m_LVCount)[lvIndex];  // 空的 0
   std::string lvName = m_volName[lvIndex];
   // if ((*m_LVUnique)[lvIndex]) writeMaterialNode(lvIndex, (*m_PVName)[pvIndex]);
-  /*if (physVol->IsReplicated()) {
-    G4VSolid* solid = logVol->GetSolid();
-    G4SolidStore* solidStore = G4SolidStore::GetInstance();
-    int solidIndex = std::find(solidStore->begin(), solidStore->end(), solid) - solidStore->begin();
-    unsigned long long solidID = (*m_SolidID)[solidIndex];
-    EAxis axis;
-    G4int nReplicas;
-    G4double width;
-    G4double offset;
-    G4bool consuming;
-    physVol->GetReplicationData(axis, nReplicas, width, offset, consuming);
-    physVol->SetCopyNo(replica);
-    G4VPVParameterisation* physParameterisation = physVol->GetParameterisation();
-    if (physParameterisation) { // parameterised volume
-      G4VSolid* solidReplica = physParameterisation->ComputeSolid(replica, physVol);
-      physParameterisation->ComputeTransformation(replica, physVol);
-      solidReplica->ComputeDimensions(physParameterisation, replica, physVol);
-      if (!(*solidReplica == *solid)) {
-        std::string solidName = (*m_solidName)[solidIndex];
-        solidName.append("_R");
-        solidName.append(std::to_string(replica));
-        writeGeometryNode(solidReplica, solidName, solidID + 0x00010000 * replica);
-      }
-      if (m_UsePrototypes && (*solidReplica == *solid)) {
-        if ((replica == 0) && (lvCount == 0)) {
-          if (!(*m_LVUnique)[lvIndex]) writeLVModelNode((*lvStore)[lvIndex], lvName, lvID);
-        }
-      } else {
-        // DIVOT lvName.append("_R");
-        // DIVOT lvName.append(std::to_string(replica));
-        // DIVOT writeLVModelNode((*lvStore)[lvIndex], lvName, lvID+0x00010000*replica+lvCount);
-      }
-      pvName.append("_R");
-      pvName.append(std::to_string(replica));
-      writePVModelNode(physVol, pvName, pvID + 0x00010000 * replica + pvCount);
-    } else { // plain replicated volume
-      G4RotationMatrix* originalRotation = physVol->GetRotation();
-      G4ThreeVector translation; // No translation
-      G4RotationMatrix rotation; // No rotation
-      switch (axis) {
-        default:
-        case kXAxis:
-          translation.setX(width * (replica - 0.5 * (nReplicas - 1)));
-          physVol->SetTranslation(translation);
-          break;
-        case kYAxis:
-          translation.setY(width * (replica - 0.5 * (nReplicas - 1)));
-          physVol->SetTranslation(translation);
-          break;
-        case kZAxis:
-          translation.setZ(width * (replica - 0.5 * (nReplicas - 1)));
-          physVol->SetTranslation(translation);
-          break;
-        case kRho:
-          if (solid->GetEntityType() == "G4Tubs") {
-            double originalRMin = ((G4Tubs*)solid)->GetInnerRadius();
-            double originalRMax = ((G4Tubs*)solid)->GetOuterRadius();
-            ((G4Tubs*)solid)->SetInnerRadius(offset + width * replica);
-            ((G4Tubs*)solid)->SetOuterRadius(offset + width * (replica + 1));
-            std::string solidName = (*m_solidName)[solidIndex];
-            solidName.append("_R");
-            solidName.append(std::to_string(replica));
-            writeGeometryNode(solid, solidName, (*m_SolidID)[solidIndex] + 0x00010000 * replica);
-            ((G4Tubs*)solid)->SetInnerRadius(originalRMin);
-            ((G4Tubs*)solid)->SetOuterRadius(originalRMax);
-          } else if (replica == 0) {
-            std::err << "Built-in volumes replicated along radius for " << solid->GetEntityType() <<
-                      " (solid " << solid->GetName() << ") are not visualisable." << std::endl;
-          }
-          break;
-        case kPhi:
-          physVol->SetRotation(&(rotation.rotateZ(-(offset + (replica + 0.5) * width))));
-          break;
-      }
-      if (m_UsePrototypes && !((axis == kRho) && (solid->GetEntityType() == "G4Tubs"))) {
-        if ((replica == 0) && (lvCount == 0)) {
-          if (!(*m_LVUnique)[lvIndex]) writeLVModelNode((*lvStore)[lvIndex], lvName, lvID);
-        }
-      } else {
-        // DIVOT lvName.append("_R");
-        // DIVOT lvName.append(std::to_string(replica));
-        // DIVOT writeLVModelNode((*lvStore)[lvIndex], lvName, lvID+0x00010000*replica+lvCount);
-      }
-      pvName.append("_R");
-      pvName.append(std::to_string(replica));
-      writePVModelNode(physVol, pvName, pvID + 0x00010000 * replica + pvCount);
-      if (axis == kPhi) physVol->SetRotation(originalRotation);
-    }
-  }
-  else*/
-  // {
+
   // if (m_UsePrototypes)
   // {
   //   // if (lvCount == 0)
   //   {
   //     // if (!(*m_LVUnique)[lvIndex])
-        writeLVModelNode(physVol.volume(), lvName, lvID);
+      writeLVModelNode(node->GetVolume(), lvName, lvID);
   //   }
   // if (pvCount == 0)
-  writePVModelNode(physVol, pvName, pvID);
+      writePVModelNode(node, pvName, pvID);
   // }
   // else
   // {
@@ -523,9 +465,9 @@ void dd4hep2FBXWriter::addModels(DetElement physVol, int replica, unsigned long 
   // }
 }
 
-void dd4hep2FBXWriter::writeLVModelNode(Volume logVol, const std::string lvName, unsigned long long lvID)
+void dd4hep2FBXWriter::writeLVModelNode(TGeoVolume *vol, const std::string lvName, unsigned long long lvID)
 {
-  m_File << "\t; LogVol " << logVol.name() << " with solid " << logVol.solid().name() << std::endl
+  m_File << "\t; LogVol " << vol->GetName() << " with solid " << vol->GetShape()->GetName() << std::endl
          << "\tModel: " << lvID << ", \"Model::lv_" << lvName << "\", \"Null\" {" << std::endl
          << "\t\tVersion: 232" << std::endl
          << "\t\tProperties70:  {" << std::endl
@@ -535,15 +477,17 @@ void dd4hep2FBXWriter::writeLVModelNode(Volume logVol, const std::string lvName,
          << "\t}" << std::endl;
 }
 
-void dd4hep2FBXWriter::writePVModelNode(DetElement physVol, const std::string pvName, unsigned long long pvID)
+void dd4hep2FBXWriter::writePVModelNode(TGeoNode *node, const std::string pvName, unsigned long long pvID)
 {
-  Position move = physVol.placement().position();
-  TGeoRotation mat(physVol.placement().matrix()); //
+  TGeoMatrix *matrix = node->GetMatrix();
+  const Double_t *tv = matrix->GetTranslation();
+
   // G4RotationMatrix* rot = physVol->GetObjectRotation();
   // G4ThreeVector move = physVol->GetObjectTranslation();
   // FBX uses the Tait-Bryan version of the Euler angles (X then Y then Z rotation)
+  TGeoRotation *mat = (TGeoRotation*)node->GetMatrix();
   double phi = 0, theta = 0, psi = 0;
-  mat.GetAngles(phi, theta, psi); // all angles in degrees
+  mat->GetAngles(phi, theta, psi); // all angles in degrees
 
   /*// Construct from three Euler angles (in radians).
   CLHEP::HepRotation *rot = new
@@ -556,16 +500,16 @@ void dd4hep2FBXWriter::writePVModelNode(DetElement physVol, const std::string pv
   double roll = std::atan2(rot->zy(), rot->zz()) * 180.0 / M_PI;
   if (fabs(roll) < 1.0E-12) roll = 0.0;
   */
-  m_File << "\t; PhysVol " << physVol.name();
+  m_File << "\t; PhysVol " << node->GetName();
   // if (physVol->IsReplicated()) {
   //   m_File << " (replicated: copy " << physVol->GetCopyNo() << ")";
   // }
-  m_File << ", placing LogVol " << physVol.volume().name() << std::endl
+  m_File << ", placing LogVol " << node->GetVolume()->GetName() << std::endl
          << "\tModel: " << pvID << ", \"Model::" << pvName << "\", \"Null\" {" << std::endl
          << "\t\tVersion: 232" << std::endl
          << "\t\tProperties70:  {" << std::endl
-         << "\t\t\tP: \"Lcl Translation\", \"Lcl Translation\", \"\", \"A\"," << move.x() << "," << move.y() << "," << move.z() << std::endl
-         << "\t\t\tP: \"Lcl Rotation\", \"Lcl Rotation\", \"\", \"A\"," << psi << "," << theta << "," << psi << std::endl
+         << "\t\t\tP: \"Lcl Translation\", \"Lcl Translation\", \"\", \"A\"," << tv[0] << "," << tv[1] << "," << tv[2] << std::endl
+         << "\t\t\tP: \"Lcl Rotation\", \"Lcl Rotation\", \"\", \"A\"," << phi << "," << theta << "," << psi << std::endl
          << "\t\t}" << std::endl
          << "\t\tShading: T" << std::endl
          << "\t\tCulling: \"CullingOff\"" << std::endl

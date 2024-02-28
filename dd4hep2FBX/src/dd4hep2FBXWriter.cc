@@ -23,7 +23,7 @@
 #include "TGeoMatrix.h"
 #include <CLHEP/Vector/Rotation.h>
 #include <CLHEP/Geometry/Transform3D.h>
-
+#include "TROOT.h"
 // #include "Math/Vector3D.h"
 // #include "Math/Transform3D.h"
 #include <iomanip>
@@ -71,34 +71,74 @@ void dd4hep2FBXWriter::getDets(DetElement det)
 // vis attributes
 
 // }
-void dd4hep2FBXWriter::getVolSolid(TGeoNode *node) {
+void dd4hep2FBXWriter::getVolSolid(TGeoNode *node)
+{
   double nodeDaughters = node->GetNdaughters();
-  std::cout << __LINE__ << " volname: " << node->GetName() << "  nodeDaughtersN: " << nodeDaughters << std::endl;
-  
+
+  TGeoVolume *aa = node->GetVolume();                 //->IsVisible() ;
+  TColor *colo = gROOT->GetColor(aa->GetFillColor()); //(bb->GetFillColor());
+  colo->SetAlpha(1 - (int(aa->GetTransparency()) / 100.0));
+
+  std::cout << __LINE__ << " volname:" << node->GetName() << "  nodeDaughtersN:" << nodeDaughters
+            << " volname:" << node->GetVolume()->GetName()
+            << " visiable:" << aa->IsVisible()
+            << " visDaughter:" << aa->IsVisDaughters()
+            << " lineColor:" << aa->GetLineColor()
+            << " FillColor:" << aa->GetFillColor()
+            << " ,r g b " << colo->GetRed() << " " << colo->GetGreen() << " " << colo->GetBlue()
+            << " alpha:" << 1 - int(aa->GetTransparency()) / 100.0
+            << std::endl;
+
   m_placedVol.push_back(node);
   m_placedVolName.push_back(node->GetName());
   m_vol.push_back(node->GetVolume());
+  m_volName.push_back(node->GetVolume()->GetName());
   m_volChildrenNum.push_back(nodeDaughters);
   m_solid.push_back(node->GetVolume()->GetShape());
-  m_volName.push_back(node->GetVolume()->GetName());
   m_solidName.push_back(node->GetVolume()->GetShape()->GetName());
+  m_color.push_back(colo);
+  m_visible.push_back(aa->IsVisible());
 
-  for (int i = 0; i < nodeDaughters; i++) {
+  bool isVisDaughter = node->GetVolume()->IsVisDaughters();
+  for (int i = 0; i < nodeDaughters; i++)
+  {
     TGeoNode *daug = node->GetDaughter(i);
-    if (daug->GetNdaughters() == 0) {
-        m_placedVol.push_back(daug);
-        m_placedVolName.push_back(daug->GetName());
-        m_vol.push_back(daug->GetVolume());
-        m_volChildrenNum.push_back(0);
-        m_solid.push_back(daug->GetVolume()->GetShape());
+    if (daug->GetNdaughters() == 0)
+    {
+      TGeoVolume *bb = daug->GetVolume();
+      TColor *color = gROOT->GetColor(bb->GetFillColor());
+      color->SetAlpha(1 - (int(bb->GetTransparency()) / 100.0));
 
-        m_volName.push_back(daug->GetVolume()->GetName());
-        m_solidName.push_back(daug->GetVolume()->GetShape()->GetName());
+      m_placedVol.push_back(daug);
+      m_placedVolName.push_back(daug->GetName());
+      m_vol.push_back(daug->GetVolume());
+      m_volName.push_back(daug->GetVolume()->GetName());
+      m_volChildrenNum.push_back(0);
+      m_solid.push_back(daug->GetVolume()->GetShape());
+      m_solidName.push_back(daug->GetVolume()->GetShape()->GetName());
+      m_color.push_back(color);
+      if(isVisDaughter){
+        m_visible.push_back(bb->IsVisible());
+      }
+      else{
+        m_visible.push_back(false);
+      }
 
-      std::cout << __LINE__ << " vol: " << daug->GetVolume()->GetName() << " mother: " << daug->GetMotherVolume()->GetName() << std::endl;
-      std::cout << __LINE__ << " solid: " << daug->GetVolume()->GetShape()->GetName() << " type:" << daug->GetVolume()->GetShape()->IsA()<<std::endl;
-
-    } else {
+      std::cout << __LINE__ << " vol:" << daug->GetVolume()->GetName()
+                << " mother:" << daug->GetMotherVolume()->GetName()
+                << " solid:" << daug->GetVolume()->GetShape()->GetName()
+                << " type:" << daug->GetVolume()->GetShape()->IsA()
+                << " volname:" << daug->GetVolume()->GetName()
+                << " visiable:" << bb->IsVisible()
+                << " visDaughter:" << bb->IsVisDaughters()
+                << " lineColor:" << bb->GetLineColor()
+                << " FillColor:" << bb->GetFillColor()
+                << " ,r g b " << color->GetRed() << " " << color->GetGreen() << " " << color->GetBlue()
+                << " alpha:" << 1 - int(bb->GetTransparency()) / 100.0
+                << std::endl;
+    }
+    else
+    {
       getVolSolid(daug);
     }
   }
@@ -120,20 +160,28 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
   {
     return false;
   }
-  // std::cout << __LINE__ << " " << 
-  // m_world.volume()->GetNode(0)->GetVolume()->GetName() << " " << 
+  // std::cout << __LINE__ << " " <<
+  // m_world.volume()->GetNode(0)->GetVolume()->GetName() << " " <<
   // m_world.volume()->GetNode(1)->GetVolume()->GetName() << std::endl;
-  
 
   // Assign legal and unique names to each used physical volume, logical volume and solid
   getDets(m_world);
-  getVolSolid( &*(m_world.placement()));
+  getVolSolid(&*(m_world.placement()));
+  std::cout << " m_placedVol size " << m_placedVol.size() << std::endl;
+  for (size_t i = 0; i < m_placedVol.size(); i++)
+  {
+    std::cout << " $$$  phvol:" << m_placedVolName[i] << " vol:" << m_volName[i]
+              << "solid:" << m_solidName[i] << " childNum:" << m_volChildrenNum[i]
+              << " color:argb:" << m_color[i]->GetAlpha() << " " << m_color[i]->GetRed() << " " << m_color[i]->GetGreen() << " " << m_color[i]->GetBlue()
+              << " visiable:" << m_visible[i]
+              << std::endl;
+  }
   // for(auto node : m_placedVol){
   //   // std::cout << node->GetVolume()->GetName() << std::endl;
 
   // }
 
-std:: cout << "***********************" << std::endl;
+  std::cout << "***********************" << std::endl;
 
   // Assign new name if duplicate
   for (size_t i = 0; i < m_det.size(); i++)
@@ -144,7 +192,7 @@ std:: cout << "***********************" << std::endl;
   }
   for (size_t i = 0; i < m_vol.size(); i++)
   {
-    string detVolName = m_volName[i]; 
+    string detVolName = m_volName[i];
     string detSolidName = m_solidName[i];
 
     m_volName = assignName(m_volName, detVolName, i);
@@ -155,7 +203,7 @@ std:: cout << "***********************" << std::endl;
   // countEntities(m_world);
   unsigned int geometryCount = m_solid.size();
   unsigned int materialCount = m_vol.size();
-  unsigned int modelCount = m_placedVol.size();   // wrong 
+  unsigned int modelCount = m_placedVol.size(); // wrong
   // Open the output file
   if (outputFilename.length() > 0)
   {
@@ -176,15 +224,15 @@ std:: cout << "***********************" << std::endl;
   // Write all solids as Geometry nodes (replicas are written later).
   // Write all logical volumes as Material nodes (color information).
   // Write all physical and logical volumes as Model nodes (with replica-solids treated here).
-  m_PVID = new std::vector<unsigned long long>(m_det.size(), 0x0000010000000000LL);
-  m_LVID = new std::vector<unsigned long long>(m_vol.size(), 0x000000C000000000LL);
-  m_SolidID = new std::vector<unsigned long long>(m_solid.size(), 0x0000008000000000LL);
-  m_MatID = new std::vector<unsigned long long>(m_vol.size(), 0x0000004000000000LL);
-  m_Visible = new std::vector<bool>(m_vol.size(), false);
+  const unsigned long long NN = m_vol.size();
+  m_PVID = new std::vector<unsigned long long>(NN, 0x0000010000000000LL);
+  m_LVID = new std::vector<unsigned long long>(NN, 0x000000C000000000LL);
+  m_SolidID = new std::vector<unsigned long long>(NN, 0x0000008000000000LL);
+  m_MatID = new std::vector<unsigned long long>(NN, 0x0000004000000000LL);
+  // m_Visible = new std::vector<bool>(m_vol.size(), false);
 
   m_File << "Objects:  {" << std::endl;
-  // index=0 is the world, 
-
+  // index=0 is the world,
 
   for (unsigned int solidIndex = 0; solidIndex < m_solid.size(); ++solidIndex)
   {
@@ -207,12 +255,12 @@ std:: cout << "***********************" << std::endl;
     // if (m_volName[lvIndex].length() > 0) {
     // if (!(*m_LVUnique)[lvIndex])
     std::cout << __LINE__ << " materials_childVol_index: " << lvIndex << std::endl;
-    // writeMaterialNode(lvIndex, m_volName[lvIndex]);
+    writeMaterialNode(lvIndex, m_volName[lvIndex]);
 
     // }
   }
 
-  for (unsigned int pvIndex = 0; pvIndex < m_det.size(); ++pvIndex)
+  for (unsigned int pvIndex = 0; pvIndex < NN; ++pvIndex)
   {
     (*m_PVID)[pvIndex] += 0x0000000001000000LL * pvIndex;
   }
@@ -230,7 +278,7 @@ std:: cout << "***********************" << std::endl;
   m_File << "}" << std::endl
          << std::endl;
 
-  // Recursively write the connections among the solid and logical/physical volume elements  
+  // Recursively write the connections among the solid and logical/physical volume elements
   m_PVCount = new std::vector<unsigned int>(m_detName.size(), 0);
   m_LVCount = new std::vector<unsigned int>(m_volName.size(), 0);
   m_SolidCount = new std::vector<unsigned int>(m_solidName.size(), 0);
@@ -242,7 +290,12 @@ std:: cout << "***********************" << std::endl;
     unsigned long long pvID = (*m_PVID)[pvIndex];
     std::string pvName = m_placedVolName[pvIndex];
 
-    writePVToParentPV(m_detName[pvIndexDaughter], pvName, pvIDDaughter, pvID);
+    TGeoVolume *mother = m_placedVol[i]->GetMotherVolume();
+    double index = std::find(m_vol.begin(), m_vol.end(), mother) - m_vol.begin();
+    std::string mothername = m_volName[index];
+    unsigned long long lvID = (*m_LVID)[index];
+
+    writePVToParentPV(pvName, mothername, pvID, lvID);
   }
   for (unsigned int i = 0; i < m_solid.size(); i++)
   {
@@ -253,7 +306,8 @@ std:: cout << "***********************" << std::endl;
     unsigned long long solidID = (*m_PVID)[i];
     std::string solidName = m_solidName[i];
 
-    writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID, solidID);
+    // writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID, solidID);
+    // writeSolidToLV(lvName, solidName, true, matID, lvID, solidID);
   }
   for (unsigned int i = 0; i < m_vol.size(); i++)
   {
@@ -264,9 +318,8 @@ std:: cout << "***********************" << std::endl;
     unsigned long long pvID = (*m_PVID)[pvIndex];
     std::string pvName = m_placedVolName[pvIndex];
 
-     writeLVToPV(pvName, lvName, pvID, lvID);
+    writeLVToPV(pvName, lvName, pvID, lvID);
   }
-
 
   int pvIndex = std::find(m_det.begin(), m_det.end(), m_world) - m_det.begin();
   m_File << "\t; Physical volume Model::" << m_world.name() << " to Model::RootNode" << std::endl
@@ -304,28 +357,34 @@ void dd4hep2FBXWriter::addConnections(DetElement physVol, int replica)
   std::string lvName = m_volName[lvIndex];
   Children mdetChildren = physVol.children();
   // for (long unsigned int daughter = 0; daughter < mdetChildren.size(); ++daughter) {
-  for (const auto& [name, physVolDaughter] : mdetChildren) {
-      // DetElement physVolDaughter = mdetChildren.at(daughter).second ;// ->GetDaughter(daughter);
-      int pvIndexDaughter = std::find(m_det.begin(), m_det.end(), physVolDaughter) - m_det.begin();
-      unsigned long long pvIDDaughter = (*m_PVID)[pvIndexDaughter];
-      unsigned int pvCountDaughter = physVolDaughter.volume()->GetNdaughters();
-      // multiple phyVols in one logicalVol
-      for (int j = 0; j < pvCountDaughter + 1; ++j) {
-          //   if (m_UsePrototypes) {
-          if ((replica == 0) && (j == 0) && (lvCount == 0) && (pvCountDaughter == 0)) {
-              if (mdetChildren.size() != 0) {
-                  writePVToParentPV(m_detName[pvIndexDaughter], pvName, pvIDDaughter, pvID);
-              } else {
-                  writePVToParentLV(m_detName[pvIndexDaughter], lvName, pvIDDaughter, lvID);
-              }
-          }
-          // } else {
-          //   //writePVToParentLV(m_detName[pvIndexDaughter], lvName, pvIDDaughter+0x00010000*j+pvCountDaughter, lvID+0x00010000*replica+lvCount);
-          //   writePVToParentPV(m_detName[pvIndexDaughter], pvName, pvIDDaughter + 0x00010000 * j + pvCountDaughter,
-          //                     pvID + 0x00010000 * replica + pvCount);
-          // }
-          addConnections(physVolDaughter, j);
+  for (const auto &[name, physVolDaughter] : mdetChildren)
+  {
+    // DetElement physVolDaughter = mdetChildren.at(daughter).second ;// ->GetDaughter(daughter);
+    int pvIndexDaughter = std::find(m_det.begin(), m_det.end(), physVolDaughter) - m_det.begin();
+    unsigned long long pvIDDaughter = (*m_PVID)[pvIndexDaughter];
+    unsigned int pvCountDaughter = physVolDaughter.volume()->GetNdaughters();
+    // multiple phyVols in one logicalVol
+    for (int j = 0; j < pvCountDaughter + 1; ++j)
+    {
+      //   if (m_UsePrototypes) {
+      if ((replica == 0) && (j == 0) && (lvCount == 0) && (pvCountDaughter == 0))
+      {
+        if (mdetChildren.size() != 0)
+        {
+          writePVToParentPV(m_detName[pvIndexDaughter], pvName, pvIDDaughter, pvID);
+        }
+        else
+        {
+          writePVToParentLV(m_detName[pvIndexDaughter], lvName, pvIDDaughter, lvID);
+        }
       }
+      // } else {
+      //   //writePVToParentLV(m_detName[pvIndexDaughter], lvName, pvIDDaughter+0x00010000*j+pvCountDaughter, lvID+0x00010000*replica+lvCount);
+      //   writePVToParentPV(m_detName[pvIndexDaughter], pvName, pvIDDaughter + 0x00010000 * j + pvCountDaughter,
+      //                     pvID + 0x00010000 * replica + pvCount);
+      // }
+      addConnections(physVolDaughter, j);
+    }
   }
 
   // Write the Geometry-LogVolModel, Material-LogVolModel and PhysVolModel-LogVolModel
@@ -414,7 +473,7 @@ void dd4hep2FBXWriter::addConnections(DetElement physVol, int replica)
     //     }
     //     else
     //     {
-          writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID, solidID);
+    writeSolidToLV(lvName, solidName, m_visible[lvIndex], matID, lvID, solidID);
     //     }
     //   }
     //   if (pvCount == 0)
@@ -425,11 +484,10 @@ void dd4hep2FBXWriter::addConnections(DetElement physVol, int replica)
     // }
     // else
     {
-      // writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID+lvCount, solidID);
-      // writeLVToPV(pvName, lvName, pvID+pvCount, lvID+lvCount);
-      // writeSolidToPV(pvName, solidName, (*m_Visible)[lvIndex], matID, pvID + pvCount, solidID);
-    }
-    (*m_LVCount)[lvIndex]++;
+        // writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID+lvCount, solidID);
+        // writeLVToPV(pvName, lvName, pvID+pvCount, lvID+lvCount);
+        // writeSolidToPV(pvName, solidName, (*m_Visible)[lvIndex], matID, pvID + pvCount, solidID);
+    }(*m_LVCount)[lvIndex]++;
     (*m_PVCount)[pvIndex]++;
   }
 }
@@ -450,10 +508,10 @@ void dd4hep2FBXWriter::addModels(TGeoNode *node, int replica, unsigned long long
   //   // if (lvCount == 0)
   //   {
   //     // if (!(*m_LVUnique)[lvIndex])
-      writeLVModelNode(node->GetVolume(), lvName, lvID);
+  writeLVModelNode(node->GetVolume(), lvName, lvID);
   //   }
   // if (pvCount == 0)
-      writePVModelNode(node, pvName, pvID);
+  writePVModelNode(node, pvName, pvID);
   // }
   // else
   // {
@@ -485,7 +543,7 @@ void dd4hep2FBXWriter::writePVModelNode(TGeoNode *node, const std::string pvName
   // G4RotationMatrix* rot = physVol->GetObjectRotation();
   // G4ThreeVector move = physVol->GetObjectTranslation();
   // FBX uses the Tait-Bryan version of the Euler angles (X then Y then Z rotation)
-  TGeoRotation *mat = (TGeoRotation*)node->GetMatrix();
+  TGeoRotation *mat = (TGeoRotation *)node->GetMatrix();
   double phi = 0, theta = 0, psi = 0;
   mat->GetAngles(phi, theta, psi); // all angles in degrees
 
@@ -519,11 +577,14 @@ void dd4hep2FBXWriter::writePVModelNode(TGeoNode *node, const std::string pvName
 void dd4hep2FBXWriter::writeMaterialNode(int lvIndex, const std::string matName)
 {
   // G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-  Volume logVol = m_vol[lvIndex];
+  // Volume logVol = m_vol[lvIndex];
   unsigned long long matID = (*m_MatID)[lvIndex];
-  float alpha = 0.5, red = 0, green = 1, blue = 0;
+  float alpha = m_color[i]->GetAlpha(),
+        red = m_color[i]->GetRed(),
+        green = m_color[i]->GetGreen(),
+        blue = m_color[i]->GetBlue();
 
-  bool visible = true;
+  bool visible = m_visible[lvIndex];
   string materialName = logVol.material().name();
   // Hide volumes that contain vacuum, air or gas
   // if (materialName == "Vacuum")
@@ -531,23 +592,7 @@ void dd4hep2FBXWriter::writeMaterialNode(int lvIndex, const std::string matName)
   // if (materialName == "G4_AIR")
   //   visible = false;
   // Hide volumes that are invisible in the GEANT4 geometry
-  const VisAttr visAttr = logVol.visAttributes();
-  if (!(visAttr == VisAttr()))
-  {
-    logVol.visAttributes().argb(alpha, red, green, blue);
-    if (!(visAttr.visible()))
-      {
-        visible = false;
-      }
-  }
-  else
-  {
-    visible = false;
-  }
-  if (logVol.isSensitive())
-    visible = true;
-  (*m_Visible)[lvIndex] = visible;
-  m_File << "\t; Color for LogVol " << logVol.name() << std::endl
+  m_File << "\t; Color for LogVol " << m_volName[lvIndex] << std::endl
          << "\tMaterial: " << matID << ", \"Material::" << matName << "\", \"\" {" << std::endl
          << "\t\tVersion: 102" << std::endl
          << "\t\tProperties70:  {" << std::endl
@@ -559,24 +604,24 @@ void dd4hep2FBXWriter::writeMaterialNode(int lvIndex, const std::string matName)
          << "\t}" << std::endl;
 }
 
-double GetCutZ	(	const CLHEP::Hep3Vector & p	, const CLHEP::Hep3Vector fLowNorm, const CLHEP::Hep3Vector fHighNorm, double fDz)
+double GetCutZ(const CLHEP::Hep3Vector &p, const CLHEP::Hep3Vector fLowNorm, const CLHEP::Hep3Vector fHighNorm, double fDz)
 {
- double newz = p.z();  // p.z() should be either +fDz or -fDz
- if (p.z()<0)
- {
-   if(fLowNorm.z()!=0.)
-   {
-      newz = -fDz-(p.x()*fLowNorm.x()+p.y()*fLowNorm.y())/fLowNorm.z();
-   }
- }
- else
- {
-   if(fHighNorm.z()!=0.)
-   {
-      newz = fDz-(p.x()*fHighNorm.x()+p.y()*fHighNorm.y())/fHighNorm.z();
-   }
- }
- return newz;
+  double newz = p.z(); // p.z() should be either +fDz or -fDz
+  if (p.z() < 0)
+  {
+    if (fLowNorm.z() != 0.)
+    {
+      newz = -fDz - (p.x() * fLowNorm.x() + p.y() * fLowNorm.y()) / fLowNorm.z();
+    }
+  }
+  else
+  {
+    if (fHighNorm.z() != 0.)
+    {
+      newz = fDz - (p.x() * fHighNorm.x() + p.y() * fHighNorm.y()) / fHighNorm.z();
+    }
+  }
+  return newz;
 }
 GPolyhedron *getPolyhedron(Solid solid)
 {
@@ -591,7 +636,6 @@ GPolyhedron *getPolyhedron(Solid solid)
     Scale tmp(solid);
     double scale_x = tmp.scale_x();
     // return new GPolyhedronCons(tmp.rMin1(), tmp.rMax1(), tmp.rMin2(), tmp.rMax2(), tmp.dZ(), 0, twopi);
-
   }
   else if (solidtype == "TGeoBBox")
   {
@@ -609,21 +653,22 @@ GPolyhedron *getPolyhedron(Solid solid)
   {
     // https://apc.u-paris.fr/~franco/g4doxy/html/G4Polycone_8cc-source.html#l00898
     Polycone tmp(solid);
-    const int nz=tmp.zPlaneZ().size();
+    const int nz = tmp.zPlaneZ().size();
     double Z_values[nz];
     double Rmin[nz];
-    double Rmax[nz]; 
-    for(int i=0;i<nz;i++){
+    double Rmax[nz];
+    for (int i = 0; i < nz; i++)
+    {
       Z_values[i] = tmp.z(i);
       Rmin[i] = tmp.rMin(i);
       Rmax[i] = tmp.rMax(i);
     }
-    return new GPolyhedronPcon( tmp.startPhi(), //original_parameters->Start_angle,
-                                tmp.deltaPhi(),// original_parameters->Opening_angle,
-                                nz,// original_parameters->Num_z_planes,
-                                Z_values, // original_parameters->Z_values,
-                                Rmin, // original_parameters->Rmin,
-                                Rmax); // original_parameters->Rmax );
+    return new GPolyhedronPcon(tmp.startPhi(), // original_parameters->Start_angle,
+                               tmp.deltaPhi(), // original_parameters->Opening_angle,
+                               nz,             // original_parameters->Num_z_planes,
+                               Z_values,       // original_parameters->Z_values,
+                               Rmin,           // original_parameters->Rmin,
+                               Rmax);          // original_parameters->Rmax );
   }
   else if (solidtype == "TGeoConeSeg") // ConeSegment
   {
@@ -633,7 +678,7 @@ GPolyhedron *getPolyhedron(Solid solid)
   else if (solidtype == "TGeoTubeSeg") // Tube___________
   {
     Tube tmp(solid);
-    return new GPolyhedronTubs(tmp.rMin(), tmp.rMax(), tmp.dZ(), tmp.startPhi(), tmp.endPhi()) ;
+    return new GPolyhedronTubs(tmp.rMin(), tmp.rMax(), tmp.dZ(), tmp.startPhi(), tmp.endPhi());
   }
   else if (solidtype == "TGeoCtub") // CutTube
   {
@@ -641,66 +686,65 @@ GPolyhedron *getPolyhedron(Solid solid)
     CutTube tmp(solid);
     typedef double double3[3];
     typedef int int4[4];
-    double fRMin=tmp.rMin(), fRMax=tmp.rMax(), fDz=tmp.dZ(), fSPhi=tmp.startPhi(), fDPhi=tmp.endPhi();
-    double kCarTolerance=0;      // Cached geometrical tolerance ??
+    double fRMin = tmp.rMin(), fRMax = tmp.rMax(), fDz = tmp.dZ(), fSPhi = tmp.startPhi(), fDPhi = tmp.endPhi();
+    double kCarTolerance = 0; // Cached geometrical tolerance ??
 
-    GPolyhedron *ph  = new GPolyhedron;
-    GPolyhedron *ph1 = new GPolyhedronTubs(fRMin, fRMax, fDz, fSPhi, fDPhi) ; //G4Tubs::CreatePolyhedron();
-    int nn=ph1->GetNoVertices();
-    int nf=ph1->GetNoFacets();
-    double3* xyz = new double3[nn];  // number of nodes 
-    int4*  faces = new int4[nf] ;    // number of faces
-  
-    std::vector<double> lowNormal=tmp.lowNormal() ;
-    std::vector<double> highNormal=tmp.highNormal();
+    GPolyhedron *ph = new GPolyhedron;
+    GPolyhedron *ph1 = new GPolyhedronTubs(fRMin, fRMax, fDz, fSPhi, fDPhi); // G4Tubs::CreatePolyhedron();
+    int nn = ph1->GetNoVertices();
+    int nf = ph1->GetNoFacets();
+    double3 *xyz = new double3[nn]; // number of nodes
+    int4 *faces = new int4[nf];     // number of faces
+
+    std::vector<double> lowNormal = tmp.lowNormal();
+    std::vector<double> highNormal = tmp.highNormal();
     const CLHEP::Hep3Vector fLowNorm(lowNormal[0], lowNormal[1], lowNormal[2]);
     const CLHEP::Hep3Vector fHighNorm(highNormal[0], highNormal[1], highNormal[2]);
-    for(int i=0;i<nn;i++)
+    for (int i = 0; i < nn; i++)
     {
-      xyz[i][0]=ph1->GetVertex(i+1).x();
-      xyz[i][1]=ph1->GetVertex(i+1).y();
-      double tmpZ=ph1->GetVertex(i+1).z();
-      if(tmpZ>=fDz-kCarTolerance)
+      xyz[i][0] = ph1->GetVertex(i + 1).x();
+      xyz[i][1] = ph1->GetVertex(i + 1).y();
+      double tmpZ = ph1->GetVertex(i + 1).z();
+      if (tmpZ >= fDz - kCarTolerance)
       {
-        xyz[i][2]=GetCutZ(CLHEP::Hep3Vector(xyz[i][0],xyz[i][1],fDz), fLowNorm, fHighNorm, fDz);
+        xyz[i][2] = GetCutZ(CLHEP::Hep3Vector(xyz[i][0], xyz[i][1], fDz), fLowNorm, fHighNorm, fDz);
       }
-      else if(tmpZ<=-fDz+kCarTolerance)
+      else if (tmpZ <= -fDz + kCarTolerance)
       {
-        xyz[i][2]=GetCutZ(CLHEP::Hep3Vector(xyz[i][0],xyz[i][1],-fDz), fLowNorm, fHighNorm, fDz);
+        xyz[i][2] = GetCutZ(CLHEP::Hep3Vector(xyz[i][0], xyz[i][1], -fDz), fLowNorm, fHighNorm, fDz);
       }
       else
       {
-        xyz[i][2]=tmpZ;
+        xyz[i][2] = tmpZ;
       }
     }
     int iNodes[4];
-    int *iEdge=0;
+    int *iEdge = 0;
     int n;
-    for(int i=0;i<nf;i++)
+    for (int i = 0; i < nf; i++)
     {
-      ph1->GetFacet(i+1,n,iNodes,iEdge);
-      for(int k=0;k<n;k++)
+      ph1->GetFacet(i + 1, n, iNodes, iEdge);
+      for (int k = 0; k < n; k++)
       {
-        faces[i][k]=iNodes[k];
+        faces[i][k] = iNodes[k];
       }
-      for(int k=n;k<4;k++)
+      for (int k = n; k < 4; k++)
       {
-        faces[i][k]=0;
+        faces[i][k] = 0;
       }
     }
-    ph->createPolyhedron(nn,nf,xyz,faces);
-  
-    delete [] xyz;
-    delete [] faces;
+    ph->createPolyhedron(nn, nf, xyz, faces);
+
+    delete[] xyz;
+    delete[] faces;
     delete ph1;
-  
+
     return ph;
-   
   }
   else if (solidtype == "TGeoEltu") // EllipticalTube
   {
     EllipticalTube tmp(solid);
-    GPolyhedronTube* eTube = new GPolyhedronTube(0.,1., tmp.dZ());
+    GPolyhedronTube *eTube = new GPolyhedronTube(0., 1., tmp.dZ());
     // apply non-uniform scaling...
     // undefined reference to `HepGeom::operator*(HepGeom::Transform3D const&, HepGeom::Vector3D<double> const&)'
     // eTube->Transform(HepGeom::Scale3D(tmp.a(), tmp.b(),1.));
@@ -715,8 +759,8 @@ GPolyhedron *getPolyhedron(Solid solid)
   {
     Trap tmp(solid);
     return new GPolyhedronTrap(tmp.dZ(), tmp.theta(), tmp.phi(),
-                                tmp.high1(), tmp.bottomLow1(), tmp.topLow1(), tmp.alpha1(),
-                                tmp.high2(), tmp.bottomLow2(), tmp.topLow2(), tmp.alpha2());
+                               tmp.high1(), tmp.bottomLow1(), tmp.topLow1(), tmp.alpha1(),
+                               tmp.high2(), tmp.bottomLow2(), tmp.topLow2(), tmp.alpha2());
   }
   else if (solidtype == "TGeoTrd1") // Trd1
   {
@@ -734,12 +778,12 @@ GPolyhedron *getPolyhedron(Solid solid)
     return new GPolyhedronTorus(tmp.rMin(), tmp.rMax(), tmp.r(), tmp.startPhi(), tmp.deltaPhi());
   }
   else if (solidtype == "TGeoSphere") // Sphere
-  { 
+  {
     Sphere tmp(solid);
     return new GPolyhedronSphere(tmp.rMin(), tmp.rMax(), tmp.startPhi(), tmp.endPhi(), tmp.startTheta(), tmp.endTheta());
   }
-  else if (solidtype == "TGeoParaboloid") // Paraboloid 
-  { 
+  else if (solidtype == "TGeoParaboloid") // Paraboloid
+  {
     Paraboloid tmp(solid);
     return new GPolyhedronParaboloid(tmp.rLow(), tmp.rHigh(), tmp.dZ(), 0., twopi);
   }
@@ -747,7 +791,7 @@ GPolyhedron *getPolyhedron(Solid solid)
   {
     Hyperboloid tmp(solid);
     return new GPolyhedronHype(tmp.rMin(), tmp.rMax(),
-                                tmp.stereoInner(), tmp.stereoOuter(), tmp.dZ());
+                               tmp.stereoInner(), tmp.stereoOuter(), tmp.dZ());
   }
   else if (solidtype == "TGeoPgon") // PolyhedraRegular______
   {
@@ -758,14 +802,13 @@ GPolyhedron *getPolyhedron(Solid solid)
   else if (solidtype == "TGeoXtru") // ExtrudedPolygon
   {
   }
-  else if (solidtype == "TGeoArb8")  // EightPointSolid
+  else if (solidtype == "TGeoArb8") // EightPointSolid
   {
   }
   else if (solidtype == "TGeoTessellated") // TessellatedSolid
   {
     // https://apc.u-paris.fr/~franco/g4doxy/html/classG4TessellatedSolid.html#8f487866dbc90c2fddf520fcc7289359
   }
-
 
   return nullptr;
 }

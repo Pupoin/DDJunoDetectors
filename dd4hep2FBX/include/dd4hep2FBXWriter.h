@@ -16,6 +16,7 @@
 #include <DD4hep/Handle.h>
 #include "XML/Layering.h"
 #include "XML/XML.h"
+#include "TColor.h"
 
 // #include "Math/Vector3D.h"
 // #include "Math/Transform3D.h"
@@ -153,6 +154,9 @@ void getVolSolid(TGeoNode *node);
   std::vector<TGeoNode*> m_placedVol;
   std::vector<double> m_volChildrenNum;
   // std::vector<TGeoVolume*> m_Vol;
+  //! Flag to indicate that the logical volume is visible
+  std::vector<bool> m_visible;
+  std::vector<TColor*> m_color;
 
   //! Modified (legal-character and unique) solid 
   // std::vector<Solid> m_childrenSolid;
@@ -170,8 +174,6 @@ void getVolSolid(TGeoNode *node);
   //! Unique identifiers for solids (Geometry nodes)
   std::vector<unsigned long long>* m_SolidID;
 
-  //! Flag to indicate that the logical volume is visible
-  std::vector<bool>* m_Visible;
 
   //! Count of number of instances of each physical volume
   std::vector<unsigned int>* m_PVCount;

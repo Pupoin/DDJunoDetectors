@@ -151,7 +151,12 @@
         "value": "cpp",
         "style_parser": "cpp",
         "colorf": "cpp",
-        "mesh": "cpp"
+        "mesh": "cpp",
+        "h1": "cpp",
+        "h2": "cpp",
+        "h3": "cpp",
+        "p1": "cpp",
+        "p2": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "cmake.configureOnOpen": true,

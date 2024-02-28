@@ -46,7 +46,7 @@
       </layer>
     </detector>
 
-    <!-- <detector name="SolenoidCoilEnds" type="DD4hep_DiskTracker" reflect="true" insideTrackingVolume="false">
+    <detector name="SolenoidCoilEnds" type="DD4hep_DiskTracker" reflect="true" insideTrackingVolume="false">
       <layer id="1" inner_r="SolenoidBarrelInnerRadius" inner_z="SolenoidBarrelOuterZ" outer_r="SolenoidBarrelOuterRadius" vis="SolenoidCoilEndsVis">
 	<slice material="Steel235" thickness="SolenoidEndcapCryostatThickness" />
       </layer>
@@ -69,7 +69,7 @@
       <zplane rmin="HcalEndcap_rmin + 1.0*cm"
 	      rmax="MuonEndcap_rmin - 1.0*cm"
 	      z="-MuonEndcap_zmax"/>
-    </detector> -->
+    </detector>
   </detectors>
 
 </lccdd>

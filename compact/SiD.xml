@@ -62,8 +62,8 @@
   <include ref="SiD/SiD_Materials.xml"/>
 
   <comment>Tracking detectors</comment>
-  <!-- <include ref="SiD/SiD_Vertex.xml"/>
-  <include ref="SiD/SiD_Tracker.xml"/> -->
+  <include ref="SiD/SiD_Vertex.xml"/>
+  <include ref="SiD/SiD_Tracker.xml"/>
 
   <comment>Calorimeters</comment>
   <!-- <include ref="SiD/SiD_Ecal.xml"/> -->
@@ -77,8 +77,8 @@
   <!-- <include ref="SiD/SiD_Beampipe.xml"/> -->
   
   <comment>Dead material, supports and magnet</comment>
-  <!-- <include ref="SiD/SiD_Shields.xml"/> -->
-  <include ref="SiD/SiD_Solenoid.xml"/>
+  <!-- <include ref="SiD/SiD_Shields.xml"/>
+  <include ref="SiD/SiD_Solenoid.xml"/> -->
 
   <comment>Magnetic field</comment>
   <!-- <include ref="SiD/SiD_Field.xml"/> -->

@@ -79,7 +79,12 @@ void dd4hep2FBXWriter::getVolSolid(TGeoNode *node)
   TColor *colo = gROOT->GetColor(aa->GetFillColor()); //(bb->GetFillColor());
   colo->SetAlpha(1 - (int(aa->GetTransparency()) / 100.0));
 
-  std::cout << __LINE__ << " volname:" << node->GetName() << "  nodeDaughtersN:" << nodeDaughters
+  string adf=node->GetName();
+  if( adf != "world_volume_1")
+         std::cout << " motherName:" << node->GetMotherVolume()->GetName() << std::endl;
+
+
+  std::cout << __LINE__ << " placedVolname:" << node->GetName() << "  nodeDaughtersN:" << nodeDaughters
             << " volname:" << node->GetVolume()->GetName()
             << " visiable:" << aa->IsVisible()
             << " visDaughter:" << aa->IsVisDaughters()
@@ -170,12 +175,15 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
   std::cout << " m_placedVol size " << m_placedVol.size() << std::endl;
   for (size_t i = 0; i < m_placedVol.size(); i++)
   {
-    std::cout << " $$$  phvol:" << m_placedVolName[i] << " vol:" << m_volName[i]
+    std::cout << "$$$  phvol:" << m_placedVolName[i] << " vol:" << m_volName[i]
               << "solid:" << m_solidName[i] << " childNum:" << m_volChildrenNum[i]
               << " color:argb:" << m_color[i]->GetAlpha() << " " << m_color[i]->GetRed() << " " << m_color[i]->GetGreen() << " " << m_color[i]->GetBlue()
               << " visiable:" << m_visible[i]
               << std::endl;
   }
+
+  // int kk = std::find(m_vol.begin(), m_vol.end(), m_vol[2])-m_vol.begin();
+  // std::cout << __LINE__ << " kk:" << kk << std::endl;
   // for(auto node : m_placedVol){
   //   // std::cout << node->GetVolume()->GetName() << std::endl;
 
@@ -233,7 +241,7 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
 
   m_File << "Objects:  {" << std::endl;
   // index=0 is the world,
-
+  std::cout << " @@ writeGeometryNode " << std::endl;
   for (unsigned int solidIndex = 0; solidIndex < m_solid.size(); ++solidIndex)
   {
     (*m_SolidID)[solidIndex] += 0x0000000001000000LL * solidIndex;
@@ -247,6 +255,7 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
     }
   }
 
+  std::cout << " @@ writeMaterialNode " << std::endl;
   // write materials
   for (unsigned int lvIndex = 0; lvIndex < m_vol.size(); ++lvIndex)
   {
@@ -267,9 +276,8 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
 
   //
 
-  // m_PVCount = new std::vector<unsigned int>(pvStore->size(), 0);
-  // m_LVCount = new std::vector<unsigned int>(lvStore->size(), 0);
-  // m_SolidCount = new std::vector<unsigned int>(solidStore->size(), 0);
+
+  std::cout << " @@ addModels " << std::endl;
   for (unsigned int i = 0; i < m_placedVol.size(); i++)
   {
     // std::cout << __LINE__ << " addmodels " << i << std::endl;
@@ -284,31 +292,42 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
   m_SolidCount = new std::vector<unsigned int>(m_solidName.size(), 0);
   m_File << "Connections:  {" << std::endl;
   // addConnections(m_world, 0);
+
+    std::cout << " @@ addConnections " << std::endl;
+
   for (unsigned int i = 0; i < m_placedVol.size(); i++)
   {
+    if(i==0) continue; // 0 is the world
     double pvIndex = i;
     unsigned long long pvID = (*m_PVID)[pvIndex];
     std::string pvName = m_placedVolName[pvIndex];
 
     TGeoVolume *mother = m_placedVol[i]->GetMotherVolume();
     double index = std::find(m_vol.begin(), m_vol.end(), mother) - m_vol.begin();
+    std::cout << __LINE__ << " index:" << index << " pvName:" << pvName << std::endl;
     std::string mothername = m_volName[index];
-    unsigned long long lvID = (*m_LVID)[index];
+    unsigned long long mPvID = (*m_PVID)[index];
 
-    writePVToParentPV(pvName, mothername, pvID, lvID);
+    writePVToParentPV(pvName, mothername, pvID, mPvID);
   }
+    std::cout << __LINE__ << std::endl;
+
   for (unsigned int i = 0; i < m_solid.size(); i++)
   {
     double lvIndex = i;
     unsigned long long lvID = (*m_LVID)[lvIndex];
     std::string lvName = m_volName[lvIndex];
     // double pvIndex = i;
-    unsigned long long solidID = (*m_PVID)[i];
+    unsigned long long solidID = (*m_SolidID)[i];
     std::string solidName = m_solidName[i];
+    unsigned long long matID = (*m_MatID)[i];
 
-    // writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID, solidID);
+
+    writeSolidToLV(lvName, solidName, m_visible[lvIndex], matID, lvID, solidID);
     // writeSolidToLV(lvName, solidName, true, matID, lvID, solidID);
   }
+    std::cout << __LINE__ << std::endl;
+
   for (unsigned int i = 0; i < m_vol.size(); i++)
   {
     double lvIndex = i;
@@ -320,6 +339,7 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
 
     writeLVToPV(pvName, lvName, pvID, lvID);
   }
+  std::cout << __LINE__ << std::endl;
 
   int pvIndex = std::find(m_det.begin(), m_det.end(), m_world) - m_det.begin();
   m_File << "\t; Physical volume Model::" << m_world.name() << " to Model::RootNode" << std::endl
@@ -394,74 +414,6 @@ void dd4hep2FBXWriter::addConnections(DetElement physVol, int replica)
   unsigned long long solidID = (*m_SolidID)[solidIndex];
   unsigned long long matID = (*m_MatID)[lvIndex];
   std::string solidName = m_solidName[solidIndex];
-  // if (physVol->IsReplicated()) {
-  //   pvName.append("_R");
-  //   pvName.append(std::to_string(replica));
-  //   EAxis axis;
-  //   G4int nReplicas;
-  //   G4double width;
-  //   G4double offset;
-  //   G4bool consuming;
-  //   physVol->GetReplicationData(axis, nReplicas, width, offset, consuming);
-  //   physVol->SetCopyNo(replica);
-  //   G4VPVParameterisation* physParameterisation = physVol->GetParameterisation();
-  //   if (physParameterisation) { // parameterised volume
-  //     G4VSolid* solidReplica = physParameterisation->ComputeSolid(replica, physVol);
-  //     physParameterisation->ComputeTransformation(replica, physVol);
-  //     solidReplica->ComputeDimensions(physParameterisation, replica, physVol);
-  //     if (!(*solidReplica == *solid)) {
-  //       solidName.append("_R");
-  //       solidName.append(std::to_string(replica));
-  //       solidID += 0x00010000 * replica;
-  //     }
-  //     if (m_UsePrototypes && (*solidReplica == *solid)) {
-  //       if ((replica == 0) && (lvCount == 0)) {
-  //         if ((*m_LVUnique)[lvIndex]) { // bypass the singleton logical volume
-  //           writeSolidToPV(pvName, solidName, (*m_Visible)[lvIndex], matID, pvID, solidID);
-  //         } else {
-  //           writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID, solidID);
-  //         }
-  //       }
-  //     } else {
-  //       lvName.append("_R");
-  //       lvName.append(std::to_string(replica));
-  //       if ((*m_LVUnique)[lvIndex]) { // bypass the singleton logical volume
-  //         writeSolidToPV(pvName, solidName, (*m_Visible)[lvIndex], matID, pvID + 0x00010000 * replica + pvCount, solidID);
-  //       } else {
-  //         writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID + 0x00010000 * replica + lvCount, solidID);
-  //       }
-  //     }
-  //     if (!(*m_LVUnique)[lvIndex]) {
-  //       writeLVToPV(pvName, lvName, pvID + 0x00010000 * replica + pvCount, lvID + 0x00010000 * replica + lvCount);
-  //     }
-  //   } else { // plain replicated volume
-  //     if ((axis == kRho) && (solid->GetEntityType() == "G4Tubs")) {
-  //       solidName.append("_R");
-  //       solidName.append(std::to_string(replica));
-  //       solidID += 0x00010000 * replica;
-  //     }
-  //     if (m_UsePrototypes && !((axis == kRho) && (solid->GetEntityType() == "G4Tubs"))) {
-  //       if ((replica == 0) && (lvCount == 0)) {
-  //         if ((*m_LVUnique)[lvIndex]) { // bypass the singleton logical volume
-  //           writeSolidToPV(pvName, solidName, (*m_Visible)[lvIndex], matID, pvID, solidID);
-  //         } else {
-  //           writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID, solidID);
-  //         }
-  //       }
-  //     } else {
-  //       lvName.append("_R");
-  //       lvName.append(std::to_string(replica));
-  //       if ((*m_LVUnique)[lvIndex]) { // bypass the singleton logical volume
-  //         writeSolidToPV(pvName, solidName, (*m_Visible)[lvIndex], matID, pvID + 0x00010000 * replica + pvCount, solidID);
-  //       } else {
-  //         writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID + 0x00010000 * replica + lvCount, solidID);
-  //       }
-  //     }
-  //     if (!(*m_LVUnique)[lvIndex]) {
-  //       writeLVToPV(pvName, lvName, pvID + 0x00010000 * replica + pvCount, lvID + 0x00010000 * replica + lvCount);
-  //     }
-  //   }
-  // } else
   {
     // if (m_UsePrototypes)
     // {
@@ -539,25 +491,16 @@ void dd4hep2FBXWriter::writePVModelNode(TGeoNode *node, const std::string pvName
 {
   TGeoMatrix *matrix = node->GetMatrix();
   const Double_t *tv = matrix->GetTranslation();
+  const Double_t *rot = matrix->GetRotationMatrix();
 
-  // G4RotationMatrix* rot = physVol->GetObjectRotation();
-  // G4ThreeVector move = physVol->GetObjectTranslation();
   // FBX uses the Tait-Bryan version of the Euler angles (X then Y then Z rotation)
-  TGeoRotation *mat = (TGeoRotation *)node->GetMatrix();
-  double phi = 0, theta = 0, psi = 0;
-  mat->GetAngles(phi, theta, psi); // all angles in degrees
-
-  /*// Construct from three Euler angles (in radians).
-  CLHEP::HepRotation *rot = new
-      CLHEP::HepRotation(phi*M_PI/180.0, theta*M_PI/180.0, psi*M_PI/180.0);
-
-  double yaw = std::atan2(rot->yx(), rot->xx()) * 180.0 / M_PI;
+  double yaw = std::atan2(rot[1*3+0], rot[0*3+0]) * 180.0 / M_PI;
   if (fabs(yaw) < 1.0E-12) yaw = 0.0;
-  double pitch = -std::asin(rot->zx()) * 180.0 / M_PI;
+  double pitch = -std::asin(rot[2*3+0]) * 180.0 / M_PI;
   if (fabs(pitch) < 1.0E-12) pitch = 0.0;
-  double roll = std::atan2(rot->zy(), rot->zz()) * 180.0 / M_PI;
+  double roll = std::atan2(rot[2*3+1], rot[2*3+2]) * 180.0 / M_PI;
   if (fabs(roll) < 1.0E-12) roll = 0.0;
-  */
+
   m_File << "\t; PhysVol " << node->GetName();
   // if (physVol->IsReplicated()) {
   //   m_File << " (replicated: copy " << physVol->GetCopyNo() << ")";
@@ -567,7 +510,7 @@ void dd4hep2FBXWriter::writePVModelNode(TGeoNode *node, const std::string pvName
          << "\t\tVersion: 232" << std::endl
          << "\t\tProperties70:  {" << std::endl
          << "\t\t\tP: \"Lcl Translation\", \"Lcl Translation\", \"\", \"A\"," << tv[0] << "," << tv[1] << "," << tv[2] << std::endl
-         << "\t\t\tP: \"Lcl Rotation\", \"Lcl Rotation\", \"\", \"A\"," << phi << "," << theta << "," << psi << std::endl
+         << "\t\t\tP: \"Lcl Rotation\", \"Lcl Rotation\", \"\", \"A\"," << roll << "," << pitch << "," << yaw << std::endl
          << "\t\t}" << std::endl
          << "\t\tShading: T" << std::endl
          << "\t\tCulling: \"CullingOff\"" << std::endl
@@ -579,13 +522,13 @@ void dd4hep2FBXWriter::writeMaterialNode(int lvIndex, const std::string matName)
   // G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
   // Volume logVol = m_vol[lvIndex];
   unsigned long long matID = (*m_MatID)[lvIndex];
-  float alpha = m_color[i]->GetAlpha(),
-        red = m_color[i]->GetRed(),
-        green = m_color[i]->GetGreen(),
-        blue = m_color[i]->GetBlue();
+  float alpha = m_color[lvIndex]->GetAlpha(),
+        red = m_color[lvIndex]->GetRed(),
+        green = m_color[lvIndex]->GetGreen(),
+        blue = m_color[lvIndex]->GetBlue();
 
   bool visible = m_visible[lvIndex];
-  string materialName = logVol.material().name();
+  string materialName = m_vol[lvIndex]->GetMaterial()->GetName(); //  +"'s material";
   // Hide volumes that contain vacuum, air or gas
   // if (materialName == "Vacuum")
   //   visible = false;
@@ -593,7 +536,7 @@ void dd4hep2FBXWriter::writeMaterialNode(int lvIndex, const std::string matName)
   //   visible = false;
   // Hide volumes that are invisible in the GEANT4 geometry
   m_File << "\t; Color for LogVol " << m_volName[lvIndex] << std::endl
-         << "\tMaterial: " << matID << ", \"Material::" << matName << "\", \"\" {" << std::endl
+         << "\tMaterial: " << matID << ", \"Material::" << materialName << "\", \"\" {" << std::endl
          << "\t\tVersion: 102" << std::endl
          << "\t\tProperties70:  {" << std::endl
          << "\t\t\tP: \"ShadingModel\", \"KString\", \"\", \"\", \"phong\"" << std::endl
@@ -675,9 +618,16 @@ GPolyhedron *getPolyhedron(Solid solid)
     ConeSegment tmp(solid);
     return new GPolyhedronCons(tmp.rMin1(), tmp.rMax1(), tmp.rMin2(), tmp.rMax2(), tmp.dZ(), tmp.startPhi(), tmp.endPhi());
   }
-  else if (solidtype == "TGeoTubeSeg") // Tube___________
+  else if (solidtype == "TGeoTubeSeg") // Tube___________, // TwistedTube__________
   {
     Tube tmp(solid);
+    std::cout << __LINE__ << " in solidtype tgeotubeseg:" 
+      <<" rmin:" <<  tmp.rMin()
+      << " rmax:" << tmp.rMax()
+      << " dz:" << tmp.dZ()
+      <<  " startphi:" << tmp.startPhi()
+      << " endphi:" << tmp.endPhi()
+      << std::endl;
     return new GPolyhedronTubs(tmp.rMin(), tmp.rMax(), tmp.dZ(), tmp.startPhi(), tmp.endPhi());
   }
   else if (solidtype == "TGeoCtub") // CutTube
@@ -749,11 +699,6 @@ GPolyhedron *getPolyhedron(Solid solid)
     // undefined reference to `HepGeom::operator*(HepGeom::Transform3D const&, HepGeom::Vector3D<double> const&)'
     // eTube->Transform(HepGeom::Scale3D(tmp.a(), tmp.b(),1.));
     // return  eTube;
-  }
-  else if (solidtype == "TGeoTubeSeg") // TwistedTube__________
-  {
-    // Trap tmp(solid);
-    // return new GPolyhedronTubs(tmp.rMin(), tmp.rMax(), tmp.dZ(), tmp.startPhi(), tmp.endPhi()) ;
   }
   else if (solidtype == "TGeoTrap") // Trap
   {

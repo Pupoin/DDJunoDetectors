@@ -66,11 +66,25 @@
 #include "HepPolyhedron.h"
 // #include "G4PhysicalConstants.hh"
 #include <CLHEP/Geometry/Vector3D.h> //#include "HepGeom::Vector3D<double>.hh"
-typedef HepGeom::Vector3D<double> G4Vector3D;
 
 #include <cstdlib>  // Required on some compilers for std::abs(int) ...
 #include <cmath>
 #include <algorithm>
+
+#include "TMatrixD.h"
+#include "TVectorD.h"
+#include "TMath.h"
+
+#include "Math/Point3D.h"
+#include "Math/Vector3D.h"
+#include "Math/Vector4D.h"
+#include "Math/GenVector/Rotation3D.h"
+#include "Math/GenVector/EulerAngles.h"
+#include "Math/GenVector/RotationX.h"
+#include "Math/GenVector/RotationY.h"
+#include "Math/GenVector/RotationZ.h"
+#include "Math/GenVector/RotationZYX.h"
+#include "Math/GenVector/Transform3D.h"
 
 using CLHEP::perMillion;
 using CLHEP::deg;
@@ -1210,7 +1224,7 @@ void HepPolyhedron::InvertFacets()
   }
 }
 
-HepPolyhedron & HepPolyhedron::Transform(const HepGeom::Transform3D &t)
+HepPolyhedron & HepPolyhedron::Transform(const ROOT::Math::Transform3D &t)
 /***********************************************************************
  *                                                                     *
  * Name: HepPolyhedron::Transform                    Date:    01.12.99  *
@@ -1221,16 +1235,26 @@ HepPolyhedron & HepPolyhedron::Transform(const HepGeom::Transform3D &t)
  ***********************************************************************/
 {
   if (nvert > 0) {
-    for (int i=1; i<=nvert; i++) { pV[i] = t * pV[i]; }
+    ROOT::Math::XYZVector pv_copy;
+    ROOT::Math::XYZVector tmp;
+    for (int i = 1; i <= nvert; i++)
+    {
+      pv_copy = ROOT::Math::XYZVector(pV[i].x(), pV[i].y(), pV[i].z());
+      tmp = t * pv_copy;
+
+      pV[i].set(tmp.x(), tmp.y(), tmp.z());
+    }
 
     //  C H E C K   D E T E R M I N A N T   A N D
     //  I N V E R T   F A C E T S   I F   I T   I S   N E G A T I V E
 
-    HepGeom::Vector3D<double> d = t * HepGeom::Vector3D<double>(0,0,0);
-    HepGeom::Vector3D<double> x = t * HepGeom::Vector3D<double>(1,0,0) - d;
-    HepGeom::Vector3D<double> y = t * HepGeom::Vector3D<double>(0,1,0) - d;
-    HepGeom::Vector3D<double> z = t * HepGeom::Vector3D<double>(0,0,1) - d;
-    if ((x.cross(y))*z < 0) InvertFacets();
+    ROOT::Math::XYZVector d = t * ROOT::Math::XYZVector(0,0,0);
+    ROOT::Math::XYZVector x = t * ROOT::Math::XYZVector(1,0,0) - d;
+    ROOT::Math::XYZVector y = t * ROOT::Math::XYZVector(0,1,0) - d;
+    ROOT::Math::XYZVector z = t * ROOT::Math::XYZVector(0,0,1) - d;
+    // auto a=x.Cross(y);
+    // std::cout 
+    if ((x.Cross(y)).Dot(z) < 0) InvertFacets();
   }
   return *this;
 }

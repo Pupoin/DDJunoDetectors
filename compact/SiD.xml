@@ -62,7 +62,7 @@
   <include ref="SiD/SiD_Materials.xml"/>
 
   <comment>Tracking detectors</comment>
-  <include ref="SiD/SiD_Vertex.xml"/>
+  <!-- <include ref="SiD/SiD_Vertex.xml"/> -->
   <include ref="SiD/SiD_Tracker.xml"/>
 
   <comment>Calorimeters</comment>

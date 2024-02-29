@@ -25,13 +25,13 @@ if(TARGET XercesC::XercesC)
   SET(OPT_XERCESC XercesC::XercesC)
 endif()
 
-dd4hep_add_plugin(DDDetectors SOURCES src/*.cpp
+dd4hep_add_plugin(mmDDDetectors SOURCES src/*.cpp
   USES DD4hep::DDCore DD4hep::DDRec ROOT::Core ROOT::Geom ROOT::GenVector ${OPT_XERCESC}
   )
-install(TARGETS DDDetectors LIBRARY DESTINATION lib)
+install(TARGETS mmDDDetectors LIBRARY DESTINATION lib)
 install(DIRECTORY compact DESTINATION examples/ClientTests)
 #-----------------------------------------------------------------------------------
-dd4hep_configure_scripts(DDDetectors DEFAULT_SETUP WITH_TESTS)
+dd4hep_configure_scripts(mmDDDetectors DEFAULT_SETUP WITH_TESTS)
 
 #***  Testing  *********************************************************************
 foreach (test simpletttest_ILD)

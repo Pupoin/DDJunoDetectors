@@ -81,15 +81,7 @@ static Ref_t create_detector(Detector& description, xml_h e, SensitiveDetector s
   pv = description.pickMotherVolume(sdet).placeVolume(assembly);
   pv.addPhysVolID("system", x_det.id());      // Set the subdetector system ID.
   sdet.setPlacement(pv);
-//////////////////////////////////////////// test ////////////////////////////////////////////////////////////////////////////////////////
-
-// assembly->
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   return sdet;
 }
 
 DECLARE_DETELEMENT(DD4hep_DiskTracker,create_detector)
-DECLARE_DEPRECATED_DETELEMENT(DiskTracker,create_detector)

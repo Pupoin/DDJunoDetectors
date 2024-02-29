@@ -156,7 +156,12 @@
         "h2": "cpp",
         "h3": "cpp",
         "p1": "cpp",
-        "p2": "cpp"
+        "p2": "cpp",
+        "begend": "cpp",
+        "member_writer": "cpp",
+        "line_style": "cpp",
+        "rgba": "cpp",
+        "text_style": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "cmake.configureOnOpen": true,

@@ -190,7 +190,7 @@
 #include <CLHEP/Geometry/Point3D.h>  //#include "HepGeom::Point3D<double>.hh"
 #include <CLHEP/Geometry/Normal3D.h> //#include "HepGeom::Normal3D<double>.hh"
 #include <CLHEP/Geometry/Transform3D.h> //#include "HepGeom::Transform3D.hh"
-
+#include "Math/GenVector/Transform3D.h"
 // typedef CLHEP::Hep2Vector G4TwoVector;
 // typedef HepGeom::Point3D<double> G4Point3D;
 // typedef HepGeom::Normal3D<double> G4Normal3D;
@@ -299,7 +299,7 @@ class HepPolyhedron {
   int GetNoFacets() const { return nface; }
 
   // Transform the polyhedron
-  HepPolyhedron & Transform(const HepGeom::Transform3D & t);
+  HepPolyhedron & Transform(const ROOT::Math::Transform3D & t);
 
   // Get next vertex index of the quadrilateral
   bool GetNextVertexIndex(int & index, int & edgeFlag) const;

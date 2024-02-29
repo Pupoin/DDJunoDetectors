@@ -25,7 +25,7 @@
 #include <CLHEP/Geometry/Transform3D.h>
 #include "TROOT.h"
 // #include "Math/Vector3D.h"
-// #include "Math/Transform3D.h"
+#include "Math/Transform3D.h"
 #include <iomanip>
 #include <typeinfo>
 #include <CLHEP/Geometry/Normal3D.h> //#include "HepGeom::Normal3D<double>.hh"
@@ -88,10 +88,9 @@ void dd4hep2FBXWriter::getVolSolid(TGeoNode *node)
             << " volname:" << node->GetVolume()->GetName()
             << " visiable:" << aa->IsVisible()
             << " visDaughter:" << aa->IsVisDaughters()
-            << " lineColor:" << aa->GetLineColor()
+            // << " lineColor:" << aa->GetLineColor()
             << " FillColor:" << aa->GetFillColor()
-            << " ,r g b " << colo->GetRed() << " " << colo->GetGreen() << " " << colo->GetBlue()
-            << " alpha:" << 1 - int(aa->GetTransparency()) / 100.0
+            << " a,r g b " << 1 - int(aa->GetTransparency()) / 100.0 << " " << colo->GetRed() << " " << colo->GetGreen() << " " << colo->GetBlue()
             << std::endl;
 
   m_placedVol.push_back(node);
@@ -103,6 +102,7 @@ void dd4hep2FBXWriter::getVolSolid(TGeoNode *node)
   m_solidName.push_back(node->GetVolume()->GetShape()->GetName());
   m_color.push_back(colo);
   m_visible.push_back(aa->IsVisible());
+  m_assembly.push_back(aa->IsAssembly());
 
   bool isVisDaughter = node->GetVolume()->IsVisDaughters();
   for (int i = 0; i < nodeDaughters; i++)
@@ -122,6 +122,8 @@ void dd4hep2FBXWriter::getVolSolid(TGeoNode *node)
       m_solid.push_back(daug->GetVolume()->GetShape());
       m_solidName.push_back(daug->GetVolume()->GetShape()->GetName());
       m_color.push_back(color);
+      m_assembly.push_back(bb->IsAssembly());
+
       if(isVisDaughter){
         m_visible.push_back(bb->IsVisible());
       }
@@ -132,14 +134,13 @@ void dd4hep2FBXWriter::getVolSolid(TGeoNode *node)
       std::cout << __LINE__ << " vol:" << daug->GetVolume()->GetName()
                 << " mother:" << daug->GetMotherVolume()->GetName()
                 << " solid:" << daug->GetVolume()->GetShape()->GetName()
-                << " type:" << daug->GetVolume()->GetShape()->IsA()
+                // << " type:" << daug->GetVolume()->GetShape()->IsA()
                 << " volname:" << daug->GetVolume()->GetName()
                 << " visiable:" << bb->IsVisible()
                 << " visDaughter:" << bb->IsVisDaughters()
-                << " lineColor:" << bb->GetLineColor()
+                // << " lineColor:" << bb->GetLineColor()
                 << " FillColor:" << bb->GetFillColor()
-                << " ,r g b " << color->GetRed() << " " << color->GetGreen() << " " << color->GetBlue()
-                << " alpha:" << 1 - int(bb->GetTransparency()) / 100.0
+                << " a,r g b " << 1 - int(bb->GetTransparency()) / 100.0 << " " << color->GetRed() << " " << color->GetGreen() << " " << color->GetBlue()
                 << std::endl;
     }
     else
@@ -189,23 +190,22 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
 
   // }
 
-  std::cout << "***********************" << std::endl;
-
+  std::cout << "********* assignName **************" << std::endl;
   // Assign new name if duplicate
-  for (size_t i = 0; i < m_det.size(); i++)
-  {
-    DetElement subdet = m_det[i];
-    string detName = subdet.name();
-    m_detName = assignName(m_detName, detName, i);
-  }
-  for (size_t i = 0; i < m_vol.size(); i++)
-  {
-    string detVolName = m_volName[i];
-    string detSolidName = m_solidName[i];
+  // for (size_t i = 0; i < m_det.size(); i++)
+  // {
+  //   DetElement subdet = m_det[i];
+  //   string detName = subdet.name();
+  //   m_detName = assignName(m_detName, detName, i);
+  // }
+  // for (size_t i = 0; i < m_vol.size(); i++)
+  // {
+  //   string detVolName = m_volName[i];
+  //   string detSolidName = m_solidName[i];
 
-    m_volName = assignName(m_volName, detVolName, i);
-    m_solidName = assignName(m_solidName, detSolidName, i);
-  }
+  //   m_volName = assignName(m_volName, detVolName, i);
+  //   m_solidName = assignName(m_solidName, detSolidName, i);
+  // }
   // Count the number of references to each physical volume and logical volume and solid
   // so that these values can be placed in the FBX file's Definitions{} section.
   // countEntities(m_world);
@@ -247,10 +247,11 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
     (*m_SolidID)[solidIndex] += 0x0000000001000000LL * solidIndex;
     if (m_solidName[solidIndex].length() > 0)
     {
-      std::cout << __LINE__ << " " << m_solid.size() << " " << m_SolidID->size()
-                << m_solidName[solidIndex] << " "
-                << " index " << solidIndex << " "
-                << (*m_SolidID)[solidIndex] << std::endl;
+      // std::cout << __LINE__ << " " << m_solid.size() << " " << m_SolidID->size()
+      //           << m_solidName[solidIndex] << " "
+      //           << " index " << solidIndex << " "
+      //           << (*m_SolidID)[solidIndex] << std::endl;
+      if(m_assembly[solidIndex]) continue;
       writeGeometryNode(m_solid[solidIndex], m_solidName[solidIndex], (*m_SolidID)[solidIndex]);
     }
   }
@@ -263,8 +264,9 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
     (*m_LVID)[lvIndex] += 0x0000000001000000LL * lvIndex;
     // if (m_volName[lvIndex].length() > 0) {
     // if (!(*m_LVUnique)[lvIndex])
-    std::cout << __LINE__ << " materials_childVol_index: " << lvIndex << std::endl;
-    writeMaterialNode(lvIndex, m_volName[lvIndex]);
+    // std::cout << __LINE__ << " materials_childVol_index: " << lvIndex << std::endl;
+      if(m_assembly[lvIndex]) continue;
+      writeMaterialNode(lvIndex, m_volName[lvIndex]);
 
     // }
   }
@@ -298,17 +300,27 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
   for (unsigned int i = 0; i < m_placedVol.size(); i++)
   {
     if(i==0) continue; // 0 is the world
+    if(m_assembly[i]) continue;
+
     double pvIndex = i;
     unsigned long long pvID = (*m_PVID)[pvIndex];
     std::string pvName = m_placedVolName[pvIndex];
 
     TGeoVolume *mother = m_placedVol[i]->GetMotherVolume();
     double index = std::find(m_vol.begin(), m_vol.end(), mother) - m_vol.begin();
-    std::cout << __LINE__ << " index:" << index << " pvName:" << pvName << std::endl;
     std::string mothername = m_volName[index];
     unsigned long long mPvID = (*m_PVID)[index];
 
-    writePVToParentPV(pvName, mothername, pvID, mPvID);
+    if(mother->IsAssembly()){
+      TGeoVolume *mmother = m_placedVol[index]->GetMotherVolume();
+      double mindex = std::find(m_vol.begin(), m_vol.end(), mmother) - m_vol.begin();
+      std::string mmothername = m_volName[mindex];
+      unsigned long long mmPvID = (*m_PVID)[mindex];
+
+      writePVToParentPV(pvName, mmothername, pvID, mmPvID);
+    }
+    else
+      writePVToParentPV(pvName, mothername, pvID, mPvID);
   }
     std::cout << __LINE__ << std::endl;
 
@@ -321,6 +333,7 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
     unsigned long long solidID = (*m_SolidID)[i];
     std::string solidName = m_solidName[i];
     unsigned long long matID = (*m_MatID)[i];
+    if(m_assembly[i]) continue;
 
 
     writeSolidToLV(lvName, solidName, m_visible[lvIndex], matID, lvID, solidID);
@@ -336,6 +349,8 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
     double pvIndex = i;
     unsigned long long pvID = (*m_PVID)[pvIndex];
     std::string pvName = m_placedVolName[pvIndex];
+    if(m_assembly[i]) continue;
+
 
     writeLVToPV(pvName, lvName, pvID, lvID);
   }
@@ -357,92 +372,6 @@ bool dd4hep2FBXWriter::doit(std::string outputFilename)
   return true;
 }
 
-void dd4hep2FBXWriter::addConnections(DetElement physVol, int replica)
-{
-  // Write the PhysVolModel-parentLogVolModel connections as we descend the recursive tree.
-  // If the parentLogVol is referenced at most once, use its referencing PhysVol instead.
-  // G4PhysicalVolumeStore* pvStore = G4PhysicalVolumeStore::GetInstance();
-  // G4LogicalVolumeStore* lvStore = G4LogicalVolumeStore::GetInstance();
-  // G4SolidStore* solidStore = G4SolidStore::GetInstance();
-  Volume logVol = physVol.volume(); // GetLogicalVolume();
-  int pvIndex = std::find(m_det.begin(), m_det.end(), physVol) - m_det.begin();
-  ; //
-  /// std::find(pvStore->begin(), pvStore->end(), physVol) - pvStore->begin();
-  unsigned long long pvID = (*m_PVID)[pvIndex];
-  unsigned int pvCount = (*m_PVCount)[pvIndex];
-  std::string pvName = m_detName[pvIndex];
-  int lvIndex = pvIndex; // std::find(lvStore->begin(), lvStore->end(), logVol) - lvStore->begin();
-  unsigned long long lvID = (*m_LVID)[lvIndex];
-  unsigned int lvCount = (*m_LVCount)[lvIndex];
-  std::string lvName = m_volName[lvIndex];
-  Children mdetChildren = physVol.children();
-  // for (long unsigned int daughter = 0; daughter < mdetChildren.size(); ++daughter) {
-  for (const auto &[name, physVolDaughter] : mdetChildren)
-  {
-    // DetElement physVolDaughter = mdetChildren.at(daughter).second ;// ->GetDaughter(daughter);
-    int pvIndexDaughter = std::find(m_det.begin(), m_det.end(), physVolDaughter) - m_det.begin();
-    unsigned long long pvIDDaughter = (*m_PVID)[pvIndexDaughter];
-    unsigned int pvCountDaughter = physVolDaughter.volume()->GetNdaughters();
-    // multiple phyVols in one logicalVol
-    for (int j = 0; j < pvCountDaughter + 1; ++j)
-    {
-      //   if (m_UsePrototypes) {
-      if ((replica == 0) && (j == 0) && (lvCount == 0) && (pvCountDaughter == 0))
-      {
-        if (mdetChildren.size() != 0)
-        {
-          writePVToParentPV(m_detName[pvIndexDaughter], pvName, pvIDDaughter, pvID);
-        }
-        else
-        {
-          writePVToParentLV(m_detName[pvIndexDaughter], lvName, pvIDDaughter, lvID);
-        }
-      }
-      // } else {
-      //   //writePVToParentLV(m_detName[pvIndexDaughter], lvName, pvIDDaughter+0x00010000*j+pvCountDaughter, lvID+0x00010000*replica+lvCount);
-      //   writePVToParentPV(m_detName[pvIndexDaughter], pvName, pvIDDaughter + 0x00010000 * j + pvCountDaughter,
-      //                     pvID + 0x00010000 * replica + pvCount);
-      // }
-      addConnections(physVolDaughter, j);
-    }
-  }
-
-  // Write the Geometry-LogVolModel, Material-LogVolModel and PhysVolModel-LogVolModel
-  // connections as we ascend the recursive tree
-  Solid solid = logVol.solid();
-  int solidIndex = pvIndex; // std::find(solidStore->begin(), solidStore->end(), solid) - solidStore->begin();
-  unsigned long long solidID = (*m_SolidID)[solidIndex];
-  unsigned long long matID = (*m_MatID)[lvIndex];
-  std::string solidName = m_solidName[solidIndex];
-  {
-    // if (m_UsePrototypes)
-    // {
-    //   if (lvCount == 0)
-    //   {
-    //     if (physVol.children().size() == 0)
-    //     { // bypass the singleton logical volume
-    //       writeSolidToPV(pvName, solidName, (*m_Visible)[lvIndex], matID, pvID, solidID);
-    //     }
-    //     else
-    //     {
-    writeSolidToLV(lvName, solidName, m_visible[lvIndex], matID, lvID, solidID);
-    //     }
-    //   }
-    //   if (pvCount == 0)
-    //   {
-    //     if (physVol.children().size() == 0)
-    //       writeLVToPV(pvName, lvName, pvID, lvID);
-    //   }
-    // }
-    // else
-    {
-        // writeSolidToLV(lvName, solidName, (*m_Visible)[lvIndex], matID, lvID+lvCount, solidID);
-        // writeLVToPV(pvName, lvName, pvID+pvCount, lvID+lvCount);
-        // writeSolidToPV(pvName, solidName, (*m_Visible)[lvIndex], matID, pvID + pvCount, solidID);
-    }(*m_LVCount)[lvIndex]++;
-    (*m_PVCount)[pvIndex]++;
-  }
-}
 
 void dd4hep2FBXWriter::addModels(TGeoNode *node, int replica, unsigned long long pvIndex)
 {
@@ -621,13 +550,13 @@ GPolyhedron *getPolyhedron(Solid solid)
   else if (solidtype == "TGeoTubeSeg") // Tube___________, // TwistedTube__________
   {
     Tube tmp(solid);
-    std::cout << __LINE__ << " in solidtype tgeotubeseg:" 
-      <<" rmin:" <<  tmp.rMin()
-      << " rmax:" << tmp.rMax()
-      << " dz:" << tmp.dZ()
-      <<  " startphi:" << tmp.startPhi()
-      << " endphi:" << tmp.endPhi()
-      << std::endl;
+    // std::cout << __LINE__ << " in solidtype tgeotubeseg:" 
+    //   <<" rmin:" <<  tmp.rMin()
+    //   << " rmax:" << tmp.rMax()
+    //   << " dz:" << tmp.dZ()
+    //   <<  " startphi:" << tmp.startPhi()
+    //   << " endphi:" << tmp.endPhi()
+    //   << std::endl;
     return new GPolyhedronTubs(tmp.rMin(), tmp.rMax(), tmp.dZ(), tmp.startPhi(), tmp.endPhi());
   }
   else if (solidtype == "TGeoCtub") // CutTube
@@ -738,11 +667,18 @@ GPolyhedron *getPolyhedron(Solid solid)
     return new GPolyhedronHype(tmp.rMin(), tmp.rMax(),
                                tmp.stereoInner(), tmp.stereoOuter(), tmp.dZ());
   }
-  else if (solidtype == "TGeoPgon") // PolyhedraRegular______
+  else if (solidtype == "TGeoPgon") // PolyhedraRegular______, Polyhedra_____
   {
-  }
-  else if (solidtype == "TGeoPgon") // Polyhedra_____
-  {
+    // PolyhedraRegular  t(Solid);
+    TGeoPgon *tmp = dynamic_cast<TGeoPgon*>(&(*solid));
+    std::cout << "__LINE__" << " in TGeoPgon:" << tmp->GetPhi1() << " " << tmp->GetDphi() << " " <<  tmp->GetNedges() << std::endl;
+    return new GPolyhedronPgon(tmp->GetPhi1()*degree,
+                               tmp->GetDphi()*degree,
+                               tmp->GetNedges(),
+                               tmp->GetNz(),
+                               tmp->GetZ(),
+                               tmp->GetRmin(),
+                               tmp->GetRmax());
   }
   else if (solidtype == "TGeoXtru") // ExtrudedPolygon
   {
@@ -760,7 +696,7 @@ GPolyhedron *getPolyhedron(Solid solid)
 
 void dd4hep2FBXWriter::writeGeometryNode(Solid solid, const std::string solidName, unsigned long long solidID)
 {
-  std::cout << __LINE__ << " solid.type:" << solid.type() << /*" IsComposite:" << solid.IsComposite() << */ std::endl;
+  // std::cout << __LINE__ << " solid.type:" << solid.type() << /*" IsComposite:" << solid.IsComposite() << */ std::endl;
   // IntersectionSolid, SubtractionSolid, UnionSolid are retrived from BooleanSolid
   // all their types are TGeoCompositeShape
   string solidtype = solid.type();
@@ -775,8 +711,8 @@ void dd4hep2FBXWriter::writeGeometryNode(Solid solid, const std::string solidNam
   else
   {
     // auto a=Polyhedra(solid);
-    std::cout << __LINE__ << " name:" << solid.name() << " type:" << solid.type() << std::endl;
-    std::cout << __LINE__ << "solid info: " << solid.toString() << std::endl;
+    // std::cout << __LINE__ << " name:" << solid.name() << " type:" << solid.type() << std::endl;
+    // std::cout << __LINE__ << "solid info: " << solid.toString() << std::endl;
     writePolyhedron(solid, getPolyhedron(solid), solidName, solidID);
   }
 }
@@ -809,6 +745,20 @@ HepPolyhedron *dd4hep2FBXWriter::getBooleanSolidPolyhedron(Solid solid)
   {
     polyhedronB = new HepPolyhedron(*(getPolyhedron(solidB)));
   }
+
+  // TGeoMatrix *leftMat =  boSolid.leftMatrix()
+  TGeoMatrix* rightMat =  boSolid.rightMatrix()->MakeClone();
+  const Double_t *tv = rightMat->GetTranslation();
+  // const Double_t *rot = rightMat->GetRotationMatrix();
+
+  TGeoRotation *mm = new TGeoRotation(*rightMat);
+  ROOT::Math::Translation3D trans(tv[0], tv[1], tv[2]);
+  double phi = 0, theta = 0, psi = 0;
+  mm->GetAngles(phi, theta, psi);
+  ROOT::Math::Rotation3D rightRotation(ROOT::Math::EulerAngles(phi, theta, psi));
+  ROOT::Math::Transform3D rightTr(rightRotation, trans);
+
+  polyhedronB->Transform(rightTr);
 
   /// home/wln/DD4hep_source/DDCore/src/ShapeUtilities.cpp
   TGeoCompositeShape *sh = (TGeoCompositeShape *)&(*solid);

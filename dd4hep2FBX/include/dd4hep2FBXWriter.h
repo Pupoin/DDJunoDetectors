@@ -19,7 +19,7 @@
 #include "TColor.h"
 
 // #include "Math/Vector3D.h"
-// #include "Math/Transform3D.h"
+#include "Math/Transform3D.h"
 
 using namespace std;
 using namespace dd4hep;
@@ -156,7 +156,9 @@ void getVolSolid(TGeoNode *node);
   // std::vector<TGeoVolume*> m_Vol;
   //! Flag to indicate that the logical volume is visible
   std::vector<bool> m_visible;
+  std::vector<bool> m_assembly;
   std::vector<TColor*> m_color;
+
 
   //! Modified (legal-character and unique) solid 
   // std::vector<Solid> m_childrenSolid;

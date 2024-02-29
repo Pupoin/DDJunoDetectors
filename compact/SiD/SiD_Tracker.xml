@@ -22,8 +22,8 @@
 
   <!--  Includes for sensitives and support                -->
   <include ref="SiD_TrackerBarrel.xml"/>
-  <include ref="SiD_TrackerEndcap.xml"/>
-  <include ref="SiD_TrackerForward.xml"/>
-  <include ref="SiD_TrackerSupport.xml"/>
+  <!-- <include ref="SiD_TrackerEndcap.xml"/> -->
+  <!-- <include ref="SiD_TrackerForward.xml"/> -->
+  <!-- <include ref="SiD_TrackerSupport.xml"/> -->
 
 </lccdd>
